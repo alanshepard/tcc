@@ -1,4 +1,4 @@
-# tcc
+# TCC
 
 Copyright 2018 Bernardo Bahia Monteiro
 
