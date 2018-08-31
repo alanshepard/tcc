@@ -25,6 +25,7 @@
 \usepackage{color}				% Controle das cores
 \usepackage{graphicx}			% Inclusão de gráficos
 \usepackage{microtype} 			% para melhorias de justificação
+\usepackage{helvet}
 
 % Pacotes de citações
 \usepackage[brazilian,hyperpageref]{backref}	 % Paginas com as citações na bibl
@@ -44,21 +45,22 @@
 % Informações de dados para CAPA e FOLHA DE ROSTO
 \titulo{FADEC for a miniature gas-turbine}
 \autor{Bernardo Bahia Monteiro}
-\local{Belo Horizonte, Brazil}
-\data{\today}
+\local{Belo Horizonte}
+\data{\the\year}
 \orientador{José Eduardo Mautone de Barros}
 %\coorientador{Equipe \abnTeX}
 \instituicao{%
-  Universidade Federal de Minas Gerais
-  \par
-  School of Engineering
-  \par
-  Aerospace Engineering}
-\tipotrabalho{Undergraduate thesis}
+    Universidade Federal de Minas Gerais
+    \protect\par
+    School of Engineering
+    \protect\par
+    Undergraduate Course in Aerospace Engineering}
+\tipotrabalho{Undergraduate dissertation}
 % O preambulo deve conter o tipo do trabalho, o objetivo, 
 % o nome da instituição e a área de concentração 
-\preambulo{Modelo canônico de trabalho monográfico acadêmico em conformidade com
-as normas ABNT apresentado à comunidade de usuários \LaTeX.}
+\preambulo{A dissertation submitted to the Faculty of the School of Engineering
+of the Universidade Federal de Minas Gerais in partial fulfillment of the
+requirements for the degree of Bachelor of Science in Aerospace Engineering.}
 
 
 % informações do PDF
@@ -79,6 +81,16 @@ as normas ABNT apresentado à comunidade de usuários \LaTeX.}
 }
 \makeatother
 % --- 
+\renewcommand{\ABNTEXchapterfont}{\normalfont\bfseries}
+\renewcommand{\ABNTEXchapterfontsize}{\LARGE}
+\renewcommand{\ABNTEXpartfont}{\ABNTEXchapterfont}
+\renewcommand{\ABNTEXpartfontsize}{\Huge}
+\renewcommand{\ABNTEXsectionfont}{\ABNTEXchapterfont}
+\renewcommand{\ABNTEXsectionfontsize}{\Large}
+\renewcommand{\ABNTEXsubsectionfont}{\ABNTEXsectionfont}
+\renewcommand{\ABNTEXsubsectionfontsize}{\large}
+\renewcommand{\ABNTEXsubsubsectionfont}{\ABNTEXsubsectionfont}
+\renewcommand{\ABNTEXsubsubsectionfontsize}{\normalsize}
 
 %% Espaçamentos entre linhas e parágrafos 
 % O tamanho do parágrafo é dado por:
@@ -87,6 +99,9 @@ as normas ABNT apresentado à comunidade de usuários \LaTeX.}
 \setlength{\parskip}{0.2cm}  % tente também \onelineskip
 
 \makeindex
+
+%capa
+\input{text/cover.tex}
 
 %includeonly directives
 \input{includeonly}
@@ -108,6 +123,6 @@ as normas ABNT apresentado à comunidade de usuários \LaTeX.}
 \input{text/body}
 
 % ELEMENTOS PÓS-TEXTUAIS
-\include{text/backmatter.tex}
+\include{text/backmatter}
 
 \end{document}
