@@ -1,6 +1,36 @@
 \chapter{Dynamic engine model}
 \epigraph{\em ``It's not denial.\\ I'm just selective about the reality I
 accept.''}{\em(Bill Watterson)}
+
+To develop a controller for any kind of system,
+ the first thing needed is a model which reproduces the system's behavior in time.
+ i.e.\ a dynamic or transient model.
+ For the present work, we must model a gas turbine engine.
+
 \section{Model description}
+The engine model used is of the lumped volume type. This means that each component 
+ (compressor, turbine, combustor and so on)
+ is modelled as a single point in space and conservation laws are applied to them.
+ This type of model is also known as zero dimensional (0-D) or as parametric cycle analysis.
+ The components considered for the simulation of the present gas turbine engine are shown in \todo{add figure}.
+
+\todo{Literature review of different forms of simulation}
+
+Somewhat surprisingly,
+ the simplest space state model of a single shaft turbine has only one state and one input.
+ The input is fuel flow and the state is the shaft rotational speed.
+ Every other parameter can be derived from this two by an off-design calculation
+ which allows for excess power in the turbine.
+ Since this off-design calculation is also needed to determine the derivative of the rotational speed,
+ and it contains all the thermodynamic of the engine, it makes the system highly non-linear.
+
+The turbomachinery in the engine are characterized using component maps.\index{Component map}
+ These are essentially lookup tables which relate 
+ rotation speed, corrected temperature, corrected mass flow and efficiency
+ for the turbine and compressor.
+
+\todo{Walkthrough of one N dot calculation}
+\todo{Figure: transient calculation flowchart}
+
 \section{Architecture for computer simulation}
 \section{Experimental parameter estimation}
