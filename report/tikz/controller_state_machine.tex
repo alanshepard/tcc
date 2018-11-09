@@ -1,0 +1,43 @@
+\tikzstyle{decision} = [diamond, draw, 
+    text width=4.5em, text badly centered, node distance=3cm, inner sep=0pt]
+\tikzstyle{block} = [rectangle, draw, 
+    text width=5em, text centered, rounded corners, minimum height=4em]
+\tikzstyle{line} = [draw, -latex']
+\tikzstyle{state} = [draw, ellipse, %node distance=3cm,
+    minimum width =3em, text badly centered, minimum height=3em]
+    
+\begin{tikzpicture}[node distance = 2.5cm, auto]
+    %% Place nodes
+    % normal path
+    \node [state,initial above] (shutdown) {Shutdown};
+    \node [state, below of= shutdown] (dry_crank) {Dry crank};
+    \node [state, below of=dry_crank] (lights_off) {Lights off};
+    \node [state, right of=lights_off, node distance = 16em] (purge) {Purge};
+    \node [state, below of=lights_off] (acceleration) {Acceleration};
+    \node [state, below of=acceleration] (heat_soak) {Heat soak};
+    \node [state, below of=heat_soak, text width=4.5em] (normal) {Normal operation};
+    \node [state, left of=acceleration, node distance=12em] at ($(normal)!0.5!(shutdown)$) (stable_idle) {Stable idle};
+    
+    % emergency shutdown
+    %\node at (current bounding box.south east) [anchor=south east, state, text width=4.5em] (emergency_shutdown) {Emergency shutdown};
+    %\node [left of=emergency_shutdown, node distance=10em] (extinction) {};
+    %\node [above of=emergency_shutdown, node distance =8em] (emergency_command){};
+    
+    %% Draw edges
+    \path[->] (shutdown)     edge              node {on/off switch = on} (dry_crank)
+              (dry_crank)    edge              node {N=x rpm}            (lights_off)
+              (lights_off)   edge              node {no EGT increase}    (purge)
+                             edge              node {EGT increase}       (acceleration)
+              (purge)        edge [bend right]                           (dry_crank)
+              (acceleration) edge [bend right]                           (heat_soak)
+              (heat_soak)    edge [bend right]                           (acceleration) 
+                             edge              node{N = ground idle}     (normal)
+              (normal)       edge [bend left]  node[text width=4.5em]{shutdown command}    (stable_idle)
+              (stable_idle)  edge [bend left]                            (shutdown)
+              %(extinction)    edge              node{extinction}          (emergency_shutdown)
+              %(emergency_command) edge          node[text width=4.5em]{emergency shutdown command} (emergency_shutdown)
+    ;
+
+    %% Rectangles
+    %\draw (dry_crank.north west) rectangle (lights_off.south east);
+\end{tikzpicture}

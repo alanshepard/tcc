@@ -2,5 +2,38 @@
 \epigraph{\em ``Keep it simple:\\
 as simple as possible,\\
 but no simpler.''}{\em (Albert Einstein)}
+\section{Requirements}
+The controller must
+\begin{itemize}
+    \item be able to start the engine.
+          In case of a failed attempt at starting, it must recover and try again;
+    \item prevent surge during all operation;
+    \item accelerate and decelerate the engine according to pilot input in a timely fashion;
+    \item shutdown the engine safely when the pilot commands it;
+    \item detect self extinction and cut-off the fuel supply.
+\end{itemize}
+
 \section{Controller architecture}
+\begin{figure}[tp]
+    \centering
+    \input{tikz/controller_state_machine}
+    \caption{State transition diagram for the FADEC}
+    \label{fig:controller_state_machine}
+\end{figure}
+The controller is implemented as a state machine\cite{amd_state_machine} as shown in \autoref{fig:controller_state_machine}. 
+The allowed states are
+\begin{description}
+    \item[Shutdown] engine is off. 
+    \item[Dry cranck] starter motor is on and engine rotates,
+          but no fuel is supplied.
+    \item[Lights off] the ignition per say. 
+    \item[Acceleration and heat soak] after a successful ignition,
+          the engine goes through an acceleration schedule that allows heat soaking. 
+    \item[Normal Operation] when the engine is warm enough, it can be operated normally.
+          This is the flight ready condition.
+    \item[Purge] after an unsuccessful start, the engine must eliminate the unburnt fuel. 
+    \item[Ground idle] before shutting down, the engine must be in a stable low rpm idle condition.
+\end{description}
+
+
 \section{Settings and gains}
