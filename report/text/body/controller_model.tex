@@ -22,13 +22,14 @@ The controller must
 \section{Controller architecture}
 \begin{figure}[tp]
     \centering
-    \caption{State transition diagram for the FADEC}
+    \caption{State transition diagram for the \acs{FADEC}}
     \input{tikz/controller_state_machine}
     
     \source{\authorsfigure}
     \label{fig:controller_state_machine}
 \end{figure}
-The controller is implemented as a state machine\cite{amd_state_machine} as shown in \autoref{fig:controller_state_machine}. 
+The controller is implemented as a state machine \cite{amd_state_machine} 
+ as shown in \autoref{fig:controller_state_machine}. 
 The allowed states are
 \begin{description}
     \item[Shutdown] engine is off. 
