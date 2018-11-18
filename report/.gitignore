@@ -259,6 +259,3 @@ TSWLatexianTemp*
 *.slg
 *.sot
 *.sym
-
-#Vim swap files
-*.swp
