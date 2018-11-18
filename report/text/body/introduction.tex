@@ -3,7 +3,55 @@
 \begin{document}
 
 \chapter{Introduction}
-\epigraph{\em ``If you can't control your peanut butter,\\ you can't expect to
-control your life.''}{\em(Bill Watterson)}
+\label{ch:intro}
+\epigraph{\em ``If you can't control your peanut butter,\\ 
+                you can't expect to control your life.''
+         }{\em(Bill Watterson)}
+
+A \gls{FADEC} is the collection of control system elements in 
+ a modern aeronautical engine \cite{rolls-royce}.
+The purpose of a \gls{FADEC} is to minimize the workload of the pilot,
+ while still giving him or her total control over the engine.
+In this way, the pilot is responsible for selecting a power setting 
+ and the \gls{FADEC} is then in charge of getting to that condition
+ as fast and safely as possible. It is therefore responsibility of the
+ control system to guarantee the operation of the engine within safe limits:
+ it must prevent surges when accelerating 
+ and combustion extinction when decelerating.
+
+Virtually all modern gas turbines are controlled by a digital system.
+The technology used in these systems, however, is proprietary most of times.
+This thesis attempts to develop a \gls{FADEC} 
+for a small (model sized) aeronautical engine for both technological demonstration 
+and to increase the scarce literature on the subject.
+
+% What you should know before reading this text
+Since this report deals with the design of an engine control system,
+ it is essential the reader to be familiar with both control theory and transient gas turbine dynamics.
+For an introduction to control theory, the reader should refer to 
+ \textcite{dorf2011modern,franklin1994feedback}.
+There are many texts that cover jet engine modelling, 
+ albeit not many deal with starting and transient behaviour. 
+For a complete treatment, the reader should refer to \textcite{walsh2004gas}. 
+\textcite{rolls-royce} provides a very comprehensive 
+ but not very mathematical description of jet engines. 
+ It is a good book to develop an intutive feel for jet engine operation. 
+Finally, \textcite{cumpsty2015jet} is a valuable introductory text on the subject.
+
+%Outline
+The rest of this thesis is organized as follows: 
+\begin{description}
+    \item[\Cref{ch:methods}] describes the engine and instrumentation used 
+         for the experimental part of this work are described.
+    \item[\Cref{ch:engine_model}] explains the transient model of the engine detail.
+        Both the physics principles and its implementation are discussed. 
+        This chapter introduces the concept of a component map, 
+         essential for gas turbine simulation.
+    \item[\Cref{ch:control}] covers both the design and implementation of the control system.
+    \item[\Cref{ch:tests}] describes the experimental results of both the engine by itself 
+         and integrated with the developed control system. 
+        It contains the experimentally obtained maps for this engine's components.
+    \item[\Cref{ch:conclusion}] presents the conclusion and final remarks of this work.
+\end{description}
 
 \end{document}
