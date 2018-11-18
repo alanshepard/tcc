@@ -253,5 +253,12 @@ TSWLatexianTemp*
 # glossaries
 *.glstex
 
-
 # End of https://www.gitignore.io/api/latex
+
+#List of symbols
+*.slg
+*.sot
+*.sym
+
+#Vim swap files
+*.swp

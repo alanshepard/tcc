@@ -21,10 +21,10 @@ sub makeacn2acr {
     system( "makeindex -s \"$_[0].ist\" -t \"$_[0].alg\" -o \"$_[0].acr\" \"$_[0].acn\"" );
 }
 # for glossary package (Sigh...) --- they can co-exist!		
-add_cus_dep( 'acr', 'acn', 0, 'makeacr2acn' );
-sub makeacr2acn {
-    system( "makeindex -s \"$_[0].ist\" -t \"$_[0].alg\" -o \"$_[0].acn\" \"$_[0].acr\"" );
-}
+#add_cus_dep( 'acr', 'acn', 0, 'makeacr2acn' );
+#sub makeacr2acn {
+#    system( "makeindex -s \"$_[0].ist\" -t \"$_[0].alg\" -o \"$_[0].acn\" \"$_[0].acr\"" );
+#}
 # example of an added custom glossary type that is used in some of the glossary/glossaries example files:
 # this is for the new glossary type command \newglossary[nlg]{notation}{not}{ntn}{Notation} from the glossaries package
 # NOTE: the glossary package uses a very different command: the <in-ext> and <out-ext>
@@ -33,6 +33,13 @@ add_cus_dep( 'ntn', 'not', 0, 'makentn2not' );
 sub makentn2not {
     system("makeindex -s \"$_[0].ist\" -t \"$_[0].nlg\" -o \"$_[0].not\" \"$_[0].ntn\"" );
 }
+#For custom glossary (list of symbols). See above
+#\newglossary[slg]{symbol}{sot}{sym}{List of Symbols}
+add_cus_dep( 'sym', 'sot', 0, 'makesym2sot' );
+sub makesym2sot {
+    system("makeindex -s \"$_[0].ist\" -t \"$_[0].slg\" -o \"$_[0].sot\" \"$_[0].sym\"" );
+}
+
 # for the	glossary package (Sigh...) --- they can co-exist!
 add_cus_dep( 'not', 'ntn', 0, 'makenot2ntn' );
 sub makenot2ntn {
