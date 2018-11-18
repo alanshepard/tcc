@@ -30,6 +30,7 @@
 \usepackage{tcolorbox}
 \usepackage{tikz}
 \usetikzlibrary{shapes,arrows,automata,calc}
+\usepackage{subfiles}
 
 % Pacotes de citações
 %\usepackage[brazilian,hyperpageref]{backref}	 % Paginas com as citações na bibl
@@ -129,9 +130,6 @@ requirements for the degree of Bachelor of Science in Aerospace Engineering.}
 %capa
 \input{text/cover.tex}
 
-%includeonly directives
-\input{includeonly}
-
 %% BEGIN DOCUMENT %%
 \begin{document}
 
@@ -143,12 +141,12 @@ requirements for the degree of Bachelor of Science in Aerospace Engineering.}
 \frenchspacing 
 
 % ELEMENTOS PRÉ-TEXTUAIS
-\include{text/frontmatter}
+\subfile{text/frontmatter}
 
 % ELEMENTOS TEXTUAIS
-\input{text/body}
+\subfile{text/body}
 
 % ELEMENTOS PÓS-TEXTUAIS
-\include{text/backmatter}
+\subfile{text/backmatter}
 
 \end{document}
