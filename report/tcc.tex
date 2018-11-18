@@ -5,7 +5,8 @@
 	% -- opções da classe memoir --
 	12pt,				% tamanho da fonte
 	%openright,			% capítulos começam em pág ímpar (insere página vazia caso preciso)
-	twoside,			% para impressão em recto e verso. Oposto a oneside
+	%twoside,			% para impressão em recto e verso. Oposto a oneside
+	oneside,
 	a4paper,			% tamanho do papel. 
 	% -- opções da classe abntex2 --
 	%chapter=TITLE,		% títulos de capítulos convertidos em letras maiúsculas
@@ -18,7 +19,7 @@
 	]{abntex2}
 
 %\usepackage{lmodern}			% Usa a fonte Latin Modern			
-%\usepackage[T1]{fontenc}		% Selecao de codigos de fonte.
+\usepackage[T1]{fontenc}		% Selecao de codigos de fonte.
 \usepackage[utf8]{inputenc}		% Codificacao do documento (conversão automática dos acentos)
 \usepackage{lastpage}			% Usado pela Ficha catalográfica
 \usepackage{indentfirst}		% Indenta o primeiro parágrafo de cada seção.
@@ -31,18 +32,28 @@
 \usetikzlibrary{shapes,arrows,automata,calc}
 
 % Pacotes de citações
-\usepackage[brazilian,hyperpageref]{backref}	 % Paginas com as citações na bibl
+%\usepackage[brazilian,hyperpageref]{backref}	 % Paginas com as citações na bibl
 % Citações padrão ABNT.
 % Uncomment to use bibtex 
-\usepackage[alf]{abntex2cite}	
+%\usepackage[alf]{abntex2cite}	
 
 % Uncomment to use biblatex
-%\usepackage[style=abnt]{biblatex}
-%\addbibresource{arquivo.bib}        % Seus arquivos de
+\usepackage[style=abnt]{biblatex}
+\addbibresource{references.bib}        % Seus arquivos de
 %\addbibresource{outroarquivo.bib}   % bibliografia vão aqui
 
 % todo boxes
 \newtcbox{\todo}[1][yellow]{on line,arc=7pt,colback=#1!10!white,colframe=#1!50!black,before upper={\rule[-3pt]{0pt}{10pt}},boxrule=1pt, boxsep=0pt,left=6pt,right=6pt,top=2pt,bottom=2pt}
+
+% for figure's sources
+\newcommand{\source}[1]{
+	\parbox{\textwidth}
+	{\footnotesize Source: #1.}
+}
+\newcommand{\authorsfigure}{author's figure}
+
+%% Uncomment this to disable source in figures
+%\renewcommand{\source}[1]{}
 
 % Configuracao da epigrafe
 \setlength{\epigraphwidth}{\textwidth-7.5cm}
