@@ -28,7 +28,7 @@
               (dry_crank)    edge              node {N=x rpm}            (lights_off)
               (lights_off)   edge              node {no EGT increase}    (purge)
                              edge              node {EGT increase}       (acceleration)
-              (purge)        edge [bend right]                           (dry_crank)
+              (purge)        edge [bend right]                           (shutdown)
               (acceleration) edge [bend right]                           (heat_soak)
               (heat_soak)    edge [bend right]                           (acceleration) 
                              edge              node{N = ground idle}     (normal)
