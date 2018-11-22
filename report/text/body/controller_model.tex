@@ -9,14 +9,16 @@ as simple as possible,\\
 but no simpler.''}{\em (Albert Einstein)}
 
 \section{Requirements}
-The controller must
+The controller shall
 \begin{itemize}
-    \item be able to start the engine.
-          In case of a failed attempt at starting, it must recover and try again;
-    \item prevent surge during all operation;
+    \item start the engine.
+          In case of a failed attempt at starting, it must purge the combustion chamber;
+    \item prevent surge during operation;
     \item accelerate and decelerate the engine according to pilot input in a timely fashion;
-    \item shutdown the engine safely when the pilot commands it;
+          \todo{be more specific}
+    \item bring the engine to idle and shut it down when the pilot commands it;
     \item detect self extinction and cut-off the fuel supply.
+    \item limit the turbine entry temperature to \todo{1200K}
 \end{itemize}
 
 \section{Controller architecture}
