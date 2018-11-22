@@ -12,13 +12,21 @@ but no simpler.''}{\em (Albert Einstein)}
 The controller shall
 \begin{itemize}
     \item start the engine.
-          In case of a failed attempt at starting, it must purge the combustion chamber;
-    \item prevent surge during operation;
-    \item accelerate and decelerate the engine according to pilot input in a timely fashion;
+    \item purge the combustion chamber in case of a failed attempt at starting;
+    \item prevent surge;
+    \item accelerate and decelerate the engine according to pilot input (\acs{TLA}) in a timely fashion;
           \todo{be more specific}
+    \item keep thrust proportional to \gls{TLA} when operationg in steady state;
+    \item not allow temperatures above \todo{1200K} at the turbine entry for more than \todo{5s};
     \item bring the engine to idle and shut it down when the pilot commands it;
     \item detect self extinction and cut-off the fuel supply.
-    \item limit the turbine entry temperature to \todo{1200K}
+\end{itemize}
+
+\subsection{Remarks and rationale for requirements}
+\begin{itemize}
+    \item the \gls{FADEC} does not attempt to relight the engine automattically 
+          because it can not determine if the engine is in a safe state
+    \item temperature at the turbine entry is limited by the material \todo{calculations for choosing a value}
 \end{itemize}
 
 \section{Controller architecture}
