@@ -14,12 +14,26 @@ To develop a controller for any kind of system,
 
 \section{Model description}
 The engine model used is of the lumped volume type. This means that each component 
- (compressor, turbine, combustor and so on)
+ (compressor, combustor,turbine and nozzle)
  is modelled as a single point in space and conservation laws are applied to them.
- This type of model is also known as zero dimensional (0-D) or as parametric cycle analysis.
- The components considered for the simulation of the present gas turbine engine are shown in \todo{add figure}.
+ This type of model is also known as zero dimensional (0-D) or as parametric cycle analysis
+ \index{parametric cycle analysis},
+ and is widely used in both industry and academy as a tool for preliminary design and 
+ performance analysis. 
 
-\todo{Literature review of different forms of simulation}
+There are many readily available computer programs that implement this kind of simulation. 
+From these, the most famous is probably the commercial program GasTurb \cite{GasTurb}, 
+\index{software} \index{GasTurb}
+followed by the \gls{GSP} \cite{GSP}.
+A comparison of both is presented in \textcite{GasTurbvsGSP}.
+In particular, GasTurb has already been used to simulate model gas turbines 
+ \cite{gao2011modelling}.
+An open-source alternative is the \gls{T-MATS}, from NASA \cite{T-MATS}.
+\gls{T-MATS} provides a library of turbo machinery blocks for use in Simulink. 
+Each of these blocks is actually a wrapper for a function written in C 
+ that simulates the component's behaviour.
+
+A schematic of the engine components considered for the simulation of the present gas turbine engine is shown in \todo{add figure}.
 
 Somewhat surprisingly,
  the simplest space state model of a single shaft turbine has only one state and one input.
@@ -29,12 +43,12 @@ Somewhat surprisingly,
  Since this off-design calculation is also needed to determine the derivative of the rotational speed,
  and it contains all the thermodynamic of the engine, it makes the system highly non-linear.
 
-The turbomachinery in the engine are characterized using component maps.\index{Component map}
+The turbo machinery in the engine are characterized using component maps.\index{component map}
  These are essentially lookup tables which relate 
  rotation speed, corrected temperature, corrected mass flow and efficiency
  for the turbine and compressor.
 
-\todo{Walkthrough of one N dot calculation}
+\todo{Walk through one N dot calculation}
 \todo{Figure: transient calculation flowchart}
 
 \section{Architecture for computer simulation}
