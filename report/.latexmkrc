@@ -1,8 +1,9 @@
 @default_files = ("tcc.tex");
 
+$pdf_mode = 1;
+
 # Use of glossaries, extra indexes, epstopdf, and other images conversions
 # Thanks to Herb Schulz
-
 
 $pdflatex = 'pdflatex --shell-escape %O %S';
 
