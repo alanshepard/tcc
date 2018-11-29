@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<project name="" company="" manager="" phase="" project-start="20180902T000000Z" mrproject-version="2" calendar="1">
+<project name="" company="" manager="" phase="" project-start="20181217T000000Z" mrproject-version="2" calendar="1">
   <properties/>
   <phases>
     <phase name="Modelagem do motor"/>
@@ -23,132 +23,121 @@
     </calendar>
   </calendars>
   <tasks>
-    <task id="1" name="Modelo din&#xE2;mico do motor" note="" work="1152000" start="20180902T000000Z" end="20181026T170000Z" work-start="20180903T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-      <task id="2" name="Elaborar formula&#xE7;&#xE3;o te&#xF3;rica" note="" work="288000" start="20180902T000000Z" end="20180914T170000Z" work-start="20180903T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
-      <task id="3" name="Implementa&#xE7;&#xE3;o computacional" note="" work="288000" start="20180914T170000Z" end="20180928T170000Z" work-start="20180917T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-        <task id="4" name="Definir arquitetura" note="" work="144000" start="20180914T170000Z" end="20180921T170000Z" work-start="20180917T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+    <task id="1" name="Modelo din&#xE2;mico do motor" note="" work="1152000" start="20181217T000000Z" end="20190125T170000Z" work-start="20181217T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <task id="2" name="Elaborar formula&#xE7;&#xE3;o te&#xF3;rica" note="" work="288000" start="20181217T000000Z" end="20181228T170000Z" work-start="20181217T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
+      <task id="3" name="Implementa&#xE7;&#xE3;o computacional" note="" work="288000" start="20181228T170000Z" end="20190111T170000Z" work-start="20181231T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <task id="4" name="Definir arquitetura" note="" work="144000" start="20181228T170000Z" end="20190104T170000Z" work-start="20181231T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
           <predecessors>
             <predecessor id="1" predecessor-id="2" type="FS"/>
           </predecessors>
         </task>
-        <task id="5" name="Implementar modelo" note="" work="144000" start="20180921T170000Z" end="20180928T170000Z" work-start="20180924T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <task id="5" name="Implementar modelo" note="" work="144000" start="20190104T170000Z" end="20190111T170000Z" work-start="20190107T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
           <predecessors>
             <predecessor id="1" predecessor-id="4" type="FS"/>
           </predecessors>
         </task>
       </task>
-      <task id="6" name="Testes e estimativa de par&#xE2;metros" note="" work="432000" start="20180930T000000Z" end="20181019T170000Z" work-start="20181001T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-        <task id="7" name="Definir programa de testes" note="" work="144000" start="20180930T000000Z" end="20181005T170000Z" work-start="20181001T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <task id="6" name="Testes e estimativa de par&#xE2;metros" note="" work="432000" start="20181228T170000Z" end="20190118T170000Z" work-start="20181231T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <task id="7" name="Definir programa de testes" note="" work="144000" start="20181228T170000Z" end="20190104T170000Z" work-start="20181231T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
           <constraint type="start-no-earlier-than" time="20180930T000000Z"/>
           <predecessors>
             <predecessor id="1" predecessor-id="2" type="FS"/>
           </predecessors>
         </task>
-        <task id="8" name="Preparar testes" note="" work="144000" start="20181005T170000Z" end="20181012T170000Z" work-start="20181008T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <task id="8" name="Preparar testes" note="" work="144000" start="20190104T170000Z" end="20190111T170000Z" work-start="20190107T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
           <predecessors>
             <predecessor id="1" predecessor-id="7" type="FS"/>
           </predecessors>
         </task>
-        <task id="9" name="Realizar testes" note="" work="144000" start="20181012T170000Z" end="20181019T170000Z" work-start="20181015T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <task id="9" name="Realizar testes" note="" work="144000" start="20190111T170000Z" end="20190118T170000Z" work-start="20190114T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
           <predecessors>
             <predecessor id="1" predecessor-id="8" type="FS"/>
           </predecessors>
         </task>
       </task>
-      <task id="10" name="Obter par&#xE2;metros do motor atrav&#xE9;s do p&#xF3;s-processamento de dados dos testes" note="" work="144000" start="20181019T170000Z" end="20181026T170000Z" work-start="20181022T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <task id="10" name="Obter par&#xE2;metros do motor atrav&#xE9;s do p&#xF3;s-processamento de dados dos testes" note="" work="144000" start="20190118T170000Z" end="20190125T170000Z" work-start="20190121T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
         <predecessors>
           <predecessor id="1" predecessor-id="9" type="FS"/>
           <predecessor id="1" predecessor-id="5" type="FS"/>
         </predecessors>
       </task>
-      <task id="11" name="Primeira vers&#xE3;o do modelo do motor" note="" work="0" start="20181026T170000Z" end="20181026T170000Z" work-start="20181026T170000Z" percent-complete="0" priority="0" type="milestone" scheduling="fixed-work">
+      <task id="11" name="Primeira vers&#xE3;o do modelo do motor" note="" work="0" start="20190125T170000Z" end="20190125T170000Z" work-start="20190125T170000Z" percent-complete="0" priority="0" type="milestone" scheduling="fixed-work">
         <predecessors>
           <predecessor id="1" predecessor-id="10" type="FS"/>
         </predecessors>
       </task>
     </task>
-    <task id="12" name="FADEC" note="" work="1728000" start="20181028T000000Z" end="20190115T170000Z" work-start="20181029T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-      <task id="13" name="Revis&#xE3;o da literatura" note="" work="144000" start="20181028T000000Z" end="20181102T170000Z" work-start="20181029T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-        <constraint type="start-no-earlier-than" time="20181028T000000Z"/>
-      </task>
-      <task id="14" name="Definir entradas e sa&#xED;das do sistema" note="" work="144000" start="20181102T170000Z" end="20181109T170000Z" work-start="20181105T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+    <task id="12" name="FADEC" note="" work="1584000" start="20181217T000000Z" end="20190226T170000Z" work-start="20181217T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <task id="13" name="Definir entradas e sa&#xED;das do sistema" note="" work="144000" start="20181217T000000Z" end="20181221T170000Z" work-start="20181217T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
+      <task id="14" name="Elaborar formula&#xE7;&#xE3;o te&#xF3;rica do controlador" note="" work="144000" start="20181221T170000Z" end="20181228T170000Z" work-start="20181224T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
         <predecessors>
           <predecessor id="1" predecessor-id="13" type="FS"/>
         </predecessors>
       </task>
-      <task id="15" name="Elaborar formula&#xE7;&#xE3;o te&#xF3;rica do controlador" note="" work="144000" start="20181109T170000Z" end="20181116T170000Z" work-start="20181112T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-        <predecessors>
-          <predecessor id="1" predecessor-id="14" type="FS"/>
-        </predecessors>
-      </task>
-      <task id="16" name="Implementa&#xE7;&#xE3;o em microcontrolador" note="" work="288000" start="20181102T170000Z" end="20181129T170000Z" work-start="20181105T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-        <task id="17" name="Definir hardware a ser utilizado" note="" work="28800" start="20181102T170000Z" end="20181105T170000Z" work-start="20181105T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <task id="15" name="Implementa&#xE7;&#xE3;o em microcontrolador" note="" work="288000" start="20181217T000000Z" end="20190110T170000Z" work-start="20181217T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <task id="16" name="Definir hardware a ser utilizado" note="" work="28800" start="20181217T000000Z" end="20181217T170000Z" work-start="20181217T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
+        <task id="17" name="Definir estrutura do c&#xF3;digo" note="" work="115200" start="20181228T170000Z" end="20190103T170000Z" work-start="20181231T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
           <predecessors>
-            <predecessor id="1" predecessor-id="13" type="FS"/>
+            <predecessor id="1" predecessor-id="16" type="FS"/>
+            <predecessor id="1" predecessor-id="14" type="FS"/>
           </predecessors>
         </task>
-        <task id="18" name="Definir estrutura do c&#xF3;digo" note="" work="115200" start="20181116T170000Z" end="20181122T170000Z" work-start="20181119T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <task id="18" name="Implementar controlador" note="" work="144000" start="20190103T170000Z" end="20190110T170000Z" work-start="20190104T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
           <predecessors>
             <predecessor id="1" predecessor-id="17" type="FS"/>
-            <predecessor id="1" predecessor-id="15" type="FS"/>
           </predecessors>
         </task>
-        <task id="19" name="Implementar controlador" note="" work="144000" start="20181122T170000Z" end="20181129T170000Z" work-start="20181123T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      </task>
+      <task id="19" name="Testes secos (simulados)" note="" work="576000" start="20181228T170000Z" end="20190212T170000Z" work-start="20181231T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <task id="20" name="Integrar o c&#xF3;digo do controlador com o modelo do motor" note="" work="144000" start="20190110T170000Z" end="20190117T170000Z" work-start="20190111T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
           <predecessors>
             <predecessor id="1" predecessor-id="18" type="FS"/>
           </predecessors>
         </task>
-      </task>
-      <task id="20" name="Testes secos (simulados)" note="" work="576000" start="20181116T170000Z" end="20190101T170000Z" work-start="20181119T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-        <task id="21" name="Integrar o c&#xF3;digo do controlador com o modelo do motor" note="" work="144000" start="20181129T170000Z" end="20181206T170000Z" work-start="20181130T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <task id="21" name="Definir programa de testes" note="" work="57600" start="20181228T170000Z" end="20190101T170000Z" work-start="20181231T080000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-work">
           <predecessors>
-            <predecessor id="1" predecessor-id="19" type="FS"/>
+            <predecessor id="1" predecessor-id="14" type="FS"/>
           </predecessors>
         </task>
-        <task id="22" name="Definir programa de testes" note="" work="57600" start="20181116T170000Z" end="20181120T170000Z" work-start="20181119T080000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-work">
+        <task id="22" name="Codificar e realizar testes" note="" work="86400" start="20190117T170000Z" end="20190122T170000Z" work-start="20190118T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
           <predecessors>
-            <predecessor id="1" predecessor-id="15" type="FS"/>
-          </predecessors>
-        </task>
-        <task id="23" name="Codificar e realizar testes" note="" work="86400" start="20181206T170000Z" end="20181211T170000Z" work-start="20181207T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-          <predecessors>
+            <predecessor id="1" predecessor-id="20" type="FS"/>
             <predecessor id="1" predecessor-id="21" type="FS"/>
+          </predecessors>
+        </task>
+        <task id="23" name="Obter ganhos do controlador atrav&#xE9;s do p&#xF3;s-processamento de dados dos testes secos" note="" work="144000" start="20190122T170000Z" end="20190129T170000Z" work-start="20190123T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+          <predecessors>
             <predecessor id="1" predecessor-id="22" type="FS"/>
           </predecessors>
         </task>
-        <task id="24" name="Obter ganhos do controlador atrav&#xE9;s do p&#xF3;s-processamento de dados dos testes secos" note="" work="144000" start="20181211T170000Z" end="20181218T170000Z" work-start="20181212T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <task id="24" name="Simular testes molhados (hardware in the loop)" note="" work="144000" start="20190205T170000Z" end="20190212T170000Z" work-start="20190206T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+          <predecessors>
+            <predecessor id="1" predecessor-id="26" type="FS"/>
+          </predecessors>
+        </task>
+      </task>
+      <task id="25" name="Testes molhados (com o motor)" note="" work="432000" start="20190129T170000Z" end="20190226T170000Z" work-start="20190130T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <task id="26" name="Definir programa de testes" note="" work="144000" start="20190129T170000Z" end="20190205T170000Z" work-start="20190130T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
           <predecessors>
             <predecessor id="1" predecessor-id="23" type="FS"/>
+            <predecessor id="1" predecessor-id="21" type="FS"/>
           </predecessors>
         </task>
-        <task id="25" name="Simular testes molhados (hardware in the loop)" note="" work="144000" start="20181225T170000Z" end="20190101T170000Z" work-start="20181226T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-          <predecessors>
-            <predecessor id="1" predecessor-id="27" type="FS"/>
-          </predecessors>
-        </task>
-      </task>
-      <task id="26" name="Testes molhados (com o motor)" note="" work="432000" start="20181218T170000Z" end="20190115T170000Z" work-start="20181219T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-        <task id="27" name="Definir programa de testes" note="" work="144000" start="20181218T170000Z" end="20181225T170000Z" work-start="20181219T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <task id="27" name="Preparar testes" note="" work="144000" start="20190212T170000Z" end="20190219T170000Z" work-start="20190213T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
           <predecessors>
             <predecessor id="1" predecessor-id="24" type="FS"/>
-            <predecessor id="1" predecessor-id="22" type="FS"/>
+            <predecessor id="1" predecessor-id="26" type="FS"/>
           </predecessors>
         </task>
-        <task id="28" name="Preparar testes" note="" work="144000" start="20190101T170000Z" end="20190108T170000Z" work-start="20190102T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <task id="28" name="Realizar testes" note="" work="144000" start="20190219T170000Z" end="20190226T170000Z" work-start="20190220T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
           <predecessors>
-            <predecessor id="1" predecessor-id="25" type="FS"/>
             <predecessor id="1" predecessor-id="27" type="FS"/>
           </predecessors>
         </task>
-        <task id="29" name="Realizar testes" note="" work="144000" start="20190108T170000Z" end="20190115T170000Z" work-start="20190109T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-          <predecessors>
-            <predecessor id="1" predecessor-id="28" type="FS"/>
-          </predecessors>
-        </task>
       </task>
-      <task id="30" name="FADEC pronto e validado" note="" work="0" start="20190115T170000Z" end="20190115T170000Z" work-start="20190115T170000Z" percent-complete="0" priority="0" type="milestone" scheduling="fixed-work">
+      <task id="29" name="FADEC pronto e validado" note="" work="0" start="20190226T170000Z" end="20190226T170000Z" work-start="20190226T170000Z" percent-complete="0" priority="0" type="milestone" scheduling="fixed-work">
         <predecessors>
-          <predecessor id="1" predecessor-id="29" type="FS"/>
+          <predecessor id="1" predecessor-id="28" type="FS"/>
         </predecessors>
       </task>
     </task>
