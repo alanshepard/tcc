@@ -1,0 +1,75 @@
+\documentclass[tcc]{subfiles}
+\begin{document}
+
+\subsection{Euler's equation}
+
+From the conservation of angular momentum, 
+
+\begin{equation}
+    \vec{\acs{torque}} = \dot{m} (\vec{r_2}\cross\vec{V_2} - \vec{r_1}\cross\vec{V_1}) 
+\end{equation}
+
+Multiplying both sides by the rotational speed ($\omega$)
+
+\begin{equation}
+    \acs{power} = \vec{\omega}\cdot\vec{\acs{torque}} 
+                = \dot{m} \vec{\omega} \cdot (\vec{r_2}\cross\vec{V_2} - \vec{r_1}\cross\vec{V_1}) 
+\end{equation}
+
+Assuming that the system is adiabatic and using the first law of thermodynamics,
+
+\begin{equation}
+    \Delta h = \frac{\acs{power}}{\dot{m}} 
+             = \vec{\omega} \cdot (\vec{r_2}\cross\vec{V_2} - \vec{r_1}\cross\vec{V_1}) 
+\end{equation}
+
+\begin{equation}
+    \Delta h = \omega (r_2 {V_t}_2 - r_1 {V_t}_1) 
+\end{equation}
+
+\begin{equation}
+    \label{eqn:euler}
+    \Delta h = U_2 {V_t}_2 - U_1 {V_t}_1 
+\end{equation}
+
+It is useful to write the absolute tangential velocity at the compressor exit (${V_t}_2$)
+as a function of the radial relative velocity (${W_r}_2$),
+since the latter is more closely related to the mass flow 
+(i.e. $\dot{m} = \rho {W_r}_2 A_2$, where $A_2$ is the ring shaped exit area of the compressor)
+
+
+From the velocity triangle in figure X, assuming that the flow exits tangential to the blade surface,
+\begin{equation}
+    \label{eqn:Vt2}
+    {V_t}_2 = U_2 - {W_r}_2 \tan\beta_2
+\end{equation}
+
+Due to aerodynamic blockage at the tip and flow distortions caused by viscous efects, flow diffusion, clearences and blade aspect ratio,
+${V_t}_2$ is actually smaller than what is predicted by \cref{eqn:Vt2}.
+This is accounted for by the \acf{impeller_distortion_factor}.
+Furthermore, the flow does not exit perfectly tangential to the blade surface, and this is accounted by the \acf{slip_factor} \cite{Wiesner1967,Aungier1995}.
+The corrected equation for the absolute tangential velocity is then
+
+\begin{equation}
+    \label{eqn:Vt2_corrected}
+    {V_t}_2 = \acs{slip_factor}(U_2 - \acs{impeller_distortion_factor}{W_r}_2 \tan\beta_2)
+\end{equation}
+
+Substituting \cref{eqn:Vt2_corrected} in \cref{eqn:euler} and dividing both sides by ${U_2^2}$, we have
+
+\begin{equation}
+    \acs{load_coef} = \acs{slip_factor}(1-\acs{impeller_distortion_factor}\acs{flow_coef}_2\tan\beta_2) - \frac{U_1 {V_t}_1}{U_2^2} 
+\end{equation}
+
+The second term accounts for pre-whirl in the flow entering the compressor, e.g due to \ac{IGV}.
+In the case of no pre-whirl, ${V_t}_1 = 0$, thus 
+
+\begin{equation}
+    \acs{load_coef} = \acs{slip_factor}(1-\acs{impeller_distortion_factor}\acs{flow_coef}_2\tan\beta_2)  
+\end{equation}
+
+
+
+
+
+\end{document}
