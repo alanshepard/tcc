@@ -15,36 +15,15 @@ def phi1(MFP, Mrotor, gam):
 def MFP2(MFP, gam, A_ratio, P0_ratio, T0_ratio):
     MFP_ratio = T0_ratio**0.5/(P0_ratio*A_ratio)
     MFP2_ = MFP_ratio*MFP
-    MFP2_ = np.minimum(MFP2_, mach2mfp(1,gam))
+    # MFP2_ = np.minimum(MFP2_, mach2mfp(1,gam))
     return MFP2_
 
-def phi2(MFP, Mrotor, gam, A_ratio, P0_ratio, T0_ratio):
+def phi2(MFP2_, Mrotor, gam, T0_ratio):
     
-    MFP2_ = MFP2(MFP, gam, A_ratio, P0_ratio, T0_ratio)
     M2rel = mfp2mach(MFP2_, gam)
-    phi2_ = MFP/Mrotor * T0_ratio/(P0_ratio*A_ratio) * (1+(gam-1)/2*M2rel**2)**(-1/(gam-1))
+    phi2_ = MFP2_/Mrotor * np.sqrt(T0_ratio) * (1+(gam-1)/2*M2rel**2)**(1/(gam-1))
 
     return phi2_
-
-#TODO: fix or remove this
-def M2(MFP, Mrotor, gam, P0_ratio, T0_ratio, A_ratio, slip_factor, beta2):
-    tol=1e-8
-
-    MFP2_ = MFP2(MFP, gam, P0_ratio, T0_ratio, A_ratio)
-    M2rel = mfp2mach(MFP2_, gam)
-    phi2_ = phi2(MFP, Mrotor, gam, P0_ratio, T0_ratio, A_ratio)
- 
-    M2_ = M2rel #initial_guess
-    while True:
-        M2new = Mrotor/np.sqrt(T0_ratio*(1+(gam-1)/2*M2_**2))*np.sqrt(phi2_**2 + (slip_factor*(1-phi2_*tan(beta2)))**2)
-
-        if np.max(np.abs(M2new-M2_))<=tol:
-            break
-
-        M2_=M2new
-
-    return M2new
-
 
 
 def psi_euler(phi2, beta2, slip_factor):
@@ -64,8 +43,6 @@ def psi2P0_ratio(psi_isen, Mrotor, gam):
 def compressor_dimensionless(MFP, Mrotor, gam, beta2, A_ratio):
     slip_factor = 0.9
 
-    phi1_ = phi1(MFP, Mrotor, gam)
-
     # guess P0_ratio and T0_ratio
     P0_ratio = 1
     T0_ratio = 1
@@ -73,7 +50,8 @@ def compressor_dimensionless(MFP, Mrotor, gam, beta2, A_ratio):
     tol = 1e-8
     iterations = 0
     while True:
-        phi2_ = phi2(MFP, Mrotor, gam, A_ratio, P0_ratio, T0_ratio)
+        MFP2_ = MFP2(MFP, gam, A_ratio, P0_ratio, T0_ratio)
+        phi2_ = phi2(MFP2_, Mrotor, gam, T0_ratio)
 
         psi = psi_euler(phi2_, beta2, slip_factor)
 
@@ -92,7 +70,11 @@ def compressor_dimensionless(MFP, Mrotor, gam, beta2, A_ratio):
         P0_ratio = P0_ratio_new
         T0_ratio = T0_ratio_new
     
-    return P0_ratio, T0_ratio
+    MFP_choke = mach2mfp(1,gam)
+    choked = (MFP>MFP_choke) | (MFP2_ >MFP_choke)
+
+    print(iterations)
+    return P0_ratio, T0_ratio, choked
 
 
 
@@ -103,22 +85,24 @@ print(compressor_dimensionless(0, 0.6, 1.4, 30*pi/180, 1))
 slip_factor=0.9
 gam = 1.4
 MFP_choke = mach2mfp(1,gam)
-MFP = np.linspace(0,MFP_choke,100)
+MFP = np.linspace(0,MFP_choke,1000)
 M = mfp2mach(MFP, gam)
-Mrotor = 0.12
-beta2 = 15*pi/180
-A_ratio = 1
-P0_ratio, T0_ratio = compressor_dimensionless(MFP, Mrotor, gam, beta2, A_ratio)
-phi2_ = phi2(MFP, Mrotor, gam, A_ratio, P0_ratio, T0_ratio)
+Mrotor = 0.1
+beta2 = 10*pi/180
+A_ratio = 0.8
+P0_ratio, T0_ratio, choked = compressor_dimensionless(MFP, Mrotor, gam, beta2, A_ratio)
+MFP2_ = MFP2(MFP, gam, A_ratio, P0_ratio, T0_ratio)
+phi2_ = phi2(MFP2_, Mrotor, gam, T0_ratio)
 phi1_ = phi1(MFP, Mrotor, gam)
 plt.plot(MFP, P0_ratio)
 plt.plot(MFP, T0_ratio)
 plt.figure()
-plt.plot(MFP, phi1_)
+# plt.plot(MFP, phi1_)
 plt.plot(MFP, phi2_)
 plt.figure()
-plt.plot(MFP, MFP2(MFP, gam, A_ratio, P0_ratio, T0_ratio))
-plt.plot(MFP, M2(MFP, Mrotor, gam, P0_ratio, T0_ratio, A_ratio, slip_factor, beta2))
+plt.plot(MFP, MFP2_)
+plt.plot(MFP, choked)
+# plt.plot(MFP, M2(MFP, Mrotor, gam, P0_ratio, T0_ratio, A_ratio, slip_factor, beta2))
 plt.hlines(MFP_choke, 0, MFP_choke)
 plt.vlines(MFP_choke, 0, MFP_choke)
 
