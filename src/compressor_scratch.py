@@ -8,7 +8,7 @@ from mfp2mach import mfp2mach, mach2mfp
 def phi1(MFP, Mrotor, gam):
     
     M1 = mfp2mach(MFP, gam)
-    phi1_ = MFP/Mrotor*(1+(gam-1)/2*M1**2)**(-1/gam-1)
+    phi1_ = MFP/Mrotor*(1+(gam-1)/2*M1**2)**(1/(gam-1))
     
     return phi1_
 
@@ -49,17 +49,20 @@ def compressor_dimensionless(MFP, Mrotor, gam, beta1, beta2, A_ratio, R_ratio):
         phi1_ = phi1(MFP, Mrotor, gam)
 
         psi_euler = slip_factor*(1-phi2_*tan(beta2))
-        
-        psi_isen = psi_euler
+
+        internal_losses = {
+            "incidence": incidence_loss(phi1_, beta1, R_ratio),
+            "skin friction": skin_friction_loss(0.004, 20, slip_factor, beta2, phi1_, phi2_,1/R_ratio , 1/R_ratio)
+        }
+
+        parasitic_losses ={}
 
         if considering_losses:
-            pass
-            psi_isen = psi_isen - (
-                incidence_loss(phi1_, beta1, R_ratio)
-              + skin_friction_loss(0.004, 3, slip_factor, beta2, phi1_, phi2_,1/R_ratio , 1/R_ratio)
-              )
-        
-        psi_actual = psi_euler         
+            psi_isen = psi_euler - sum(internal_losses.values())
+            psi_actual = psi_euler + sum(parasitic_losses.values())
+        else:
+            psi_isen=psi_euler
+            psi_actual = psi_euler
         
         P0_ratio_new = psi2P0_ratio(psi_isen, Mrotor, gam)
         T0_ratio_new = psi2T0_ratio(psi_actual, Mrotor, gam)
@@ -84,11 +87,11 @@ def compressor_dimensionless(MFP, Mrotor, gam, beta1, beta2, A_ratio, R_ratio):
     choked = (MFP>MFP_choke) | (MFP2_ >MFP_choke)
 
     print(iterations)
-    return P0_ratio, T0_ratio, choked
+    return P0_ratio, T0_ratio, choked, phi2_, internal_losses, parasitic_losses
 
-def plot_map(MFP, M0rotor, gam, beta1, beta2, A_ratio, R_ratio):
+def plot_contour_map(MFP, M0rotor, gam, beta1, beta2, A_ratio, R_ratio):
     MFP_grid, M0rotor_grid = np.meshgrid(MFP, M0rotor)
-    P0_ratio, T0_ratio, choked = compressor_dimensionless(MFP_grid, M0rotor_grid, gam, beta1, beta2, A_ratio, R_ratio)
+    P0_ratio, T0_ratio, choked, phi2_, internal_losses, parasitic_losses = compressor_dimensionless(MFP_grid, M0rotor_grid, gam, beta1, beta2, A_ratio, R_ratio)
     T0_ratio_isen = P0_ratio**((gam-1)/gam)
     eff = np.log(T0_ratio_isen)/np.log(T0_ratio)
 
@@ -108,6 +111,21 @@ def plot_map(MFP, M0rotor, gam, beta1, beta2, A_ratio, R_ratio):
     plt.legend(("M0rotor", "eta_p"))
     
     return P0_ratio, eff
+
+
+def plot_map(MFP, M0rotor, gam, beta1, beta2, A_ratio, R_ratio):
+
+    fig, ax= plt.subplots(2,1)
+    fig2, ax2 = plt.subplots(1, 1)
+
+    for M in M0rotor:
+        P0_ratio, T0_ratio, choked, phi2_, internal_losses, parasitic_losses = compressor_dimensionless(MFP, M, gam, beta1, beta2, A_ratio, R_ratio)
+        T0_ratio_isen = P0_ratio ** ((gam - 1) / gam)
+        eff = np.log(T0_ratio_isen) / np.log(T0_ratio)
+        ax[0].plot(MFP, eff)
+        ax[1].plot(MFP, P0_ratio)
+        ax2.plot(MFP, MFP2(MFP, gam, A_ratio, P0_ratio, T0_ratio))
+
 
 def incidence_loss(phi1_, beta1, R_ratio):
     
@@ -131,17 +149,23 @@ def skin_friction_loss(Cf, Lb_Dhyd, slip_factor, beta2, phi1_, phi2_, D1t_D2, D1
 slip_factor=0.9
 gam = 1.4
 MFP_choke = mach2mfp(1,gam)
-MFP = np.linspace(0,MFP_choke,100)
+MFP = np.linspace(0,MFP_choke,1000)
 M = mfp2mach(MFP, gam)
 Mrotor = 0.3
-beta2 = 0*pi/180
+beta2 = 30*pi/180
 beta1 = 40*pi/180
 A_ratio = 2
 R_ratio = 2
-P0_ratio, T0_ratio, choked = compressor_dimensionless(MFP, Mrotor, gam, beta1, beta2, A_ratio, R_ratio)
+P0_ratio, T0_ratio, choked, phi2_, internal_losses, parasitic_losses = compressor_dimensionless(MFP, Mrotor, gam, beta1, beta2, A_ratio, R_ratio)
 MFP2_ = MFP2(MFP, gam, A_ratio, P0_ratio, T0_ratio)
 phi2_ = phi2(MFP2_, Mrotor, gam, T0_ratio)
 phi1_ = phi1(MFP, Mrotor, gam)
+
+for loss_name, delta_psi in internal_losses.items():
+    plt.plot(phi2_, delta_psi, label=loss_name)
+    plt.legend()
+
+plt.figure()
 plt.plot(MFP, P0_ratio)
 plt.plot(MFP, T0_ratio)
 plt.figure()
@@ -149,13 +173,14 @@ plt.figure()
 plt.plot(MFP, phi2_)
 plt.figure()
 plt.plot(MFP, MFP2_)
-plt.plot(MFP, choked)
+plt.xlabel("MFP1")
+plt.xlabel("MFP2")
 # plt.plot(MFP, M2(MFP, Mrotor, gam, P0_ratio, T0_ratio, A_ratio, slip_factor, beta2))
 plt.hlines(MFP_choke, 0, MFP_choke)
 plt.vlines(MFP_choke, 0, MFP_choke)
 plt.figure()
-P0_ratio, eff = plot_map(MFP, np.linspace(0.3,1.5,100), gam, beta1, beta2, A_ratio, R_ratio)
-
+P0_ratio, eff = plot_contour_map(MFP, np.linspace(0.3,1.5,100), gam, beta1, beta2, A_ratio, R_ratio)
+plot_map(MFP, np.linspace(0.3,1,10), gam, beta1, beta2, A_ratio, R_ratio)
 
 plt.show()
 
