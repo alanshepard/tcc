@@ -544,17 +544,6 @@ distributions.
   year    = {2004},
 }
 
-@InProceedings{Eisenlohr2002,
-  author    = {Gernot Eisenlohr and Hartmut Krain and Franz-Arno Richter and Valentin Tiede},
-  title     = {Investigations of the Flow Through a High Pressure Ratio Centrifugal Impeller},
-  booktitle = {Volume 5: Turbo Expo 2002, Parts A and B},
-  publisher = {{ASME}},
-  doi       = {10.1115/gt2002-30394},
-  file      = {:Eisenlohr2002-Investigations_of_the_Flow_through_a_High_Pressure_Ratio_Centrifugal_Impeller.pdf:PDF},
-  groups    = {Tests},
-  year      = {2002},
-}
-
 @Article{Galvas1973,
   author = {Galvas, Michael R},
   title  = {Fortran program for predicting off-design performance of centrifugal compressors},
@@ -693,12 +682,10 @@ distributions.
   year      = {1974},
 }
 
-@Article{Klassen1977,
-  author = {Klassen, Hugh A and Wood, Jerry R and Schumann, Lawrence F},
-  title  = {Experimental performance of a 16.10-centimeter-tip-diameter sweptback centrifugal compressor designed for a 6: 1 pressure ratio},
-  year   = {1977},
-  url    = {https://ntrs.nasa.gov/search.jsp?R=19770018140},
-  file   = {:Klassen1977-Experimental_Performance_of_a_16.10_Centimeter_Tip_Diameter_Sweptback_Centrifugal_Compressor_Designed_for_a_6__1_Pressure_Ratio.pdf:PDF},
-}
-
 @Comment{jabref-meta: databaseType:biblatex;}
+
+@Comment{jabref-meta: grouping:
+0 AllEntriesGroup:;
+1 StaticGroup:Markings\;2\;1\;\;\;\;;
+2 StaticGroup:bernardo:6\;2\;1\;\;\;\;;
+}
