@@ -1,6 +1,22 @@
 \documentclass[tcc]{subfiles}
 \begin{document}
 
+\subsection{Dimensionless compressor analysis}
+
+\begin{gather}
+    \acs{MFP} \triangleq \MFP{1} = \MFPalt{1} \\
+    \acs{M0rotor} \triangleq \frac{U_2}{\sqrt{\gamma R T_{01}}} \\
+    \gamma
+\end{gather}
+
+\begin{equation}
+    \phi_2 \triangleq \frac{W_{2r}}{U_2} 
+           = \frac{\frac{\dot{m}}{\rho_2 A2}}{\acs{M0rotor} a_{01}}
+           = \frac{\MFPalt{2}}{\acs{M0rotor}} \frac{a_{02}}{a_{01}} \stagdensratio{2}
+           = \frac{\acs{MFP}_2}{\acs{M0rotor}} \sqrt{\frac{T_{02}}{T_{01}}} \stagdensratio{2}
+\end{equation}
+
+
 \subsection{Euler's equation}
 
 From the conservation of angular momentum, 
