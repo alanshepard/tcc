@@ -2,3 +2,7 @@
 *djvu
 *.pptx
 *.docx
+
+#JabRef files
+*.sav
+*.bak
