@@ -1,7 +1,5 @@
 @default_files = ("tcc.tex");
 
-$ENV{'TEXINPUTS'}='./tex//:' . $ENV{'TEXINPUTS'}; 
-
 $out_dir = 'build';
 
 $pdf_mode = 1;

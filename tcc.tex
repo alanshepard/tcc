@@ -14,7 +14,7 @@
 	%subsection=TITLE,	% títulos de subseções convertidos em letras maiúsculas
 	%subsubsection=TITLE,% títulos de subsubseções convertidos em letras maiúsculas
 	% -- opções do pacote babel --
-	brazil,	% idioma adicional para hifenização
+	%brazil,	% idioma adicional para hifenização
 	english % o último idioma é o principal do documento
 	]{abntex2}
 
@@ -35,14 +35,16 @@
 \usepackage{siunitx}
 \usepackage[olditem,oldenum]{paralist}
 \usepackage{pdfpages}
+\usepackage{amsmath}
 \usepackage{amssymb}
+\usepackage[ruled]{algorithm2e}
 
 % Citações padrão ABNT.
 % Uncomment to use bibtex 
 %\usepackage[alf]{abntex2cite}	
 
 % Uncomment to use biblatex
-\usepackage[style=abnt]{biblatex}
+\usepackage[style=abnt,language=english,pretty]{biblatex}
 \addbibresource{references/references.bib}        % Seus arquivos de
 %\addbibresource{outroarquivo.bib}   % bibliografia vão aqui
 

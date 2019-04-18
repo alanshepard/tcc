@@ -1,23 +1,13 @@
 \documentclass[tcc]{subfiles}
 \begin{document}
 
-\subsection{Dimensionless compressor analysis}
 
-\begin{gather}
-    \acs{MFP} \triangleq \MFP{1} = \MFPalt{1} \\
-    \acs{M0rotor} \triangleq \frac{U_2}{\sqrt{\gamma R T_{01}}} \\
-    \gamma
-\end{gather}
+\chapter{Compressor model}
 
-\begin{equation}
-    \phi_2 \triangleq \frac{W_{2r}}{U_2} 
-           = \frac{\frac{\dot{m}}{\rho_2 A2}}{\acs{M0rotor} a_{01}}
-           = \frac{\MFPalt{2}}{\acs{M0rotor}} \frac{a_{02}}{a_{01}} \stagdensratio{2}
-           = \frac{\acs{MFP}_2}{\acs{M0rotor}} \sqrt{\frac{T_{02}}{T_{01}}} \stagdensratio{2}
-\end{equation}
+Assumptions: ideal gas
 
-
-\subsection{Euler's equation}
+\section{Work done in a compressor: Euler's equation}
+\label{sec:euler_equation}
 
 From the conservation of angular momentum, 
 
@@ -32,7 +22,7 @@ Multiplying both sides by the rotational speed ($\omega$)
                 = \dot{m} \vec{\omega} \cdot (\vec{r_2}\cross\vec{V_2} - \vec{r_1}\cross\vec{V_1}) 
 \end{equation}
 
-Assuming that the system is adiabatic and using the first law of thermodynamics,
+Assuming that the system is adiabatic and using the first law of thermodynamics the specific enthalpy change is given by,
 
 \begin{equation}
     \Delta h = \frac{\acs{power}}{\dot{m}} 
@@ -53,7 +43,6 @@ as a function of the radial relative velocity (${W_r}_2$),
 since the latter is more closely related to the mass flow 
 (i.e. $\dot{m} = \rho {W_r}_2 A_2$, where $A_2$ is the ring shaped exit area of the compressor)
 
-
 From the velocity triangle in figure X, assuming that the flow exits tangential to the blade surface,
 \begin{equation}
     \label{eqn:V_u_2}
@@ -62,7 +51,7 @@ From the velocity triangle in figure X, assuming that the flow exits tangential 
 
 Due to aerodynamic blockage at the tip and flow distortions caused by viscous efects, flow diffusion, clearences and blade aspect ratio,
 ${V_u}_2$ is actually smaller than what is predicted by \cref{eqn:V_u_2}.
-This is accounted for by the \acf{impeller_distortion_factor}.
+This is accounted for by the \acf{impeller_distortion_factor}\index{impeller distortion factor}.
 Furthermore, the flow does not exit perfectly tangential to the blade surface, and this is accounted by the \acf{slip_factor} \cite{Wiesner1967,Aungier1995}.
 The corrected equation for the absolute tangential velocity is then
 
@@ -77,11 +66,159 @@ Substituting \cref{eqn:V_u_2_corrected} in \cref{eqn:euler} and dividing both si
     \acs{load_coef} = \acs{slip_factor}(1-\acs{impeller_distortion_factor}\acs{flow_coef}_2\tan\beta_2) - \frac{U_1 {V_u}_1}{U_2^2} 
 \end{equation}
 
-The second term accounts for pre-whirl in the flow entering the compressor, e.g due to \ac{IGV}.
+where $\phi_2 \triangleq \frac{\dot{m}}{A_2 \rho_2 U_2} = \frac{W_{2r}}{U_2}$ is the flow parameter\index{flow parameter} at the compressor exit
+and $\psi \triangleq \frac{\Delta h}{U_2^2}$
+
+The second term accounts for pre-whirl\index{pre-whirl} in the flow entering the compressor, e.g due to \ac{IGV}.
 In the case of no pre-whirl, ${V_u}_1 = 0$, thus 
 
 \begin{equation}
+    \label{eqn:euler}
     \acs{load_coef} = \acs{slip_factor}(1-\acs{impeller_distortion_factor}\acs{flow_coef}_2\tan\beta_2)  
 \end{equation}
+
+\section{Dimensionless compressor analysis}
+\label{sec:dimensionless_compressor}
+
+From the Buckinham $\Pi$ Theorem \cite{Buckingham1914} it can be shown that,
+the compressor behaviour is a function of only three parameters, namely the \acl{MFP}, the \acl{M0rotor}, the \acl{gam} and the \acl{Re}. For a centrifugal compressor, this quantities are defined respectively as follows
+
+\begin{align}
+    \acs{MFP} &\triangleq \MFP{1} = \MFPalt{1} \\
+    \acs{M0rotor} &\triangleq \frac{U_2}{\sqrt{\gamma R T_{01}}} \\
+    \gamma &\triangleq \frac{c_p}{c_v} \\
+    \acs{Re} &
+\end{align}
+
+In particular, the \acl{MFP} is a function of the Mach number and the specific heat ratio,
+ i.e.\
+\begin{equation}
+    \label{eqn:mfp2mach}
+    \acs{MFP}(M,\gamma) = M \left( 1 + \frac{\gamma-1}{2}M^2\right)^{-\frac{\gamma+1}{\gamma-1}}
+\end{equation}
+While there is no closed form inverse for this function, it is invertible and the inverse can be easily computed nummerically, e.g.\ by a newton scheme \cite{Der1974}.
+
+According to \textcite{walsh2004gas},
+ the influence of the \acl{Re} in the system behaviour is only of second order.
+
+To write Euler's equation \cref{eqn:euler} in terms of these parameters, suffices to rewrite $\phi_2$ and $\psi$ as a function of them. Thus
+\begin{multline}
+    \label{eqn:phi2_dimensionless}
+    \phi_2 = \frac{W_{2r}}{U_2} 
+           = \frac{\frac{\dot{m}}{\rho_2 A2}}{\acs{M0rotor} a_{01}}
+           = \frac{\MFPalt{2}}{\acs{M0rotor}} \frac{a_{02}}{a_{01}} \stagdensratio{2} \\ 
+           = \frac{\acs{MFP}_2}{\acs{M0rotor}} \sqrt{\frac{T_{02}}{T_{01}}} \stagdensratio{2}
+\end{multline}
+The value of $M_2$ can be obtained from $\acs{MFP}_2$ using \cref{eqn:mfp2mach}, while the latter is given by
+\begin{equation}
+    \label{eqn:mfp2mfp2}
+    \acs{MFP}_2 \triangleq \MFP{2} = \acs{MFP} \frac{A_1}{A_2} \frac{P_{01}}{P_{02}} \sqrt{\frac{T_{02}}{T_{01}}}
+\end{equation}
+Notice that \cref{eqn:mfp2mfp2} makes no assumption of the process 1--2 being isentropic. $\acs{MFP}_2$ can be used along with \acs{MFP} to check for choking.
+
+Finally, the load coefficient is given by
+\begin{equation}
+    \acs{load_coef}_2 \triangleq \frac{\Delta h}{U_2^2}
+                      = \frac{c_p(T_{02}-T_{01})}{U_2^2}
+                      = \frac{\frac{c_p(T_{02}-T_{01})}{\gamma R T_{01})}}
+                                    {\acs{M0rotor}^2}
+                      = \frac{\frac{T_{02}}{T_{01}}-1}
+                                  {\acs{M0rotor}^2}
+                        \left(\frac{1}{\gamma-1}\right)
+\end{equation}
+
+The temperatures and pressure ratio can then be readly obtained from $\psi_2$, i.e.\
+\begin{equation}
+    \label{eqn:psi2Tratio_isen}
+    \frac{T_{02}}{T_{01}} = (\gamma - 1)\psi_2 \acs{M0rotor} + 1
+\end{equation}
+and, assuming an isentropic process,
+\begin{equation}
+    \label{eqn:psi2Pratio_isen}
+    \frac{P_{02}}{P_{01}} = \left[(\gamma - 1)\psi_2 \acs{M0rotor} + 1\right]^\frac{\gamma}{\gamma-1}
+\end{equation}
+
+The procedure for calculating the compressor map is summarized in \cref{alg:isen_comp_map}.
+
+\begin{algorithm}
+    \caption{Isentropic compressor map}
+    \label{alg:isen_comp_map}
+    
+    \KwIn{\textsc{Inputs:} \acs{MFP}, \acs{M0rotor}, \acs{gam}}
+    
+    guess $\frac{T_{02}}{T_{01}}$ and $\frac{P_{02}}{P_{01}}$\;
+    \Repeat{pressure and temperature ratio converge}{
+        calculate $\acs{MFP}_2$ from \cref{eqn:mfp2mfp2} \label{start}\;
+        calculate $M_2$ by solving \cref{eqn:mfp2mach}\;
+        calculate $\phi_2$ using \cref{eqn:phi2_dimensionless}\;
+        calculate $\psi$ from Euler's~equation~(\ref{eqn:euler})\;
+        calculate $\frac{T_{02}}{T_{01}}$ and $\frac{P_{02}}{P_{01}}$ 
+            using \cref{eqn:psi2Tratio_isen,eqn:psi2Pratio_isen} \;
+}
+
+    \KwOut{$\frac{T_{02}}{T_{01}}$, $\frac{P_{02}}{P_{01}}$}
+\end{algorithm}
+
+
+\section{Losses}
+The assumption of isentropic flow used at the very end of last section 
+does not hold for a real compressor. 
+There is generation of entropy in many parts of the compression process. 
+These so called ``losses'' are modelled in literature as enthalpy corrections 
+for the Euler equation considering both the actual process and the isentropic process 
+that would generate the same increase in pressure as the real process \cite{Galvas1973}. 
+That is, we rewrite \cref{eqn:psi2Tratio_isen,eqn:psi2Pratio_isen} as
+
+\begin{align}
+    \frac{T_{02}}{T_{01}} &= (\gamma - 1)\psi_{2\text{actual}} \acs{M0rotor} + 1
+    \tag{\ref{eqn:psi2Tratio_isen}mod} \\
+    \frac{P_{02}}{P_{01}} &= \left[(\gamma - 1)\psi_{2\text{isen}} \acs{M0rotor} + 1\right]^\frac{\gamma}{\gamma-1}
+    \tag{\ref{eqn:psi2Pratio_isen}mod}\\
+    \text{where} \notag\\
+    \psi_{2\text{actual}} &= \psi_{2\text{euler}} + \sum_{\substack{
+                                                            \text{parasitic} \\ 
+                                                            \text{losses}
+                                                        }}
+                                                          \Delta \psi_2 \\
+    \psi_{2\text{isen}}  &= \psi_{2\text{euler}} - \sum_{\substack{
+                                                            \text{internal} \\ 
+                                                            \text{losses}
+                                                        }}
+                                                          \Delta \psi_2 
+\end{align}
+
+The isentropic and polytropic efficiencies can then be readly calculated as
+\begin{align}
+    \eta_t &= \frac{\psi_{2\text{isen}}}{\psi_{2\text{actual}}}\\
+    \eta_p &= \frac{\gamma-1}{\gamma} \left(\frac{\log\frac{P_{02}}{P_{01}}}
+                                                 {\log\frac{T_{02}}{T_{01}}}
+                                     \right)
+\end{align}
+
+
+
+The losses generally accounted for are \cite{Oh1997}:
+\begin{itemize}
+    \item[] \textbf{Internal}
+    \item Incidence loss (in the impeller and diffuser)
+    \item Blade loading loss
+    \item Skin friction loss
+    \item Clearance loss
+    \item Mixing loss
+    \item Vaneless diffuser loss
+    \item[] \textbf{Parasitic}
+    \item Disc friction loss
+    \item Recirculation loss
+    \item Leakage loss
+\end{itemize}
+
+A detailed discussion of each loss mechanism is beyond the scope of this work; 
+the interested reader should refer to \textcite{Cumpsty2004}. 
+
+Semi-empirical models were used to predict each individual loss 
+based on compressor geometry and flow condition. 
+The incidence loss model used \textcite{Stanitz1953}.
+All other loss models used were suggested by the comparative study of \textcite{Oh1997}, 
+and will not be discussed here.
 
 \end{document}
