@@ -17,6 +17,7 @@ def mfp2mach(MFP, gam):
     """
     
     MFP_choked = mach2mfp(1,gam)
+    MFP[MFP>MFP_choked] = np.nan
     #Anything with MFP>MFP_choked is choked, so
     #MFP = np.minimum(MFP, MFP_choked)
 
@@ -32,7 +33,7 @@ def mfp2mach(MFP, gam):
     
     #Newton method
     iterations = 0
-    M = np.ones_like(MFP) #1-z(MFP)**2 #initial guess
+    M = 1-z(MFP)**2 #initial guess
     tol = 1e-8
     while(np.max(np.abs(z(mach2mfp(M,gam))-z(MFP))) > tol):
         
