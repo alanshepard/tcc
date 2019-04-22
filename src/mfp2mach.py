@@ -17,9 +17,8 @@ def mfp2mach(MFP, gam):
     """
     
     MFP_choked = mach2mfp(1,gam)
-    MFP[MFP>MFP_choked] = np.nan
     #Anything with MFP>MFP_choked is choked, so
-    #MFP = np.minimum(MFP, MFP_choked)
+    # MFP[MFP>MFP_choked] = MFP_choked
 
     def z(MFP):
         z_= -np.sqrt(1-MFP/MFP_choked)
