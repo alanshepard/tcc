@@ -8,7 +8,7 @@ from mfp2mach import mach2mfp
 gam = 1.4
 beta5 = -56*pi/180
 alfa4 = 60*pi/180
-A_ratio = (65.3**2-45**2)/(67.**2-46.**2)
+A_ratio = 3#(65.3**2-45**2)/(67.**2-46.**2)
 M0rotor = 0.8
 
 def f(x, P0_ratio):
@@ -33,33 +33,37 @@ def f(x, P0_ratio):
 
 import matplotlib.pyplot as plt
 
-M = np.linspace(5e-2,1,10)
-grid = np.meshgrid(M, M)
-print(np.shape(grid))
-P0_ratio=0.9
-P0, err_MFP, psi = f(grid, P0_ratio)
+# M = np.linspace(5e-2,1,10)
+# grid = np.meshgrid(M, M)
+# print(np.shape(grid))
+# P0_ratio=0.9
+# P0, err_MFP, psi = f(grid, P0_ratio)
 
-ex = P0
+# ex = P0
 
-c = plt.imshow(P0, cmap='RdBu', vmin=0, vmax=1.2,
-              extent=[5e-2,1,5e-2,1],
-              interpolation='nearest', origin='lower')
-plt.colorbar(c)
-plt.contour(M,M,psi, levels=[0], color='red')
-plt.contour(M,M,P0, levels=[P0_ratio], color='red')
-plt.contour(M,M,err_MFP, levels=[0], color='red')
-plt.figure(2)
-d = plt.imshow(psi, cmap='RdBu', vmin=np.min(psi), vmax=np.max(psi),
-              extent=[5e-2,1,5e-2,1],
-              interpolation='nearest', origin='lower')
-plt.colorbar(d)
-# plt.contour(M,M,errP0, levels=[0], color='blue')
-plt.contour(M,M,err_MFP, levels=[0], color='red')
-plt.contour(M,M,P0) 
+# c = plt.imshow(P0, cmap='RdBu', vmin=0, vmax=1.2,
+#               extent=[5e-2,1,5e-2,1],
+#               interpolation='nearest', origin='lower')
+# plt.colorbar(c)
+# plt.contour(M,M,psi, levels=[0], color='red')
+# plt.contour(M,M,P0, levels=[P0_ratio], color='red')
+# plt.contour(M,M,err_MFP, levels=[0], color='red')
+# plt.figure(2)
+# d = plt.imshow(psi, cmap='RdBu', vmin=np.min(psi), vmax=np.max(psi),
+#               extent=[5e-2,1,5e-2,1],
+#               interpolation='nearest', origin='lower')
+# plt.colorbar(d)
+# # plt.contour(M,M,errP0, levels=[0], color='blue')
+# plt.contour(M,M,err_MFP, levels=[0], color='red')
+# plt.contour(M,M,P0) 
 
-def g(x, P):
+def P_err(x, P):
     P0_ratio_new, err_MFP, psi = f(x, P)
-    return P-P0_ratio_new, err_MFP
+    return P-P0_ratio_new
+
+def MFP_err(x, P):
+    P0_ratio_new, err_MFP, psi = f(x, P)
+    return err_MFP
 
 fig, ax = plt.subplots(2,2)
 for M0rotor in np.linspace(0.1, 0.5, 10):
@@ -67,12 +71,24 @@ for M0rotor in np.linspace(0.1, 0.5, 10):
     MFP2=[]
     P=[]
     x0=(0.5,0.5)
-    for p in np.linspace(1,1/3,100):
-        sol = root(g,x0,p)
+    for p in np.linspace(1,0,100):
+        sol = minimize(lambda x: -mach2mfp(x[0],gam)-mach2mfp(x[1], gam),x0,
+                    bounds=[(0, 1), (0, 1)], 
+                    constraints= [
+                        {'type': 'eq',
+                         'fun': P_err,
+                         'args': [p]
+                        },
+                        {'type': 'eq',
+                         'fun': MFP_err,
+                         'args': [p]
+                        },
+                    ])
         print(sol)
-        if not sol.success or np.any(sol.x>=1):
+        if not sol.success: # or np.any(sol.x>1):
             break
-        x0 = sol.x
+            pass
+        #x0 = sol.x
         P.append(p)
         MFP1.append(mach2mfp(sol.x[0], gam))
         MFP2.append(mach2mfp(sol.x[1], gam))
@@ -95,7 +111,7 @@ ax[0][1].set_xlabel("P04/P05")
 plt.delaxes(ax[1][1])
 
 # print(minimize(f, [1,1], bounds=[(0.1,1), (0.1,1)]))
-# print(root(f,[1,1]))
+# print(root(g,[.5,.5],3))
 
 plt.show()
 
