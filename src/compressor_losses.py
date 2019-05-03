@@ -13,12 +13,14 @@ def internal(**kwargs):
 
 
     internal_loss_func_dict = {
-        "incidence": incidence_loss,
-        "skin friction": skin_friction,
-        "blade_loading": blade_loading,
+        "inducer_incidence_loss": inducer_incidence,
+        "diffuser_incidence_loss": diffuser_incidence,
+        "skin_friction_loss": skin_friction,
+        "blade_loading_loss": blade_loading,
     }
 
     internal_loss_dict = eval_loss_func_dict(internal_loss_func_dict, **kwargs)
+    # assert not np.any(np.isnan(list(internal_loss_dict.values())))
     
     return internal_loss_dict
 
@@ -39,10 +41,16 @@ def eval_loss_func_dict(loss_func_dict, **available_kwargs):
     return loss_dict
 
 
-def incidence_loss(phi1, beta1, R_ratio):
+def inducer_incidence(phi1, beta1, R_ratio):
     
     beta1_opt = np.arctan(1/(R_ratio*phi1))
     delta_psi = ((1/R_ratio)**2+phi1**2)*np.sin(beta1-beta1_opt)**2
+
+    return delta_psi
+
+def diffuser_incidence(psi_euler, phi2, alfa3):
+    alfa3_opt = np.arctan(psi_euler/phi2)
+    delta_psi = (psi_euler**2+phi2**2)*np.sin(alfa3-alfa3_opt)**2
 
     return delta_psi
 
