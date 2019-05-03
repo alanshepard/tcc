@@ -9,7 +9,7 @@ def mach2mfp(M, gam):
     """
     return M*(1+(gam-1)/2*M**2)**(-(gam+1)/(2*(gam-1)))
 
-def mfp2mach(MFP, gam):
+def mfp2mach(MFP, gam, tol=1e-8):
     """ 
     Only works for subsonic
     
@@ -33,7 +33,6 @@ def mfp2mach(MFP, gam):
     #Newton method
     iterations = 0
     M = 1-z(MFP)**2 #initial guess
-    tol = 1e-8
     while(np.max(np.abs(z(mach2mfp(M,gam))-z(MFP))) > tol):
         
         if iterations >= 50:
@@ -53,3 +52,8 @@ if __name__ == "__main__":
     print(np.c_[M,M_err])
     assert np.max(np.abs(M_err))<=1e-6
     print("TEST OK")
+    
+    import matplotlib.pyplot as plt
+    M=np.linspace(0,2,100)
+    plt.plot(M, mach2mfp(M, gam))
+    plt.show()
