@@ -3,7 +3,7 @@
 
 \documentclass[
 	% -- opções da classe memoir --
-	12pt,				% tamanho da fonte
+	10pt,				% tamanho da fonte
 	%openright,			% capítulos começam em pág ímpar (insere página vazia caso preciso)
 	%twoside,			% para impressão em recto e verso. Oposto a oneside
 	oneside,
@@ -30,6 +30,10 @@
 \usepackage{tcolorbox}
 \usepackage{tikz}
 \usetikzlibrary{shapes,arrows,automata,calc}
+\usepackage{pgfplots}
+\pgfplotsset{compat=newest}
+\usepgfplotslibrary{groupplots}
+\usepgfplotslibrary{dateplot}
 \usepackage{subfiles}
 \usepackage{subcaption}
 \usepackage{siunitx}
@@ -37,6 +41,7 @@
 \usepackage{pdfpages}
 \usepackage{amsmath}
 \usepackage{amssymb}
+\usepackage{mathtools}
 \usepackage[ruled]{algorithm2e}
 
 % Citações padrão ABNT.

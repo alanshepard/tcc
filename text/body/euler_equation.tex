@@ -77,11 +77,66 @@ In the case of no pre-whirl, ${V_u}_1 = 0$, thus
     \acs{load_coef} = \acs{slip_factor}(1-\acs{impeller_distortion_factor}\acs{flow_coef}_2\tan\beta_2)  
 \end{equation}
 
+\section{Losses}
+\label{sec:compressor_losses}
+There is generation of entropy in many parts of the compression process. 
+These so called ``losses'' are modelled in literature as enthalpy corrections 
+for the Euler equation considering both the \emph{actual} process and the \emph{isentropic} process 
+that would generate the same increase in pressure as the real process \cite{Galvas1973}. 
+
+\begin{align}
+    \Delta h_{\text{actual}} &= \Delta h_{\text{euler}} + \sum_{\substack{
+                                                            \text{parasitic} \\ 
+                                                            \text{losses}
+                                                        }}
+                                                          \Delta h \\
+    \Delta h_{\text{isen}}  &= \Delta h_{\text{euler}} - \sum_{\substack{
+                                                            \text{internal} \\ 
+                                                            \text{losses}
+                                                        }}
+                                                          \Delta h
+\end{align}
+
+The isentropic and polytropic efficiencies can then be readly calculated as
+\begin{align}
+    \eta_t &= \frac{\Delta h_{\text{isen}}}{\Delta h_{\text{actual}}}\\
+    \eta_p &= \frac{\gamma-1}{\gamma} \left(\frac{\log\frac{P_{02}}{P_{01}}}
+                                                 {\log\frac{T_{02}}{T_{01}}}
+                                     \right)
+\end{align}
+
+The losses generally accounted for are \cite{Oh1997}:
+\begin{compactitem}
+    \item[] \textbf{Internal}
+    \item Incidence loss (in the impeller and diffuser)
+    \item Blade loading loss
+    \item Skin friction loss
+    \item Clearance loss
+    \item Mixing loss
+    \item Vaneless diffuser loss
+    \item[] \textbf{Parasitic}
+    \item Disc friction loss
+    \item Recirculation loss
+    \item Leakage loss
+\end{compactitem}
+
+A detailed discussion of each loss mechanism is beyond the scope of this work; 
+the interested reader should refer to \textcite{Cumpsty2004}. 
+
+Semi-empirical models were used to predict each individual loss 
+based on compressor geometry and flow condition. 
+The incidence loss model used assumes that all kinectic energy from the velocity components
+normal to the inducer and diffuser blades is lost \textcite{Stanitz1953}.
+All other loss models used were suggested by the comparative study of \textcite{Oh1997}, 
+and will not be discussed here.
+
 \section{Dimensionless compressor analysis}
 \label{sec:dimensionless_compressor}
 
-From the Buckinham $\Pi$ Theorem \cite{Buckingham1914} it can be shown that,
-the compressor behaviour is a function of only three parameters, namely the \acl{MFP}, the \acl{M0rotor}, the \acl{gam} and the \acl{Re}. For a centrifugal compressor, this quantities are defined respectively as follows
+From the Buckinham $\Pi$ Theorem \cite{Buckingham1914}, 
+it can be shown that the compressor behaviour is a function of only three parameters, 
+namely the \acl{MFP}, the \acl{M0rotor}, the \acl{gam} and the \acl{Re}. 
+For a centrifugal compressor, this quantities are defined respectively as follows
 
 \begin{align}
     \acs{MFP} &\triangleq \MFP{1} = \MFPalt{1} \\
@@ -94,7 +149,7 @@ In particular, the \acl{MFP} is a function of the Mach number and the specific h
  i.e.\
 \begin{equation}
     \label{eqn:mfp2mach}
-    \acs{MFP}(M,\gamma) = M \left( 1 + \frac{\gamma-1}{2}M^2\right)^{-\frac{\gamma+1}{\gamma-1}}
+    \acs{MFP}(M,\gamma) = M \left( 1 + \frac{\gamma-1}{2}M^2\right)^{-\frac{\gamma+1}{2(\gamma-1)}}
 \end{equation}
 While there is no closed form inverse for this function, it is invertible and the inverse can be easily computed nummerically, e.g.\ by a newton scheme \cite{Der1974}.
 
@@ -116,109 +171,58 @@ The value of $M_2$ can be obtained from $\acs{MFP}_2$ using \cref{eqn:mfp2mach},
 \end{equation}
 Notice that \cref{eqn:mfp2mfp2} makes no assumption of the process 1--2 being isentropic. $\acs{MFP}_2$ can be used along with \acs{MFP} to check for choking.
 
-Finally, the load coefficient is given by
+The load coefficient is given by
 \begin{equation}
-    \acs{load_coef}_2 \triangleq \frac{\Delta h}{U_2^2}
+    \acs{load_coef}_{2 \text{euler}} \triangleq \frac{\Delta h_{\text{euler}}}{U_2^2}
                       = \frac{c_p(T_{02}-T_{01})}{U_2^2}
-                      = \frac{\frac{c_p(T_{02}-T_{01})}{\gamma R T_{01})}}
+                      = \frac{\frac{c_p(T_{02}-T_{01})}{\gamma R T_{01}}}
                                     {\acs{M0rotor}^2}
                       = \frac{\frac{T_{02}}{T_{01}}-1}
                                   {\acs{M0rotor}^2}
                         \left(\frac{1}{\gamma-1}\right)
 \end{equation}
 
-The temperatures and pressure ratio can then be readly obtained from $\psi_2$, i.e.\
-\begin{equation}
-    \label{eqn:psi2Tratio_isen}
-    \frac{T_{02}}{T_{01}} = (\gamma - 1)\psi_2 \acs{M0rotor} + 1
-\end{equation}
-and, assuming an isentropic process,
-\begin{equation}
-    \label{eqn:psi2Pratio_isen}
-    \frac{P_{02}}{P_{01}} = \left[(\gamma - 1)\psi_2 \acs{M0rotor} + 1\right]^\frac{\gamma}{\gamma-1}
-\end{equation}
+At this point the loss models discussed in \cref{sec:compressor_losses} are introduced, 
+and the values of $\acs{load_coef}_{2\text{actual}}$ and $\acs{load_coef}_{2\text{isen}}$ are obtained.
+The temperatures and pressure ratio can then be readly calculate from
+\begin{align}
+    \label{eqn:psi2Tratio}
+    \frac{T_{02}}{T_{01}} &= (\gamma - 1)\psi_{2\text{actual}} \acs{M0rotor}^2 + 1 \\
+    \label{eqn:psi2Pratio}
+    \frac{P_{02}}{P_{01}} &= \left[(\gamma - 1)\psi_{2\text{isen}} \acs{M0rotor}^2 + 1\right]^\frac{\gamma}{\gamma-1}
+\end{align}
 
-The procedure for calculating the compressor map is summarized in \cref{alg:isen_comp_map}.
+The procedure for calculating the compressor map is summarized in \cref{alg:comp_map}. 
+This is a iterative process, and initial guesses must be made for both 
+the mass flow parameter at the impeller exit ($\acs{MFP}_2$) and the temperature ratio 
+($\tfrac{T_{02}}{T_{01}}$). 
+It is important to keep the values for $\acs{MFP}_2$ bellow the choke value during all iterations,
+otherwise the computation of $M_2$ will fail. 
+Therefore, it is convenient to guess that the compressor exit is choked because this will lead 
+to approaching the actual value of $\acs{MFP}_2$ from above.
+Even if the exit is far from choked, the method converges very rapidly in our experience.
 
 \begin{algorithm}
-    \caption{Isentropic compressor map}
-    \label{alg:isen_comp_map}
-    
+    \caption{Compressor map}
+    \label{alg:comp_map}
+
     \KwIn{\textsc{Inputs:} \acs{MFP}, \acs{M0rotor}, \acs{gam}}
     
-    guess $\frac{T_{02}}{T_{01}}$ and $\frac{P_{02}}{P_{01}}$\;
-    \Repeat{pressure and temperature ratio converge}{
-        calculate $\acs{MFP}_2$ from \cref{eqn:mfp2mfp2} \label{start}\;
+    guess that the outlet is choked, i.e.\ 
+        $\acs{MFP}_2 = \left( \frac{\gamma+1}{2}\right)^{-\frac{\gamma+1}{2(\gamma-1)}} $\;
+    guess that the compressor is isentropic, and take
+     $\frac{T_{02}}{T_{01}} = \left(\frac{A_2}{A_1}\frac{\acs{MFP}_2}{\acs{MFP}_1}\right)^{-\frac{2(\gamma-1)}{\gamma+1}} $\;
+    \Repeat{$\acs{MFP}_2$ converges} {
         calculate $M_2$ by solving \cref{eqn:mfp2mach}\;
         calculate $\phi_2$ using \cref{eqn:phi2_dimensionless}\;
-        calculate $\psi$ from Euler's~equation~(\ref{eqn:euler})\;
+        calculate $\psi_\text{euler}$ from Euler's~equation~(\ref{eqn:euler})\;
+        calculate parasitic and 
         calculate $\frac{T_{02}}{T_{01}}$ and $\frac{P_{02}}{P_{01}}$ 
-            using \cref{eqn:psi2Tratio_isen,eqn:psi2Pratio_isen} \;
+            using \cref{eqn:psi2Tratio,eqn:psi2Pratio} \;
+        calculate $\acs{MFP}_2$ from \cref{eqn:mfp2mfp2}\;
 }
 
     \KwOut{$\frac{T_{02}}{T_{01}}$, $\frac{P_{02}}{P_{01}}$}
 \end{algorithm}
-
-
-\section{Losses}
-The assumption of isentropic flow used at the very end of last section 
-does not hold for a real compressor. 
-There is generation of entropy in many parts of the compression process. 
-These so called ``losses'' are modelled in literature as enthalpy corrections 
-for the Euler equation considering both the actual process and the isentropic process 
-that would generate the same increase in pressure as the real process \cite{Galvas1973}. 
-That is, we rewrite \cref{eqn:psi2Tratio_isen,eqn:psi2Pratio_isen} as
-
-\begin{align}
-    \frac{T_{02}}{T_{01}} &= (\gamma - 1)\psi_{2\text{actual}} \acs{M0rotor} + 1
-    \tag{\ref{eqn:psi2Tratio_isen}mod} \\
-    \frac{P_{02}}{P_{01}} &= \left[(\gamma - 1)\psi_{2\text{isen}} \acs{M0rotor} + 1\right]^\frac{\gamma}{\gamma-1}
-    \tag{\ref{eqn:psi2Pratio_isen}mod}\\
-    \text{where} \notag\\
-    \psi_{2\text{actual}} &= \psi_{2\text{euler}} + \sum_{\substack{
-                                                            \text{parasitic} \\ 
-                                                            \text{losses}
-                                                        }}
-                                                          \Delta \psi_2 \\
-    \psi_{2\text{isen}}  &= \psi_{2\text{euler}} - \sum_{\substack{
-                                                            \text{internal} \\ 
-                                                            \text{losses}
-                                                        }}
-                                                          \Delta \psi_2 
-\end{align}
-
-The isentropic and polytropic efficiencies can then be readly calculated as
-\begin{align}
-    \eta_t &= \frac{\psi_{2\text{isen}}}{\psi_{2\text{actual}}}\\
-    \eta_p &= \frac{\gamma-1}{\gamma} \left(\frac{\log\frac{P_{02}}{P_{01}}}
-                                                 {\log\frac{T_{02}}{T_{01}}}
-                                     \right)
-\end{align}
-
-
-
-The losses generally accounted for are \cite{Oh1997}:
-\begin{itemize}
-    \item[] \textbf{Internal}
-    \item Incidence loss (in the impeller and diffuser)
-    \item Blade loading loss
-    \item Skin friction loss
-    \item Clearance loss
-    \item Mixing loss
-    \item Vaneless diffuser loss
-    \item[] \textbf{Parasitic}
-    \item Disc friction loss
-    \item Recirculation loss
-    \item Leakage loss
-\end{itemize}
-
-A detailed discussion of each loss mechanism is beyond the scope of this work; 
-the interested reader should refer to \textcite{Cumpsty2004}. 
-
-Semi-empirical models were used to predict each individual loss 
-based on compressor geometry and flow condition. 
-The incidence loss model used \textcite{Stanitz1953}.
-All other loss models used were suggested by the comparative study of \textcite{Oh1997}, 
-and will not be discussed here.
 
 \end{document}

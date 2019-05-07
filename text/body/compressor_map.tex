@@ -2,7 +2,43 @@
 
 \begin{document}
 
-\subsection{Compressor Model}
+\begin{table}
+\centering
+    \caption{Compressor model problem statement}
+\begin{minipage}{0.7\textwidth}
+
+
+    Given $\gamma$ and the compressor geometry 
+    $\mathcal{G} \triangleq \left(
+    \beta_2, \beta_3, \alpha_3, \tfrac{A_3}{A_2}, \tfrac{D_{1t}}{D_2}, \tfrac{D_{1h}}{D_2}, Z 
+    \right)$, \\
+    find $\acs{MFP}_1$, $\acs{MFP}_2$, $M_b$, $\frac{P_{03}}{P_{02}}$, $\frac{T_{03}}{T_{02}}$ 
+    which satisfy
+\begin{align}
+    \acs{MFP}_2 - \acs{MFP}_3\frac{A_3}{A_2}\frac{P_{03}}{P_{02}}\sqrt{\frac{T_{02}}{T_{03}}}    &= 0 \\
+    \frac{T_{03}}{T_{02}} - [(\gamma-1)\psi_{\text{actual}} M_b^2 - 1]                           &= 0 \\
+    \frac{P_{03}}{P_{02}} - [(\gamma-1)\psi_{\text{isen}} M_b^2 - 1]^{\frac{\gamma}{\gamma-1}} &= 0 
+\end{align}
+
+where
+
+\begin{align}
+    \psi_{\text{isen}}   &= \psi_{\text{euler}}  - \sum_{\substack{\text{internal}\\\text{losses}}} \Delta \psi( \psi_{\text{euler}}, \phi_2, \phi_3, \mathcal{G})\\ 
+    \psi_{\text{actual}}   &= \psi_{\text{euler}}  + \sum_{\substack{\text{parasitic}\\\text{losses}}} \Delta \psi( \psi_{\text{euler}}, \phi_2, \phi_3, \mathcal{G}) \\
+    \psi_{\text{euler}} & = \sigma(1 - \phi_3 \tan\beta_3) \\
+    \phi_2 &= \frac{\acs{MFP}_2}{M_b} \left( 1 + \frac{\gamma-1}{2} M_2^2 \right)^{\frac{1}{\gamma-1}} \\
+    \phi_3 &= \frac{\acs{MFP}_3}{M_b} \left( 1 + \frac{\gamma-1}{2} M_3^2 \right)^{\frac{1}{\gamma-1}} \sqrt{\frac{T_{03}}{T_{02}}}\\
+    \acs{MFP} &= M \left( 1 + \frac{\gamma-1}{2} M^2 \right)^{-\frac{\gamma+1}{2(\gamma-1)}}
+\end{align}
+
+    and 
+    $\sigma(\mathcal{G})$, 
+    $\Delta \psi( \psi_{\text{euler}}, \phi_2, \phi_3, \mathcal{G})$ 
+    are given by a loss model.
+
+\end{minipage}
+\end{table}
+
 
 \end{document}
 
