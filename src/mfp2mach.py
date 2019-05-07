@@ -9,7 +9,7 @@ def mach2mfp(M, gam):
     """
     return M*(1+(gam-1)/2*M**2)**(-(gam+1)/(2*(gam-1)))
 
-def mfp2mach(MFP, gam, tol=1e-8):
+def mfp2mach(MFP, gam, tol=1e-13):
     """ 
     Only works for subsonic
     
@@ -35,7 +35,7 @@ def mfp2mach(MFP, gam, tol=1e-8):
     M = 1-z(MFP)**2 #initial guess
     while(np.max(np.abs(z(mach2mfp(M,gam))-z(MFP))) > tol):
         
-        if iterations >= 50:
+        if iterations >= 100:
             warn("Exceeded maximum iterations")
             break
 
@@ -48,9 +48,9 @@ def mfp2mach(MFP, gam, tol=1e-8):
 if __name__ == "__main__":
     M=np.linspace(0,1,1000)
     gam=1.4
-    M_err = M - mfp2mach(mach2mfp(M,gam),gam)
+    M_err = M - mfp2mach(mach2mfp(M,gam),gam,tol=1e-13)
     print(np.c_[M,M_err])
-    assert np.max(np.abs(M_err))<=1e-6
+    assert np.max(np.abs(M_err))<=1e-13
     print("TEST OK")
     
     import matplotlib.pyplot as plt
