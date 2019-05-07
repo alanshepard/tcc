@@ -312,7 +312,8 @@ for Mb in np.linspace(0.1,1,10):
     eff = sol['eff']
     ax2.plot(MFP1[success], P0_ratio[success], '-+')
     ax1.plot(MFP1[success & (P0_ratio>1)], eff[success & (P0_ratio>1)])
-    ax3.plot(MFP1[success], MFP2[success])
+    ax3.plot(phi2[success], eff[success])
+    ax3.set_ylim((0,1))
 
 np.savetxt('comp.txt', np.c_[MFP1[success], P0_ratio[success]])
 
