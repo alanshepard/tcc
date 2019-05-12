@@ -1,15 +1,23 @@
 from math import pi
 
+from turbomachine import Turbomachine
 from compressor import Compressor
 from turbine import Turbine
 from mfp2mach import mach2mfp
 
 # Outputs: N, F
 
-class Engine:
+class Engine(Turbomachine):
     def __init__(self):
         self.compressor = Compressor()
         self.turbine = Turbine()
+
+
+    DEFAULT_PARAMS = {'M_flight':0, 
+                      'MFP': 0.2, 'MFP3':0.2, 'Mb_c':0.4, 'T0_ratio_c': 1, 'P0_ratio_c':1,
+                      'mdot_f':0, 'T04': 300,
+                      'MFP4': 0.2, 'MFP5': 0.2, 'Mb_t': 0.4, 'T0_ratio_t': 1, 'P0_ratio_t':1}
+    N_FREE_PARAMS = 2
 
     def implicit_map(self,
                      M_flight,                                # flight mach number

@@ -18,6 +18,9 @@ class Turbine(Turbomachine):
         self.geom['A2'] = pi/4*(self.geom['D2t']**2 - self.geom['D2h']**2)
         self.geom['A_ratio'] = self.geom['A2']/self.geom['A1']
 
+    DEFAULT_PARAMS = {'MFP1':0.3, 'MFP2':0.3, 'Mb':0.5, 'T0_ratio':1, 'P0_ratio':1}
+    N_FREE_PARAMS = 2
+    
     def implicit_map(self, MFP1, MFP2, Mb, T0_ratio, P0_ratio, tol=1e-12):
 
         # Expose instance variables

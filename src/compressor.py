@@ -32,6 +32,9 @@ class Compressor(Turbomachine):
         
         self.gam=1.4
     
+    DEFAULT_PARAMS = {'MFP1':0.3, 'MFP2':0.3, 'Mb':0.5, 'T0_ratio':1, 'P0_ratio':1}
+    N_FREE_PARAMS = 2
+
     def implicit_map(self, MFP1, MFP2, Mb, T0_ratio, P0_ratio, tol=1e-13):
         #Unpack constants
         gam = self.gam
