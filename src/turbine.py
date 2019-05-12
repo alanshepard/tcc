@@ -6,7 +6,7 @@ from turbomachine import Turbomachine
 
 class Turbine(Turbomachine):
     def __init__(self):
-        self.gam = 1.4
+        self.gam = 1.3
         self.geom = {'beta5': -56*pi/180,
                      'alfa4':  60*pi/180,
                      'D1t': 65.3e-3,
