@@ -7,21 +7,28 @@ from turbomachine import Turbomachine
 class Turbine(Turbomachine):
     def __init__(self):
         self.gam = 1.4
-        self.beta5 = -56*pi/180
-        self.alfa4 = 60*pi/180
-        self.A_ratio = 3#(65.3**2-45**2)/(67.**2-46.**2)
+        self.geom = {'beta5': -56*pi/180,
+                     'alfa4':  60*pi/180,
+                     'D1t': 65.3e-3,
+                     'D1h': 45e-3,
+                     'D2t': 67e-3,
+                     'D2h': 46e-3,
+                    }
+        self.geom['A1'] = pi/4*(self.geom['D1t']**2 - self.geom['D1h']**2)
+        self.geom['A2'] = pi/4*(self.geom['D2t']**2 - self.geom['D2h']**2)
+        self.geom['A_ratio'] = self.geom['A2']/self.geom['A1']
 
-    def implicit_map(self, MFP1, MFP2, Mb, T0_ratio, P0_ratio):
+    def implicit_map(self, MFP1, MFP2, Mb, T0_ratio, P0_ratio, tol=1e-12):
 
         # Expose instance variables
         gam     = self.gam
-        beta5   = self.beta5
-        alfa4   = self.alfa4
-        A_ratio = self.A_ratio
+        beta5   = self.geom['beta5']
+        alfa4   = self.geom['alfa4']
+        A_ratio = self.geom['A_ratio']
 
         # Calculate auxiliary variables
-        M4 = mfp2mach(MFP1, gam)
-        M5 = mfp2mach(MFP2, gam)
+        M4 = mfp2mach(MFP1, gam, tol)
+        M5 = mfp2mach(MFP2, gam, tol)
 
         phi4 = MFP1/Mb*(1+(gam-1)/2*M4**2)**(1/(gam-1))
         phi5 = MFP2/Mb*(1+(gam-1)/2*M5**2)**(1/(gam-1))*T0_ratio**0.5
