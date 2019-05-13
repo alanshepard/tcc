@@ -13,10 +13,7 @@ class Engine(Turbomachine):
         self.turbine = Turbine()
 
 
-    DEFAULT_PARAMS = {'M_flight':0, 
-                      'MFP': 0.2, 'MFP3':0.2, 'Mb_c':0.4, 'T0_ratio_c': 1, 'P0_ratio_c':1,
-                      'mdot_f':0, 'T04': 300,
-                      'MFP4': 0.2, 'MFP5': 0.2, 'Mb_t': 0.4, 'T0_ratio_t': 1, 'P0_ratio_t':1}
+    DEFAULT_PARAMS = {'T0_ratio_t': 0.96436687617413985, 'mdot_f': 0.0066319645809202691, 'MFP4': 0.20468750390045476, 'M_flight': 0, 'T0_ratio_c': 1.2516635357014483, 'P0_ratio_t': 0.85450885594403303, 'P0_ratio_c': 2.0306198363706747, 'Mb_t': 0.38777828294949468, 'MFP3': 0.15742047334781259, 'MFP5': 0.22195744480561111, 'Mb_c': 0.85197553270430582, 'MFP': 0.23704735721743181, 'T04': 1500}
     N_FREE_PARAMS = 2
 
     def implicit_map(self,
@@ -42,11 +39,11 @@ class Engine(Turbomachine):
         A9 = pi/4*30e-3**2 #TODO: check
         gam_c = self.compressor.gam
         gam_t = self.turbine.gam
-        cpc = 1004e3 # J/(kg K)
-        cpt = 1225e3 # J/(kg K)
+        cpc = 1004 # J/(kg K)
+        cpt = 1225 # J/(kg K)
         T01 = 273.15 # K
         P01 = 101e3  # Pa
-        FHV = 55e6 #Fuel lower calorific value
+        FHV = 43e6 #J/kg Fuel lower calorific value
         eta_combustion = 0.5
         R_c = (1-1/gam_c)*cpc # from gam and cp
         R_t = (1-1/gam_t)*cpt
@@ -86,9 +83,9 @@ class Engine(Turbomachine):
             # Flow is subsonic
             P09 = P05 #isentropic nozzle
             P9 = P01/(1+(gam_c-1)/2*M_flight**2)**(gam_c/(gam_c-1))
-            #assert P9<P09
+            # assert P9<P09
             M9 = (((P09/P9)**((gam_t-1)/gam_t) - 1)*2/(gam_t-1))**0.5
-            #assert M9<1
+            # assert M9<1
         else:
             # Flow is sonic
             M9 = 1
@@ -115,6 +112,14 @@ class Engine(Turbomachine):
         ### TURBINE MAP ###
         res_MFP_t, res_T0_ratio_t, res_P0_ratio_t = self.turbine.implicit_map(MFP4, MFP5, Mb_t, T0_ratio_t, P0_ratio_t, tol=1e-13)
 
-        return (res_omega, res_energy, res_mdot, res_MFP_nozzle, res_T04,
+        return (res_omega, res_energy, res_mdot, res_MFP_nozzle,
+                res_T04,
                 res_MFP_c, res_T0_ratio_c, res_P0_ratio_c, 
                 res_MFP_t, res_T0_ratio_t, res_P0_ratio_t)
+
+
+if __name__ == '__main__':
+    e=Engine()
+    e.implicit_map(**e.__class__.DEFAULT_PARAMS)
+    sol = e.general_explicit_map(params={'M_flight': 0, 'T04': 1000})#, 'MFP': 0.4})
+    print(sol)
