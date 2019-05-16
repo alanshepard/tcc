@@ -1,0 +1,36 @@
+\documentclass[tcc]{subfiles}
+\begin{document}
+The procedure for calculating the compressor map is summarized in \cref{alg:comp_map}. 
+This is a iterative process, and initial guesses must be made for both 
+the mass flow parameter at the impeller exit ($\acs{MFP}_2$) and the temperature ratio 
+($\tfrac{T_{02}}{T_{01}}$). 
+It is important to keep the values for $\acs{MFP}_2$ bellow the choke value during all iterations,
+otherwise the computation of $M_2$ will fail. 
+Therefore, it is convenient to guess that the compressor exit is choked because this will lead 
+to approaching the actual value of $\acs{MFP}_2$ from above.
+Even if the exit is far from choked, the method converges very rapidly in our experience.
+
+\begin{algorithm}
+    \caption{Compressor map}
+    \label{alg:comp_map}
+
+    \KwIn{\textsc{Inputs:} \acs{MFP}, \acs{M0rotor}, \acs{gam}}
+    
+    guess that the outlet is choked, i.e.\ 
+        $\acs{MFP}_2 = \left( \frac{\gamma+1}{2}\right)^{-\frac{\gamma+1}{2(\gamma-1)}} $\;
+    guess that the compressor is isentropic, and take
+     $\frac{T_{02}}{T_{01}} = \left(\frac{A_2}{A_1}\frac{\acs{MFP}_2}{\acs{MFP}_1}\right)^{-\frac{2(\gamma-1)}{\gamma+1}} $\;
+    \Repeat{$\acs{MFP}_2$ converges} {
+        calculate $M_2$ by solving \cref{eqn:mfp2mach}\;
+        calculate $\phi_2$ using \cref{eqn:phi2_dimensionless}\;
+        calculate $\psi_\text{euler}$ from Euler's~equation~(\ref{eqn:euler})\;
+        calculate parasitic and 
+        calculate $\frac{T_{02}}{T_{01}}$ and $\frac{P_{02}}{P_{01}}$ 
+            using \cref{eqn:psi2Tratio,eqn:psi2Pratio} \;
+        calculate $\acs{MFP}_2$ from \cref{eqn:mfp2mfp2}\;
+}
+
+    \KwOut{$\frac{T_{02}}{T_{01}}$, $\frac{P_{02}}{P_{01}}$}
+\end{algorithm}
+
+\end{document}
