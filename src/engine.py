@@ -79,21 +79,9 @@ class Engine(Turbomachine):
         res_mdot = mdot_3 + mdot_f - mdot_4
 
         # * Nozzle exit is either choked or at ambient pressure
-        A_ratio_star = MFP5*((gam_t+1)/2)**((gam_t+1)/(2*(gam_t-1)))
-        if A9/A5 > A_ratio_star:
-            # Flow is subsonic
-            P09 = P05 #isentropic nozzle
-            P9 = P01/(1+(gam_c-1)/2*M_flight**2)**(gam_c/(gam_c-1))
-            assert P9<P09
-            M9 = (((P09/P9)**((gam_t-1)/gam_t) - 1)*2/(gam_t-1))**0.5
-            assert M9<1
-        else:
-            # Flow is sonic
-            M9 = 1
-        
-        MFP9 = mach2mfp(M9, gam_t)
-        # isentropic nozzle
-        res_MFP_nozzle = MFP9-MFP5*A5/A9
+        Pa = P01/(1+(gam_c-1)/2*M_flight**2)**(gam_c/(gam_c-1))
+        MFP9 = MFP5*A5/A9
+        res_MFP_nozzle = MFP9 - min(mach2mfp(1,gam_t), mach2mfp((2/(gam_t-1)*((P05/Pa)**((gam_t-1)/gam_t)-1))**0.5,gam_t))
 
         ### remove dimensions of residuals ###
         # References for removing dimensions of residuals
