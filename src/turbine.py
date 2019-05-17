@@ -8,7 +8,7 @@ class Turbine(Turbomachine):
     def __init__(self):
         self.gam = 1.3
         self.geom = {'beta5': -56*pi/180,
-                     'alfa4':  60*pi/180,
+                     'alfa4': 60*pi/180,
                      'D1t': 65.3e-3,
                      'D1h': 45e-3,
                      'D2t': 67e-3,
@@ -17,6 +17,7 @@ class Turbine(Turbomachine):
         self.geom['A1'] = pi/4*(self.geom['D1t']**2 - self.geom['D1h']**2)
         self.geom['A2'] = pi/4*(self.geom['D2t']**2 - self.geom['D2h']**2)
         self.geom['A_ratio'] = self.geom['A2']/self.geom['A1']
+        self.geom['Dt_ratio'] = self.geom['D2t']/self.geom['D1t']
 
     DEFAULT_PARAMS = {'MFP1':0.3, 'MFP2':0.3, 'Mb':0.5, 'T0_ratio':1, 'P0_ratio':1}
     N_FREE_PARAMS = 2
@@ -28,6 +29,7 @@ class Turbine(Turbomachine):
         beta5   = self.geom['beta5']
         alfa4   = self.geom['alfa4']
         A_ratio = self.geom['A_ratio']
+        Dt_ratio = self.geom['Dt_ratio']
 
         # Calculate auxiliary variables
         M4 = mfp2mach(MFP1, gam, tol)
@@ -36,7 +38,7 @@ class Turbine(Turbomachine):
         phi4 = MFP1/Mb*(1+(gam-1)/2*M4**2)**(1/(gam-1))
         phi5 = MFP2/Mb*(1+(gam-1)/2*M5**2)**(1/(gam-1))*T0_ratio**0.5
 
-        psi = 1 + phi5*tan(beta5) - phi4*tan(alfa4)
+        psi = 1 + phi5*tan(beta5) - 1/(Dt_ratio)**2*phi4*tan(alfa4)
 
         # Non-linear system
         res_MFP = MFP2 - MFP1*T0_ratio**0.5/(A_ratio*P0_ratio)

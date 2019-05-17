@@ -13,7 +13,8 @@ class Engine(Turbomachine):
         self.turbine = Turbine()
 
 
-    DEFAULT_PARAMS = {'T0_ratio_t': 0.96436687617413985, 'mdot_f': 0.0066319645809202691, 'MFP4': 0.20468750390045476, 'M_flight': 0, 'T0_ratio_c': 1.2516635357014483, 'P0_ratio_t': 0.85450885594403303, 'P0_ratio_c': 2.0306198363706747, 'Mb_t': 0.38777828294949468, 'MFP3': 0.15742047334781259, 'MFP5': 0.22195744480561111, 'Mb_c': 0.85197553270430582, 'MFP': 0.23704735721743181, 'T04': 1500}
+    DEFAULT_PARAMS = {'MFP3': 0.35772119376017375, 'Mb_c': 0.37366364627840715, 'mdot_f': -8.0673878767457773e-05, 'T0_ratio_t': 0.9664376634912677, 'MFP5': 0.22195744480561111, 'T04': 273.14999999999998, 'P0_ratio_t': 0.8624885448462517, 'T0_ratio_c': 1.0409286833982381, 'MFP': 0.29870739864240153, 'MFP4': 0.20637748551438256, 'Mb_t': 0.39854946920103851, 'M_flight': 0, 'P0_ratio_c': 1.0268871435831242 }
+
     N_FREE_PARAMS = 2
 
     def implicit_map(self,
@@ -83,9 +84,9 @@ class Engine(Turbomachine):
             # Flow is subsonic
             P09 = P05 #isentropic nozzle
             P9 = P01/(1+(gam_c-1)/2*M_flight**2)**(gam_c/(gam_c-1))
-            # assert P9<P09
+            assert P9<P09
             M9 = (((P09/P9)**((gam_t-1)/gam_t) - 1)*2/(gam_t-1))**0.5
-            # assert M9<1
+            assert M9<1
         else:
             # Flow is sonic
             M9 = 1
