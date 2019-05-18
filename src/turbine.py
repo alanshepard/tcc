@@ -47,3 +47,20 @@ class Turbine(Turbomachine):
 
         return res_MFP, res_T0_ratio, res_P0_ratio
 
+class TurbineExtendedMap(Turbomachine):
+    """
+    This class adds the parameter MbMFP=Mb*MFP1 to the turbine map
+    """
+    DEFAULT_PARAMS = Turbine.DEFAULT_PARAMS.copy()
+    DEFAULT_PARAMS['MbMFP'] = Turbine.DEFAULT_PARAMS['Mb']*Turbine.DEFAULT_PARAMS['MFP1']
+
+    N_FREE_PARAMS = Turbine.N_FREE_PARAMS
+
+    def __init__(self, turbine):
+        self.turbine=turbine
+
+    def implicit_map(self, MFP1, MFP2, Mb, T0_ratio, P0_ratio, MbMFP, tol=1e-12):
+        res_turbine = self.turbine.implicit_map(MFP1, MFP2, Mb, T0_ratio, P0_ratio, tol)
+
+        return (*res_turbine, MbMFP-Mb*MFP1)
+
