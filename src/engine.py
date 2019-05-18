@@ -13,7 +13,19 @@ class Engine(Turbomachine):
         self.turbine = Turbine()
 
 
-    DEFAULT_PARAMS = {'MFP3': 0.35772119376017375, 'Mb_c': 0.37366364627840715, 'mdot_f': -8.0673878767457773e-05, 'T0_ratio_t': 0.9664376634912677, 'MFP5': 0.22195744480561111, 'T04': 273.14999999999998, 'P0_ratio_t': 0.8624885448462517, 'T0_ratio_c': 1.0409286833982381, 'MFP': 0.29870739864240153, 'MFP4': 0.20637748551438256, 'Mb_t': 0.39854946920103851, 'M_flight': 0, 'P0_ratio_c': 1.0268871435831242 }
+    DEFAULT_PARAMS = {'P0_ratio_c': 1.2347241010792356,
+             'Mb_t': 0.27072466251896482,
+              'MFP4': 0.15310678698124691,
+               'MFP3': 0.14924987675288623,
+                'M_flight': 0,
+                 'mdot_f': 0.0019637316313999187,
+                  'P0_ratio_t': 0.92680225375718472,
+                   'MFP5': 0.15451547834023707,
+                    'Mb_c': 0.44527731422329964,
+                     'MFP': 0.14801196525452109,
+                      'T0_ratio_t': 0.98261102832775471,
+                       'T0_ratio_c': 1.0669702796449636,
+                        'T04': 840.63888888888891}
 
     N_FREE_PARAMS = 2
 
@@ -81,7 +93,7 @@ class Engine(Turbomachine):
         # * Nozzle exit is either choked or at ambient pressure
         Pa = P01/(1+(gam_c-1)/2*M_flight**2)**(gam_c/(gam_c-1))
         MFP9 = MFP5*A5/A9
-        res_MFP_nozzle = MFP9 - min(mach2mfp(1,gam_t), mach2mfp((2/(gam_t-1)*((P05/Pa)**((gam_t-1)/gam_t)-1))**0.5,gam_t))
+        res_MFP_nozzle = (P05/Pa-1)*MFP9 - (P05/Pa-1)*mach2mfp(min(1, (2/(gam_t-1)*((P05/Pa)**((gam_t-1)/gam_t)-1))**0.5) if P05/Pa>1 else 0 ,gam_t)
 
         ### remove dimensions of residuals ###
         # References for removing dimensions of residuals
