@@ -19,7 +19,7 @@ class Turbomachine():
             
             return res
           
-        sol = root(fsv, list(initial_guesses.values()),method='hybr', options={'eps':1e-10,})  
+        sol = root(fsv, list(initial_guesses.values()),method='lm', options={'eps':1e-10,})  
         params.update(dict(zip(initial_guesses.keys(), sol.x)))
         sol.params=params
         
