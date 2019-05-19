@@ -3,11 +3,12 @@ import numpy as np
 
 from mfp2mach import mach2mfp, mfp2mach
 import compressor_losses as losses
-from turbomachine import Turbomachine
+from turbomachine import Turbomachine, gridmap
 
 
 class Compressor(Turbomachine):
     def __init__(self):
+        super().__init__()
         geom = {
         #Measured parameters
         'b': 5e-3,
@@ -60,4 +61,40 @@ class Compressor(Turbomachine):
         res_MFP = MFP2 - MFP1*T0_ratio**0.5/(A_ratio*P0_ratio)
         
         return res_MFP, res_T0_ratio, res_P0_ratio
+    def plot_map(self, ax, P0_min=1, P0_max=4, samples=25):
     
+        MFP_choke = mach2mfp(1,self.gam)
+        sol_cr = self.general_explicit_map({'MFP1': MFP_choke, 'MFP2': MFP_choke})
+        sol_P1 = self.general_explicit_map({'MFP2': MFP_choke, 'P0_ratio': P0_min})
+    
+        def MFP_max(P0_ratio):
+            MFP = np.interp(P0_ratio, 
+                           [sol_P1.params['P0_ratio'], sol_cr.params['P0_ratio']],
+                           [sol_P1.params['MFP1'], sol_cr.params['MFP1']])
+            return MFP
+      
+        P0_ratio = np.linspace(P0_min, P0_max, samples)
+        P0_grid = np.empty((samples, samples))
+        MFP_grid = np.empty_like(P0_grid)
+        for i, p in enumerate(P0_ratio):
+            MFP = np.linspace(1e-6,MFP_max(p), samples)
+            MFP_grid[:, i] = MFP
+            P0_grid[:, i] = p
+    
+        params = gridmap(self, MFP_grid, P0_grid, 'MFP1')
+        params['eff'] = (self.gam-1)/self.gam*np.log(P0_grid)/np.log(params['T0_ratio'])
+    
+        ax.plot(MFP_grid, P0_grid, 'k,')
+        CS2 = ax.contour(MFP_grid, P0_grid, params['Mb'], levels=np.arange(0,2,0.1), 
+                            colors='k', linewidths=1.5)
+        ax.clabel(CS2, CS2.levels, fmt='%.1f')
+        CS2 = ax.contour(MFP_grid, P0_grid, params['eff'], colors='k', linewidths=0.5,
+                          levels=[0.5,0.8,0.9,0.95])
+        ax.clabel(CS2, CS2.levels, fmt='%.2f')
+        ax.plot([MFP_choke, MFP_choke, sol_P1.params['MFP1']],
+                 [P0_max, sol_cr.params['P0_ratio'], P0_min], 'k--', label='choke limit')
+        ax.set_xlim((0,0.6))
+        ax.set_ylim((1,4))
+        ax.set_xlabel("MFP")
+        ax.set_ylabel(r"$\frac{P_{03}}{P_{02}}$")
+        
