@@ -49,7 +49,7 @@ class Engine(Turbomachine):
 
         # Expose constants
         A5 = self.turbine.geom['A2']
-        A9 = pi/4*30e-3**2 #TODO: check
+        A9 = pi/4*35e-3**2 #TODO: check
         gam_c = self.compressor.gam
         gam_t = self.turbine.gam
         cpc = 1004 # J/(kg K)
@@ -117,6 +117,19 @@ class Engine(Turbomachine):
                 res_T04,
                 res_MFP_c, res_T0_ratio_c, res_P0_ratio_c, 
                 res_MFP_t, res_T0_ratio_t, res_P0_ratio_t)
+
+    def ode_fun(self,t,y):
+        P4, mdot, omega = y
+
+        self.compressor.explicit_map(mdot, omega)
+        T04 = self.throtle(t, mdot, T03)
+        self.turbine.explicit_map(P4, omega)
+
+        P4_dot = a01**2*(mdot-mdot_t)
+        mdot_dot = A1/Lc*(P3-P4)
+        omega_dot = 1/J*torque_t-torque_c
+
+        return P4_dot, mdot_dot, omega_dot
 
 
 if __name__ == '__main__':
