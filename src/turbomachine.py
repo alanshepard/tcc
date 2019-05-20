@@ -5,7 +5,7 @@ import random
 import itertools
 import matplotlib.pyplot as plt
 
-def gridmap(t, x_grid, pr_grid, x_param='MFP1', plot=True):
+def gridmap(t, x_grid, pr_grid, x_param='MFP1', plot=False):
     """ 
     t: Turbomachine
     """
@@ -77,7 +77,6 @@ def gridmap(t, x_grid, pr_grid, x_param='MFP1', plot=True):
 
     if plot:
         map_imshow(x_grid, pr_grid, params)
-        plt.show()
 
     return params
 
