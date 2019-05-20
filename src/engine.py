@@ -11,6 +11,7 @@ class Engine(Turbomachine):
     def __init__(self):
         self.compressor = Compressor()
         self.turbine = Turbine()
+        self.initial_guess = self.__class__.DEFAULT_PARAMS.copy()
 
 
     DEFAULT_PARAMS = {'P0_ratio_c': 1.2347241010792356,
@@ -117,6 +118,19 @@ class Engine(Turbomachine):
                 res_T04,
                 res_MFP_c, res_T0_ratio_c, res_P0_ratio_c, 
                 res_MFP_t, res_T0_ratio_t, res_P0_ratio_t)
+
+    def working_line(self, T04_grid):
+        
+        wline=[]
+        params = self.initial_guess
+        for T04 in T04_grid:
+            sol = self.general_explicit_map({'M_flight': 0, 'T04': T04}, params)
+            params = sol.params
+            wline.append(params)
+
+        return wline
+            
+
 
     def ode_fun(self,t,y):
         P4, mdot, omega = y
