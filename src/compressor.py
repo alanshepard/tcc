@@ -85,11 +85,13 @@ class Compressor(Turbomachine):
         params['eff'] = (self.gam-1)/self.gam*np.log(P0_grid)/np.log(params['T0_ratio'])
     
         ax.plot(MFP_grid, P0_grid, 'k,')
-        CS2 = ax.contour(MFP_grid, P0_grid, params['Mb'], levels=np.arange(0,2,0.1), 
+        CS = ax.contour(MFP_grid, P0_grid, params['Mb'], levels=np.arange(0,2,0.1), 
                             colors='k', linewidths=1.5)
-        ax.clabel(CS2, CS2.levels, fmt='%.1f')
+        ax.clabel(CS, CS.levels, fmt='%.1f')
+        CS.collections[0].set_label('$M_b$')
         CS2 = ax.contour(MFP_grid, P0_grid, params['eff'], colors='k', linewidths=0.5,
                           levels=[0.5,0.8,0.9,0.95])
+        CS2.collections[0].set_label(r'$\eta_p$')
         ax.clabel(CS2, CS2.levels, fmt='%.2f')
         ax.plot([MFP_choke, MFP_choke, sol_P1.params['MFP1']],
                  [P0_max, sol_cr.params['P0_ratio'], P0_min], 'k--', label='choke limit')
@@ -97,4 +99,5 @@ class Compressor(Turbomachine):
         ax.set_ylim((1,4))
         ax.set_xlabel("MFP")
         ax.set_ylabel(r"$\frac{P_{03}}{P_{02}}$")
+        ax.legend()
         
