@@ -1,11 +1,13 @@
 from math import tan, pi
+import numpy as np
 
 from mfp2mach import mach2mfp, mfp2mach
-from turbomachine import Turbomachine
+from turbomachine import Turbomachine, gridmap
 
 
 class Turbine(Turbomachine):
     def __init__(self):
+        super().__init__()
         self.gam = 1.3
         self.geom = {'beta5': -56*pi/180,
                      'alfa4': 60*pi/180,
@@ -58,4 +60,27 @@ class TurbineExtendedMap(Turbine):
         res_turbine = super().implicit_map(MFP1, MFP2, Mb, T0_ratio, P0_ratio, tol)
 
         return (*res_turbine, MbMFP-Mb*MFP1)
+
+    def plot_map(self, ax, pr_min=0.3, pr_max=1, samples=25):
+
+        MbMFP, P0_ratio = np.meshgrid(np.linspace(0,1,samples), np.linspace(pr_min,pr_max, samples))
+        
+        params = gridmap(self, MbMFP, P0_ratio, 'MbMFP')
+        
+        params['eff'] = (self.gam-1)/self.gam*np.log(P0_ratio)/np.log(params['T0_ratio'])
+    
+        ax.plot(MbMFP, 1/P0_ratio, 'k,')
+        CS = ax.contour(MbMFP, 1/P0_ratio, params['Mb'], levels=np.arange(0,2,0.1), 
+                            colors='k', linewidths=1.5)
+        ax.clabel(CS, CS.levels, fmt='%.1f')
+        CS.collections[0].set_label('$M_b$')
+
+        CS2 = ax.contour(MbMFP, 1/P0_ratio, params['eff'], colors='k', linewidths=0.5,
+                          levels=[0.5,0.8,0.9,0.95])
+        CS2.collections[0].set_label(r'$\eta_p$')
+        ax.clabel(CS2, CS2.levels, fmt='%.2f')
+
+        ax.set_xlabel("MbMFP")
+        ax.set_ylabel(r"$\frac{P_{04}}{P_{05}}$")
+        ax.legend()
 
