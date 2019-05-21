@@ -253,36 +253,36 @@ To write Euler's equation \cref{eqn:euler} in terms of these parameters, suffice
 \begin{multline}
     \label{eqn:phi2_dimensionless}
     \phi_3 = \frac{W_{2r}}{U_3} 
-           = \frac{\frac{\dot{m}}{\rho_3 A2}}{\acs{M0rotor} a_{01}}
-           = \frac{\MFPalt{2}}{\acs{M0rotor}} \frac{a_{02}}{a_{01}} \stagdensratio{2} \\ 
-           = \frac{\acs{MFP}_3}{\acs{M0rotor}} \sqrt{\frac{T_{02}}{T_{01}}} \stagdensratio{2}
+           = \frac{\frac{\dot{m}}{\rho_3 A2}}{\acs{M0rotor} a_{02}}
+           = \frac{\MFPalt{2}}{\acs{M0rotor}} \frac{a_{03}}{a_{02}} \stagdensratio{3} \\ 
+           = \frac{\acs{MFP}_3}{\acs{M0rotor}} \sqrt{\frac{T_{03}}{T_{01}}} \stagdensratio{3}
 \end{multline}
 The value of $M_3$ can be obtained from $\acs{MFP}_3$ using \cref{eqn:mfp2mach}, while the latter is given by
 \begin{equation}
     \label{eqn:mfp2mfp2}
-    \acs{MFP}_3 \triangleq \MFP{2} = \acs{MFP} \frac{A_2}{A_3} \frac{P_{01}}{P_{02}} \sqrt{\frac{T_{02}}{T_{01}}}
+    \acs{MFP}_3 \triangleq \MFP{2} = \acs{MFP} \frac{A_2}{A_3} \frac{P_{02}}{P_{03}} \sqrt{\frac{T_{03}}{T_{02}}}
 \end{equation}
 Notice that \cref{eqn:mfp2mfp2} makes no assumption of the process 1--2 being isentropic. $\acs{MFP}_3$ can be used along with \acs{MFP} to check for choking.
 
 The load coefficient is given by
 \begin{equation}
     \acs{load_coef}\triangleq \frac{\Delta h}{U_3^2}
-                      = \frac{c_p(T_{02}-T_{01})}{U_3^2}
-                      = \frac{\frac{c_p(T_{02}-T_{01})}{\gamma R T_{01}}}
+                      = \frac{c_p(T_{02}-T_{02})}{U_3^2}
+                      = \frac{\frac{c_p(T_{03}-T_{01})}{\gamma R T_{02}}}
                                     {\acs{M0rotor}^2}
-                      = \frac{\frac{T_{02}}{T_{01}}-1}
+                      = \frac{\frac{T_{03}}{T_{02}}-1}
                                   {\acs{M0rotor}^2}
                         \left(\frac{1}{\gamma-1}\right)
 \end{equation}
 
 At this point the loss models discussed in \cref{sec:compressor_losses} are introduced, 
-and the values of $\acs{load_coef}_{2\text{actual}}$ and $\acs{load_coef}_{2\text{isen}}$ are obtained.
+and the values of $\acs{load_coef}_{\text{actual}}$ and $\acs{load_coef}_{\text{isen}}$ are obtained.
 The temperatures and pressure ratio can then be readly calculate from
 \begin{align}
     \label{eqn:psi2Tratio}
-    \frac{T_{02}}{T_{01}} &= (\gamma - 1)\psi_{2\text{actual}} \acs{M0rotor}^2 + 1 \\
+    \frac{T_{03}}{T_{02}} &= (\gamma - 1)\psi_{\text{actual}} \acs{M0rotor}^2 + 1 \\
     \label{eqn:psi2Pratio}
-    \frac{P_{02}}{P_{01}} &= \left[(\gamma - 1)\psi_{2\text{isen}} \acs{M0rotor}^2 + 1\right]^\frac{\gamma}{\gamma-1}
+    \frac{P_{03}}{P_{02}} &= \left[(\gamma - 1)\psi_{\text{isen}} \acs{M0rotor}^2 + 1\right]^\frac{\gamma}{\gamma-1}
 \end{align}
 
 
@@ -308,6 +308,12 @@ Equations:
 \end{enumerate}
 
 \section{Engine dynamical model}
+\begin{align}
+    \dot{P}_{04} &= \frac{a_{01}^2}{\volume}(\dot{m}_c - \dot{m}_t) \\
+    \ddot{m}_c &= \frac{A_1}{L_c}(P_{03}-P_{04}) \\
+    \dot{\omega} &= \frac{1}{J} (\tau_t-\tau_c)
+\end{align}
+
 \section{Surge model}
 \section{Numerical aspects}
 \subsection{Nonlinear solvers and convergence}
@@ -321,8 +327,8 @@ Equations:
 \section{Turbine map}
 \section{Work line}
 \includegraphics{src/working_line_compressor.pdf}
-\section{Dynamical simulation}
 
+\section{Dynamical simulation}
 \subfile{text/body/materials_and_methods}
 \subfile{text/body/dynamic_engine_model}
 \subfile{text/body/controller_model}
