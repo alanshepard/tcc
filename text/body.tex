@@ -52,43 +52,43 @@ Assuming that the system is adiabatic and using the first law of thermodynamics,
 
 \subsection{Euler's equation for a centrifugal compressor}
 
-It is useful to write the absolute tangential velocity at the compressor exit (${V_u}_2$)
-as a function of the radial relative velocity (${W_r}_2$),
+It is useful to write the absolute tangential velocity at the compressor exit (${V_u}_3$)
+as a function of the radial relative velocity (${W_r}_3$),
 since the latter is more closely related to the mass flow 
-(i.e. $\dot{m} = \rho {W_r}_2 A_2$, where $A_2$ is the ring shaped exit area of the compressor)
+(i.e. $\dot{m} = \rho {W_r}_3 A_3$, where $A_3$ is the ring shaped exit area of the compressor)
 
 From the velocity triangle in figure X, assuming that the flow exits tangential to the blade surface,
 \begin{equation}
-    \label{eqn:V_u_2}
-    {V_u}_2 = U_2 - {W_r}_2 \tan\beta_2
+    \label{eqn:V_u_3}
+    {V_u}_3 = U_3 - {W_r}_3 \tan\beta_3
 \end{equation}
 
 Due to aerodynamic blockage at the tip and flow distortions caused by viscous efects, flow diffusion, clearences and blade aspect ratio,
-${V_u}_2$ is actually smaller than what is predicted by \cref{eqn:V_u_2}.
+${V_u}_3$ is actually smaller than what is predicted by \cref{eqn:V_u_3}.
 This is accounted for by the \acf{impeller_distortion_factor}\index{impeller distortion factor}.
 Furthermore, the flow does not exit perfectly tangential to the blade surface, and this is accounted by the \acf{slip_factor} \cite{Wiesner1967,Aungier1995}.
 The corrected equation for the absolute tangential velocity is then
 
 \begin{equation}
-    \label{eqn:V_u_2_corrected}
-    {V_u}_2 = \acs{slip_factor}(U_2 - \acs{impeller_distortion_factor}{W_r}_2 \tan\beta_2)
+    \label{eqn:V_u_3_corrected}
+    {V_u}_3 = \acs{slip_factor}(U_3 - \acs{impeller_distortion_factor}{W_r}_3 \tan\beta_3)
 \end{equation}
 
-Substituting \cref{eqn:V_u_2_corrected} in \cref{eqn:euler} and dividing both sides by ${U_2^2}$, we have
+Substituting \cref{eqn:V_u_3_corrected} in \cref{eqn:euler} and dividing both sides by ${U_3^2}$, we have
 
 \begin{equation}
-    \acs{load_coef} = \acs{slip_factor}(1-\acs{impeller_distortion_factor}\acs{flow_coef}_2\tan\beta_2) - \frac{U_1 {V_u}_1}{U_2^2} 
+    \acs{load_coef}_c = \acs{slip_factor}(1-\acs{impeller_distortion_factor}\acs{flow_coef}_3\tan\beta_3) - \frac{U_2 {V_u}_2}{U_3^2} 
 \end{equation}
 
-where $\phi_2 \triangleq \frac{\dot{m}}{A_2 \rho_2 U_2} = \frac{W_{2r}}{U_2}$ is the flow parameter\index{flow parameter} at the compressor exit
-and $\psi \triangleq \frac{\Delta h}{U_2^2}$
+where $\phi_3 \triangleq \frac{\dot{m}}{A_3 \rho_3 U_3} = \frac{W_{3r}}{U_3}$ is the flow parameter\index{flow parameter} at the compressor exit
+and $\psi_c \triangleq \frac{\Delta h}{U_3^2}$ is the compressor power coefficient.
 
 The second term accounts for pre-whirl\index{pre-whirl} in the flow entering the compressor, e.g due to \ac{IGV}.
-In the case of no pre-whirl, ${V_u}_1 = 0$, thus 
+In the case of no pre-whirl, ${V_u}_2 = 0$, thus 
 
 \begin{equation}
     \label{eqn:euler}
-    \acs{load_coef} = \acs{slip_factor}(1-\acs{impeller_distortion_factor}\acs{flow_coef}_2\tan\beta_2)  
+    \boxed{\acs{load_coef}_c = \acs{slip_factor}(1-\acs{impeller_distortion_factor}\acs{flow_coef}_3\tan\beta_3)}
 \end{equation}
 
 \subsection{Euler's equation for an axial turbine}
@@ -115,7 +115,7 @@ Then,
 \end{equation}
 And finally, making the equation non-dimensional by diving both sides by the blade speed at the exit $U_5$, we get
 \begin{equation}
-    \psi_t = 1 + \phi_5\tan\beta_5-\left(\frac{r_4}{r_5}\right)^2\phi_4\tan\alpha_4
+    \boxed{\psi_t = 1 + \phi_5\tan\beta_5-\left(\frac{r_4}{r_5}\right)^2\phi_4\tan\alpha_4}
 \end{equation}
 where $\phi_4 = \frac{V_{4x}}{U_5}$ and $\phi_5 = \frac{V_{5x}}{U_5}$ are the flow parameters and
 $\psi_t=\frac{\Delta h}{U_5^2}$ is the power coefficient for the turbine.
@@ -233,7 +233,7 @@ For a centrifugal compressor, this quantities are defined respectively as follow
 
 \begin{align}
     \acs{MFP} &\triangleq \MFP{1} = \MFPalt{1} \\
-    \acs{M0rotor} &\triangleq \frac{U_2}{\sqrt{\gamma R T_{01}}} \\
+    \acs{M0rotor} &\triangleq \frac{U_3}{\sqrt{\gamma R T_{01}}} \\
     \gamma &\triangleq \frac{c_p}{c_v} \\
     \acs{Re} &
 \end{align}
@@ -249,25 +249,25 @@ While there is no closed form inverse for this function, it is invertible and th
 According to \textcite{walsh2004gas},
  the influence of the \acl{Re} in the system behaviour is only of second order.
 
-To write Euler's equation \cref{eqn:euler} in terms of these parameters, suffices to rewrite $\phi_2$ and $\psi$ as a function of them. Thus
+To write Euler's equation \cref{eqn:euler} in terms of these parameters, suffices to rewrite $\phi_3$ and $\psi$ as a function of them. Thus
 \begin{multline}
     \label{eqn:phi2_dimensionless}
-    \phi_2 = \frac{W_{2r}}{U_2} 
-           = \frac{\frac{\dot{m}}{\rho_2 A2}}{\acs{M0rotor} a_{01}}
+    \phi_3 = \frac{W_{2r}}{U_3} 
+           = \frac{\frac{\dot{m}}{\rho_3 A2}}{\acs{M0rotor} a_{01}}
            = \frac{\MFPalt{2}}{\acs{M0rotor}} \frac{a_{02}}{a_{01}} \stagdensratio{2} \\ 
-           = \frac{\acs{MFP}_2}{\acs{M0rotor}} \sqrt{\frac{T_{02}}{T_{01}}} \stagdensratio{2}
+           = \frac{\acs{MFP}_3}{\acs{M0rotor}} \sqrt{\frac{T_{02}}{T_{01}}} \stagdensratio{2}
 \end{multline}
-The value of $M_2$ can be obtained from $\acs{MFP}_2$ using \cref{eqn:mfp2mach}, while the latter is given by
+The value of $M_3$ can be obtained from $\acs{MFP}_3$ using \cref{eqn:mfp2mach}, while the latter is given by
 \begin{equation}
     \label{eqn:mfp2mfp2}
-    \acs{MFP}_2 \triangleq \MFP{2} = \acs{MFP} \frac{A_1}{A_2} \frac{P_{01}}{P_{02}} \sqrt{\frac{T_{02}}{T_{01}}}
+    \acs{MFP}_3 \triangleq \MFP{2} = \acs{MFP} \frac{A_2}{A_3} \frac{P_{01}}{P_{02}} \sqrt{\frac{T_{02}}{T_{01}}}
 \end{equation}
-Notice that \cref{eqn:mfp2mfp2} makes no assumption of the process 1--2 being isentropic. $\acs{MFP}_2$ can be used along with \acs{MFP} to check for choking.
+Notice that \cref{eqn:mfp2mfp2} makes no assumption of the process 1--2 being isentropic. $\acs{MFP}_3$ can be used along with \acs{MFP} to check for choking.
 
 The load coefficient is given by
 \begin{equation}
-    \acs{load_coef}\triangleq \frac{\Delta h}{U_2^2}
-                      = \frac{c_p(T_{02}-T_{01})}{U_2^2}
+    \acs{load_coef}\triangleq \frac{\Delta h}{U_3^2}
+                      = \frac{c_p(T_{02}-T_{01})}{U_3^2}
                       = \frac{\frac{c_p(T_{02}-T_{01})}{\gamma R T_{01}}}
                                     {\acs{M0rotor}^2}
                       = \frac{\frac{T_{02}}{T_{01}}-1}
