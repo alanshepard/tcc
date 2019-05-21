@@ -24,30 +24,30 @@ Euler's equation is a consequence of the application of the laws of conservation
 From the conservation of angular momentum, 
 
 \begin{equation}
-    \vec{\acs{torque}} = \dot{m} (\vec{r_2}\cross\vec{V_2} - \vec{r_1}\cross\vec{V_1}) 
+    \vec{\acs{torque}} = \dot{m} (\vec{r}_{\text{out}}\cross\vec{V}_{\text{out}} - \vec{r}_{\text{in}}\cross\vec{V}_{\text{in}}) 
 \end{equation}
 
 Multiplying both sides by the rotational speed ($\omega$)
 
 \begin{equation}
     \acs{power} = \vec{\omega}\cdot\vec{\acs{torque}} 
-                = \dot{m} \vec{\omega} \cdot (\vec{r_2}\cross\vec{V_2} - \vec{r_1}\cross\vec{V_1}) 
+                = \dot{m} \vec{\omega} \cdot (\vec{r}_{\text{out}}\cross\vec{V}_{\text{out}} - \vec{r_{\text{in}}}\cross\vec{V}_{\text{in}}) 
 \end{equation}
 
 Assuming that the system is adiabatic and using the first law of thermodynamics, the specific enthalpy change is given by
 
 \begin{equation}
     \Delta h = \frac{\acs{power}}{\dot{m}} 
-             = \vec{\omega} \cdot (\vec{r_2}\cross\vec{V_2} - \vec{r_1}\cross\vec{V_1}) 
+             = \vec{\omega} \cdot (\vec{r}_{\text{out}}\cross\vec{V}_{\text{out}} - \vec{r}_{\text{in}}\cross\vec{V}_{\text{in}}) 
 \end{equation}
 
 \begin{equation}
-    \Delta h = \omega (r_2 {V_u}_2 - r_1 {V_u}_1) 
+    \Delta h = \omega (r_{\text{out}} {V_u}_{\text{out}} - r_{\text{in}} {V_u}_{\text{in}}) 
 \end{equation}
 
 \begin{equation}
     \label{eqn:euler}
-    \Delta h = U_2 {V_u}_2 - U_1 {V_u}_1 
+    \Delta h = U_{\text{out}} {V_u}_{\text{out}} - U_{\text{in}} {V_u}_{\text{in}} 
 \end{equation}
 
 \subsection{Euler's equation for a centrifugal compressor}
@@ -92,6 +92,33 @@ In the case of no pre-whirl, ${V_u}_1 = 0$, thus
 \end{equation}
 
 \subsection{Euler's equation for an axial turbine}
+\begin{figure}
+    \centering
+    \includegraphics[width=10cm]{fig/turbine_euler}
+    \caption{Velocity triangle for an axial turbine stage}
+    \label{fig:turbine_euler}
+    \source{\cite{Mattingly1996}}
+\end{figure}
+
+Applying \cref{eqn:euler} to an axial turbine stage (\cref{fig:turbine_euler}), we have
+\begin{equation}
+    \Delta_h = U_5V_5-U_4V_5
+\end{equation}
+The tangential fluid velocities can be expressed in terms of their axial components, i.e.\
+\begin{align}
+    V_{4u} &= V_{4x} \tan\alpha_4 \\
+    V_{5u} &= U_5 + V_{5x} \tan\beta_5
+\end{align}
+Then,
+\begin{equation}
+    \Delta h = U_5^2 + U_5 V_{5x}\tan\beta_5 - U_4 V_{4x}\tan\alpha_4
+\end{equation}
+And finally, making the equation non-dimensional by diving both sides by the blade speed at the exit $U_5$, we get
+\begin{equation}
+    \psi_t = 1 + \phi_5\tan\beta_5-\left(\frac{r_4}{r_5}\right)^2\phi_4\tan\alpha_4
+\end{equation}
+where $\phi_4 = \frac{V_{4x}}{U_5}$ and $\phi_5 = \frac{V_{5x}}{U_5}$ are the flow parameters and
+$\psi_t=\frac{\Delta h}{U_5^2}$ is the power coefficient for the turbine.
 
 \section{Loss models for centrifugal compressors}
 \label{sec:compressor_losses}
@@ -278,6 +305,7 @@ Equations:
     \item nozzle
     \item turbine (x3)
     \item compressor (x3)
+\end{enumerate}
 
 \section{Engine dynamical model}
 \section{Surge model}
