@@ -61,6 +61,7 @@ class Compressor(Turbomachine):
         res_MFP = MFP2 - MFP1*T0_ratio**0.5/(A_ratio*P0_ratio)
         
         return res_MFP, res_T0_ratio, res_P0_ratio
+
     def plot_map(self, ax, P0_min=1, P0_max=4, samples=25, plot=False):
     
         MFP_choke = mach2mfp(1,self.gam)
@@ -86,18 +87,16 @@ class Compressor(Turbomachine):
     
         ax.plot(MFP_grid, P0_grid, 'k,')
         CS = ax.contour(MFP_grid, P0_grid, params['Mb'], levels=np.arange(0,2,0.1), 
-                            colors='k', linewidths=1.5)
+                            colors='k', linewidths=0.8)
         ax.clabel(CS, CS.levels, fmt='%.1f')
         CS.collections[0].set_label('$M_b$')
-        CS2 = ax.contour(MFP_grid, P0_grid, params['eff'], colors='k', linewidths=0.5,
+        CS2 = ax.contour(MFP_grid, P0_grid, params['eff'], colors='k', linewidths=0.4,
                           levels=[0.5,0.8,0.9,0.95])
         CS2.collections[0].set_label(r'$\eta_p$')
         ax.clabel(CS2, CS2.levels, fmt='%.2f')
         ax.plot([MFP_choke, MFP_choke, sol_P1.params['MFP1']],
-                 [P0_max, sol_cr.params['P0_ratio'], P0_min], 'k--', label='choke limit')
+                 [P0_max, sol_cr.params['P0_ratio'], P0_min], 'k--', label='choke limit', linewidth=0.8)
         ax.set_xlim((0,0.6))
         ax.set_ylim((1,4))
         ax.set_xlabel("MFP")
-        ax.set_ylabel(r"$\frac{P_{03}}{P_{02}}$")
-        ax.legend()
-        
+        ax.set_ylabel(r"$\frac{P_{03}}{P_{02}}$", rotation=0)
