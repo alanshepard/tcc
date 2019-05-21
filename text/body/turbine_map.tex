@@ -1,0 +1,37 @@
+\documentclass[tcc]{subfiles}
+
+\begin{document}
+
+\begin{table}
+\centering
+    \caption{Turbine model problem statement}
+\begin{minipage}{0.7\textwidth}
+    \hrule
+
+    Given $\gamma$ and the turbine geometry 
+    $\mathcal{G} \triangleq \left(
+    \alpha_4, \beta_5, \tfrac{A_5}{A_4}, \tfrac{D_{5}}{D_4} \right)$, \\
+    find $\acs{MFP}_4$, $\acs{MFP}_5$, $M_b$, $\frac{P_{05}}{P_{04}}$, $\frac{T_{05}}{T_{04}}$ 
+    which satisfy
+\begin{align}
+    \acs{MFP}_4 - \acs{MFP}_5\frac{A_5}{A_4}\frac{P_{05}}{P_{04}}\sqrt{\frac{T_{04}}{T_{05}}}    &= 0 \\
+    \frac{T_{05}}{T_{04}} - [1 + (\gamma-1)\psi_{\text{euler}} M_b^2]                           &= 0 \\
+    \frac{P_{05}}{P_{04}} - [1 + (\gamma-1)\psi_{\text{euler}} M_b^2]^{\frac{\gamma}{\gamma-1}} &= 0 
+\end{align}
+
+where
+
+\begin{align}
+    \psi_{\text{euler}} & = 1 + \phi_5\tan\beta_5-\left(\frac{D_4}{D_5}\right)^2\phi_4\tan\alpha_4 \\
+    \phi_4 &= \frac{\acs{MFP}_4}{M_b} \left( 1 + \frac{\gamma-1}{2} M_4^2 \right)^{\frac{1}{\gamma-1}} \\
+    \phi_5 &= \frac{\acs{MFP}_5}{M_b} \left( 1 + \frac{\gamma-1}{2} M_5^2 \right)^{\frac{1}{\gamma-1}} \sqrt{\frac{T_{05}}{T_{04}}}\\
+    \acs{MFP} &= M \left( 1 + \frac{\gamma-1}{2} M^2 \right)^{-\frac{\gamma+1}{2(\gamma-1)}}
+\end{align}
+
+    \hrule
+\end{minipage}
+\end{table}
+
+
+\end{document}
+
