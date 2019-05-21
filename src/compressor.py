@@ -61,7 +61,7 @@ class Compressor(Turbomachine):
         res_MFP = MFP2 - MFP1*T0_ratio**0.5/(A_ratio*P0_ratio)
         
         return res_MFP, res_T0_ratio, res_P0_ratio
-    def plot_map(self, ax, P0_min=1, P0_max=4, samples=25):
+    def plot_map(self, ax, P0_min=1, P0_max=4, samples=25, plot=False):
     
         MFP_choke = mach2mfp(1,self.gam)
         sol_cr = self.general_explicit_map({'MFP1': MFP_choke, 'MFP2': MFP_choke})
@@ -81,7 +81,7 @@ class Compressor(Turbomachine):
             MFP_grid[:, i] = MFP
             P0_grid[:, i] = p
     
-        params = gridmap(self, MFP_grid, P0_grid, 'MFP1')
+        params = gridmap(self, MFP_grid, P0_grid, 'MFP1', plot=plot)
         params['eff'] = (self.gam-1)/self.gam*np.log(P0_grid)/np.log(params['T0_ratio'])
     
         ax.plot(MFP_grid, P0_grid, 'k,')

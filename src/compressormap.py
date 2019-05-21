@@ -4,7 +4,7 @@ plt.rc('font', family='serif')
 from compressor import Compressor
 
 plt.figure(figsize=(6,8),dpi=150)
-Compressor().plot_map(plt.gca())
+Compressor().plot_map(plt.gca(), samples=100, plot=True)
 plt.savefig('map.pdf', dpi=300)
 
 plt.show()
