@@ -69,6 +69,23 @@ class TurbineExtendedMap(Turbine):
         else:
             xmin, xmax, ymin, ymax = extent
 
+        #Choke line
+        MFP_choke = mach2mfp(1, self.gam)
+        sol = self.general_explicit_map({'MFP1': 0.9*MFP_choke, 'MFP2': 0.9*MFP_choke})
+        MbMFP = np.linspace(sol.params['MbMFP'], xmax, samples*5)
+        pr_choke = np.empty_like(MbMFP)
+        for i, MbMFP_ in enumerate(MbMFP):
+            if sol.success:
+                old_sol = sol
+            sol = self.general_explicit_map({'MbMFP': MbMFP_, 'MFP2': MFP_choke}, 
+                                            initial_guesses=old_sol.params)
+            pr_choke[i] = sol.params['P0_ratio'] if sol.success else np.nan
+
+        ax.plot(MbMFP, 1/pr_choke, 'k--', linewidth=0.8)
+
+
+        #Map
+
         MbMFP, P0_ratio = np.meshgrid(np.linspace(xmin, xmax, samples), np.linspace(1/ymax, 1/ymin, samples))
         
         params = gridmap(self, MbMFP, P0_ratio, 'MbMFP')
