@@ -61,7 +61,7 @@ class TurbineExtendedMap(Turbine):
 
         return (*res_turbine, MbMFP-Mb*MFP1)
 
-    def plot_map(self, ax, extent=None, samples=25):
+    def plot_map(self, ax, extent=None, samples=25, grid=False):
 
         if extent is None:
             xmin, xmax = ax.get_xlim()
@@ -75,16 +75,18 @@ class TurbineExtendedMap(Turbine):
         
         params['eff'] = (self.gam-1)/self.gam*np.log(P0_ratio)/np.log(params['T0_ratio'])
     
-        ax.plot(MbMFP, 1/P0_ratio, 'k,')
+        if grid:
+            ax.plot(MbMFP, 1/P0_ratio, 'k,')
+
         CS = ax.contour(MbMFP, 1/P0_ratio, params['Mb'], levels=np.arange(0,2,0.1), 
                             colors='k', linewidths=0.8)
-        ax.clabel(CS, CS.levels, fmt='%.1f')
-        CS.collections[0].set_label('$M_b$')
+        ax.clabel(CS, CS.levels, fmt='%.1f', rightside_up=False)
+        CS.collections[0].set_label('$M_{bt}$')
 
-        CS2 = ax.contour(MbMFP, 1/P0_ratio, params['eff'], colors='k', linewidths=0.4,
-                          levels=[0.5,0.8,0.9,0.95])
-        CS2.collections[0].set_label(r'$\eta_p$')
-        ax.clabel(CS2, CS2.levels, fmt='%.2f')
+        #CS2 = ax.contour(MbMFP, 1/P0_ratio, params['eff'], colors='k', linewidths=0.4,
+        #                  levels=[0.5,0.8,0.9,0.95])
+        #CS2.collections[0].set_label(r'$\eta_p$')
+        #ax.clabel(CS2, CS2.levels, fmt='%.2f')
 
-        ax.set_xlabel("MbMFP")
+        ax.set_xlabel(r"$M_{bt}\text{MFP}_4$")
         ax.set_ylabel(r"$\frac{P_{04}}{P_{05}}$", rotation=0)

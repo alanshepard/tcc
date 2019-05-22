@@ -62,7 +62,7 @@ class Compressor(Turbomachine):
         
         return res_MFP, res_T0_ratio, res_P0_ratio
 
-    def plot_map(self, ax, P0_min=1, P0_max=4, samples=25, plot=False):
+    def plot_map(self, ax, P0_min=1, P0_max=4, samples=25, plot=False, grid=False):
     
         MFP_choke = mach2mfp(1,self.gam)
         sol_cr = self.general_explicit_map({'MFP1': MFP_choke, 'MFP2': MFP_choke})
@@ -85,11 +85,13 @@ class Compressor(Turbomachine):
         params = gridmap(self, MFP_grid, P0_grid, 'MFP1', plot=plot)
         params['eff'] = (self.gam-1)/self.gam*np.log(P0_grid)/np.log(params['T0_ratio'])
     
-        ax.plot(MFP_grid, P0_grid, 'k,')
+        if grid:
+            ax.plot(MFP_grid, P0_grid, 'k,')
+
         CS = ax.contour(MFP_grid, P0_grid, params['Mb'], levels=np.arange(0,2,0.1), 
                             colors='k', linewidths=0.8)
         ax.clabel(CS, CS.levels, fmt='%.1f')
-        CS.collections[0].set_label('$M_b$')
+        CS.collections[0].set_label('$M_{bc}$')
         CS2 = ax.contour(MFP_grid, P0_grid, params['eff'], colors='k', linewidths=0.4,
                           levels=[0.5,0.8,0.9,0.95])
         CS2.collections[0].set_label(r'$\eta_p$')

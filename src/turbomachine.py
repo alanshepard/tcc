@@ -5,7 +5,7 @@ import random
 import itertools
 import matplotlib.pyplot as plt
 
-def gridmap(t, x_grid, pr_grid, x_param='MFP1', plot=False):
+def gridmap(t, x_grid, pr_grid, x_param='MFP1', y_param='P0_ratio', plot=False):
     """ 
     t: Turbomachine
     """
@@ -23,7 +23,7 @@ def gridmap(t, x_grid, pr_grid, x_param='MFP1', plot=False):
     ijgrid = list(itertools.product(*map(range, x_grid.shape)))
     random.shuffle(ijgrid)
     for i,j in ijgrid:
-        sol = t.general_explicit_map({x_param: x_grid[i,j], 'P0_ratio': pr_grid[i,j]})
+        sol = t.general_explicit_map({x_param: x_grid[i,j], y_param: pr_grid[i,j]})
         if sol.success: 
             print(i,j)
             break
@@ -46,7 +46,7 @@ def gridmap(t, x_grid, pr_grid, x_param='MFP1', plot=False):
                         del queue[(ii,jj)]
                         
                 assert (ii,jj) not in queue
-                sol=t.general_explicit_map(params={x_param: x_grid[ii,jj], 'P0_ratio': pr_grid[ii,jj]},
+                sol=t.general_explicit_map(params={x_param: x_grid[ii,jj], y_param: pr_grid[ii,jj]},
                                            initial_guesses=sol.params)
                 queue[(ii, jj)] = sol
                 tries[ii,jj]+=1
