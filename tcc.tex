@@ -44,6 +44,10 @@
 \usepackage{mathtools}
 \usepackage[ruled]{algorithm2e}
 \usepackage{multicol}
+\usepackage{rotating}
+\usepackage{pdflscape}
+\usepackage{everypage}
+\usepackage[font={small,sf, singlespacing}, margin=2cm]{caption}
 
 % Citações padrão ABNT.
 % Uncomment to use bibtex 
@@ -79,8 +83,7 @@
 
 % for figure's sources
 \newcommand{\source}[1]{
-	\parbox{\textwidth}
-	{\footnotesize Source: #1.}
+	\caption*{\footnotesize \raggedright Source: #1.}
 }
 \newcommand{\authorsfigure}{author's figure}
 

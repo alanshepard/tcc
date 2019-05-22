@@ -94,8 +94,8 @@ In the case of no pre-whirl, ${V_u}_2 = 0$, thus
 \subsection{Euler's equation for an axial turbine}
 \begin{figure}
     \centering
-    \includegraphics[width=10cm]{fig/turbine_euler}
     \caption{Velocity triangle for an axial turbine stage}
+    \includegraphics[width=10cm]{fig/turbine_euler}
     \label{fig:turbine_euler}
     \source{\cite{Mattingly1996}}
 \end{figure}
@@ -350,7 +350,15 @@ Equations:
 \includegraphics{src/mapv1.pdf}
 \section{Turbine map}
 \section{Work line}
-\includegraphics{src/working_line_compressor.pdf}
+
+\begin{sidewaysfigure}[p]
+    \AddThispageHook{\thispagestyle{empty}}
+    \caption{Component maps and work line of the VT-80 engine}
+\includegraphics{fig/wline.pdf}
+    \source{author's figure}
+    \legend{Compressor and turbine maps for the VT-80 engine, with the work line superimposed (thick line).
+    The medium thickness contours are of constant blade mach number and the thin countours are of constant polytropic efficiency.}
+\end{sidewaysfigure}
 
 \section{Dynamical simulation}
 \subfile{text/body/materials_and_methods}
