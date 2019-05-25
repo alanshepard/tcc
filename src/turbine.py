@@ -4,6 +4,7 @@ import numpy as np
 from mfp2mach import mach2mfp, mfp2mach
 from turbomachine import Turbomachine, gridmap
 
+import tccsty
 
 class Turbine(Turbomachine):
     def __init__(self):
@@ -96,7 +97,7 @@ class TurbineExtendedMap(Turbine):
             ax.plot(MbMFP, 1/P0_ratio, 'k,')
 
         CS = ax.contour(MbMFP, 1/P0_ratio, params['Mb'], levels=np.arange(0,2,0.1), 
-                            colors='k', linewidths=0.8)
+                            colors='k', linewidths=tccsty.thick)
         ax.clabel(CS, CS.levels, fmt='%.1f', rightside_up=False)
         CS.collections[0].set_label('$M_{bt}$')
 
@@ -106,4 +107,4 @@ class TurbineExtendedMap(Turbine):
         #ax.clabel(CS2, CS2.levels, fmt='%.2f')
 
         ax.set_xlabel(r"$M_{bt}\text{MFP}_4$")
-        ax.set_ylabel(r"$\frac{P_{04}}{P_{05}}$", rotation=0)
+        ax.set_ylabel(r"\[\frac{P_{04}}{P_{05}}\]", labelpad=16, rotation=0)

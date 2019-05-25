@@ -1,0 +1,40 @@
+text.usetex: True
+grid.linewidth: 0.2
+axes.linewidth: 0.6
+lines.linewidth: 0.8
+text.latex.preamble: \usepackage{sfmath} \usepackage{amsmath}
+verbose.level: debug-annoying
+
+# FONT SIZE
+font.size: 9
+legend.fontsize: medium
+axes.titlesize: x-large
+axes.labelsize: large
+xtick.labelsize : large
+ytick.labelsize : large
+axes.labelpad: 8
+axes.titlepad: 10  
+xtick.major.width: 0.6    # major tick width in points
+xtick.minor.width: 0.4    # minor tick width in points
+xtick.top: False
+xtick.direction: in
+
+ytick.right: False
+ytick.direction: in
+
+# The figure subplot parameters.  All dimensions are a fraction of the
+figure.subplot.left    : 0.125  # the left side of the subplots of the figure
+figure.subplot.right   : 0.9    # the right side of the subplots of the figure
+figure.subplot.bottom  : 0.11    # the bottom of the subplots of the figure
+figure.subplot.top     : 0.90    # the top of the subplots of the figure
+figure.subplot.wspace  : 0.15    # the amount of width reserved for blank space between subplots,
+                                 # expressed as a fraction of the average axis width
+figure.subplot.hspace  : 0.15    # the amount of height reserved for white space between subplots,
+                                 # expressed as a fraction of the average axis height
+
+savefig.dpi         : 1200   # figure dots per inch or 'figure'
+savefig.facecolor   : white    # figure facecolor when saving
+savefig.edgecolor   : white    # figure edgecolor when saving
+savefig.format      : pdf      # png, ps, pdf, svg
+savefig.bbox        : tight # 'tight' or 'standard'.
+

@@ -4,7 +4,7 @@ import numpy as np
 from mfp2mach import mach2mfp, mfp2mach
 import compressor_losses as losses
 from turbomachine import Turbomachine, gridmap
-
+import tccsty
 
 class Compressor(Turbomachine):
     def __init__(self):
@@ -89,16 +89,16 @@ class Compressor(Turbomachine):
             ax.plot(MFP_grid, P0_grid, 'k,')
 
         CS = ax.contour(MFP_grid, P0_grid, params['Mb'], levels=np.arange(0,2,0.1), 
-                            colors='k', linewidths=0.8)
+                            colors='k', linewidths=tccsty.thick)
         ax.clabel(CS, CS.levels, fmt='%.1f')
         CS.collections[0].set_label('$M_{bc}$')
-        CS2 = ax.contour(MFP_grid, P0_grid, params['eff'], colors='k', linewidths=0.4,
+        CS2 = ax.contour(MFP_grid, P0_grid, params['eff'], colors='k', linewidths=tccsty.thin,
                           levels=[0.5,0.8,0.9,0.95])
         CS2.collections[0].set_label(r'$\eta_p$')
         ax.clabel(CS2, CS2.levels, fmt='%.2f')
         ax.plot([MFP_choke, MFP_choke, sol_P1.params['MFP1']],
-                 [P0_max, sol_cr.params['P0_ratio'], P0_min], 'k--', label='choke limit', linewidth=0.8)
+                 [P0_max, sol_cr.params['P0_ratio'], P0_min], 'k--', label='choke limit')
         ax.set_xlim((0,0.6))
         ax.set_ylim((1,4))
         ax.set_xlabel("MFP")
-        ax.set_ylabel(r"$\frac{P_{03}}{P_{02}}$", rotation=0)
+        ax.set_ylabel(r"\[\frac{P_{03}}{P_{02}}\]", labelpad=16, rotation=0)
