@@ -19,7 +19,7 @@ TurbineExtendedMap().plot_map(ax[1], extent=(0,1.2,1,3),samples=samples)
 e = Engine()
 e.initial_guess = e.general_explicit_map({'M_flight': 0, 'MFP': 0.3}).params
 
-wline = e.working_line(np.arange(600,1000,50))
+wline = e.working_line(np.arange(600,1001,50))
 
 ax[0].plot([p['MFP'] for p in wline], [p['P0_ratio_c'] for p in wline], 'k.-', linewidth=tccsty.verythick)
 ax[1].plot([p['MFP4']*p['Mb_t'] for p in wline], [1/p['P0_ratio_t'] for p in wline], 'k.-', linewidth=tccsty.verythick)
