@@ -92,12 +92,13 @@ In the case of no pre-whirl, ${V_u}_2 = 0$, thus
 \end{equation}
 
 \subsection{Euler's equation for an axial turbine}
+
 \begin{figure}
-    \centering
-    \caption{Velocity triangle for an axial turbine stage}
-%    \includegraphics[width=10cm]{fig/turbine_euler}
+    \sffamily\small 
+    \caption{Velocities in an axial turbine stage}
     \label{fig:turbine_euler}
-    \source{\cite{Mattingly1996}}
+    \hfill\includesvg{fig/turbine_euler}\hfill
+    \source{author's figure}
 \end{figure}
 
 Applying \cref{eqn:euler} to an axial turbine stage (\cref{fig:turbine_euler}), we have
@@ -216,12 +217,6 @@ A schematic of the engine components considered for the simulation of the presen
     \sffamily\small 
     \caption{Schematic diagram of the modelled engine}
     \hfill\includesvg{fig/engine_schematic}\hfill
-    \source{author's figure}
-\end{figure}
-\begin{figure}
-    \sffamily\small 
-    \caption{Velocities in an axial turbine stage}
-    \hfill\includesvg{fig/turbine_euler}\hfill
     \source{author's figure}
 \end{figure}
 
@@ -344,13 +339,16 @@ The engine equilibrium, or steady state,
 
 Equations:
 \begin{enumerate}
-    \item Constant shaft speed
+    \item Constant spool speed
+    \item Conservation of energy transmited through spool
     \item Conservation of mass in the burner
     \item Energy adition due to fuel
     \item nozzle
     \item turbine (x3)
     \item compressor (x3)
 \end{enumerate}
+
+\subfile{text/body/engine_map}
 
 \section{Engine dynamical model}
 \begin{align}
@@ -367,10 +365,8 @@ Equations:
 
 \chapter{Results and discussion}
 \epigraph{``Que tanto de coisa para estragar.''\\{\footnotesize ``That's a lot of parts to need fixing.}''}{My Grandfather commenting on my dad's new car}
-\section{Compressor map}
-\section{Turbine map}
-\section{Work line}
 
+\section{Engine matching}
 \begin{sidewaysfigure}[p]
     \AddThispageHook{\thispagestyle{empty}}
     \caption{Component maps and work line of the VT-80 engine}
@@ -379,6 +375,18 @@ Equations:
     \legend{Compressor and turbine maps for the VT-80 engine, with the work line superimposed (thick line).
     The medium thickness contours are of constant blade mach number and the thin countours are of constant polytropic efficiency.}
 \end{sidewaysfigure}
+
+\begin{figure}
+    \centering
+    \caption{Flow state at each engine station}
+    \includegraphics{fig/stations1000K}
+    \source{author's figure}
+    \caption*{Temperature, pressure and mach number for each engine station at a turbine inlet temperature of 1000K and flight mach number zero. The temperature and pressure scales were chosen to keep their ratios to the reference values $\mathsf P_{01}$ and $\mathsf T_{01}$ comparable. When the station number is prefixed with a ``0'', the properties are from stagnation, otherwise they are static. Interpolation was done with the PCHIP algorithm \cite{Fritsch1980, Moler2004}, to keep lines smooth while not introducing artificial maxima.}
+\end{figure}
+
+\begin{figure}
+    \caption{Matching sensitivity to nozzle diameter}
+\end{figure}
 
 \section{Dynamical simulation}
 \subfile{text/body/materials_and_methods}

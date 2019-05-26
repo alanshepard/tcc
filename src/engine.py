@@ -4,10 +4,10 @@ from collections import namedtuple
 from turbomachine import Turbomachine
 from compressor import Compressor
 from turbine import Turbine
-from mfp2mach import mach2mfp
+from mfp2mach import mach2mfp, mfp2mach
 
 DimensionalParameters = namedtuple('DimensionalEngineParameters',
-             'T02 T03 T04 T05 P02 P03 P04 P05 omega_c omega_t mdot2 mdot3 mdot4 mdot5')
+             'T02 T03 T04 T05 T8 P02 P03 P04 P05 P8 omega_c omega_t mdot2 mdot3 mdot4 mdot5')
 
 class Engine(Turbomachine):
     def __init__(self):
@@ -165,15 +165,23 @@ class Engine(Turbomachine):
         mdot4 = MFP4 * self.turbine.geom['A1']*P04*gam_t**0.5/(T04*R_t)**0.5
         mdot5 = MFP5 * self.turbine.geom['A2']*P05*gam_t**0.5/(T05*R_t)**0.5
 
+        #Nozzle
+        MFP8 = min(MFP5*self.turbine.geom['A2']/self.A8, mach2mfp(1, gam_t))
+        M8 = mfp2mach(MFP8, gam_t)
+        P8 = P05 * (1+(gam_t-1)/2*M8**2)**(-gam_t/(gam_t-1))
+        T8 = T05 * (1+(gam_t-1)/2*M8**2)**(-1)
+
         dim_params = DimensionalParameters(
                                            T02     = T02    ,
                                            T03     = T03    ,
                                            T04     = T04    ,
                                            T05     = T05    ,
+                                           T8      = T8     ,
                                            P02     = P02    ,
                                            P03     = P03    ,
                                            P04     = P04    ,
                                            P05     = P05    ,
+                                           P8      = P8     ,
                                            omega_c = omega_c,
                                            omega_t = omega_t,
                                            mdot2   = mdot2  ,

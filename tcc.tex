@@ -3,7 +3,7 @@
 
 \documentclass[
 	% -- opções da classe memoir --
-	10pt,				% tamanho da fonte
+	11pt,				% tamanho da fonte
 	%openright,			% capítulos começam em pág ímpar (insere página vazia caso preciso)
 	%twoside,			% para impressão em recto e verso. Oposto a oneside
 	oneside,
@@ -26,7 +26,8 @@
 \usepackage{color}				% Controle das cores
 \usepackage{graphicx}			% Inclusão de gráficos
 \usepackage{microtype} 			% para melhorias de justificação
-\usepackage{helvet}
+%\usepackage{helvet}
+%\usepackage{sfmath}
 \usepackage{tcolorbox}
 \usepackage{tikz}
 \usetikzlibrary{shapes,arrows,automata,calc}
@@ -57,6 +58,8 @@
 % Uncomment to use biblatex
 \usepackage[style=abnt,language=english,pretty]{biblatex}
 \addbibresource{references/references.bib}        % Seus arquivos de
+\addbibresource{references/numeric/numeric.bib}        % Seus arquivos de
+\addbibresource{references/turbine/turbine.bib}        % Seus arquivos de
 %\addbibresource{outroarquivo.bib}   % bibliografia vão aqui
 
 %Acronyms and list of symbols

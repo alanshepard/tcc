@@ -1,0 +1,43 @@
+\documentclass[tcc]{subfiles}
+
+\begin{document}
+
+\begin{table}
+\centering
+    \caption{Engine steady state model problem statement}
+\begin{minipage}{0.7\textwidth}
+    \hrule\vspace{2pt}
+
+    Given the constants required as inputs for the compressor and turbine maps (\cref{map:compressor, map:turbine}), 
+    the free flow stagnation temperature ($T_{01}$) and pressure ($P_{01}$), 
+    the \acf{FHV}, the combustion efficiency ($\eta_f$),
+    the specific heat of clean air ($c_{pc}$) and combustion products ($c_{pt}$) \\ 
+    find $M_\text{flight}$, $\acs{MFP}_2$, $\acs{MFP}_3$, $\acs{MFP}_4$, $\acs{MFP}_5$, $M_{bc}$, $M_{bt}$, $\pr{03}{02}$, $\pr{04}{05}$, $\tr{03}{02}$, $\tr{04}{05}$, $T_{04}$, $\dot{m}_f$
+    which satisfy
+\begin{align}
+    \omega_c - \omega_t &= 0 \label{eqn:engine:rotation} \\
+    \dot{m}_2 c_{pc} (T_{03}-T_{02}) - \dot{m}_4 c_{pt}(T_{04}-T_{05}) &= 0 \label{eqn:engine:energy}\\
+    \dot{m}_3 + \dot{m}_f - \dot{m}_4 &= 0 \label{eqn:engine:mass} \\
+    T_{03} + \frac{\dot{m}_f \eta_f \acs{FHV}}{\dot{m}_3 c_{pc}} - T_{04} &= 0 \label{eqn:engine:burn} \\
+    \text{nozzle eq}
+\end{align}
+    
+where the unknowns are dimensionalized as described in the section of nondimensional parameters
+
+Note that although this model is given in its dimensionalized form, it can easily be made non-dimensional if
+\begin{itemize}
+    \item \cref{eqn:engine:burn} and $T_{04}$ are normalized by $T_{01}$
+    \item \cref{eqn:engine:mass} and $\dot{m}_f$ are normalized by $\rho_{01} A_1 \sqrt{\gamma_c R_c T_{01}}$
+    \item \cref{eqn:engine:energy} is normalized by $c_{pc} T_{01} \rho_{01} A_1 \sqrt{\gamma_c R_c T_{01}}$
+    \item \cref{eqn:engine:rotation} is normalized by $D_1\sqrt{\gamma_c R_c T_{01}}$
+\end{itemize}
+    The input parameters for this case are $\frac{c_{pt}}{c_{pc}}$, $\frac{\eta_f \acs{FHV}}{c_{pc} T_{01}}$ 
+and the inputs for the compressor and turbine maps (\cref{map:compressor, map:turbine}).
+
+    \hrule
+\end{minipage}
+\end{table}
+
+
+\end{document}
+
