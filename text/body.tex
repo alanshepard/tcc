@@ -10,12 +10,9 @@
 
 The simulation of a gas turbine engine is fundamentally a multidisciplinary matter.
 It encompass not only the fields of turbomachinery and compressible flow, 
-but also those of dynamical systems and numerical analysis. 
+but also those of dynamical systems and numerical analysis.
 
-\section{Basic compressible flow relations}
-There are many consolidated references on compressible flow. 
-This section will only list the relations essential to the development in \cref{sec:methods}. 
-The reader should refer to \textcite{Anderson, Shapiro} for a more in depth discussion.
+Since only the basic equations of compressible flow will be used, they will not be reproced here. The reader should refer to \textcite{Anderson, Shapiro}, or simply check the very nice review table available at NASA's website \cite{nasa_isentropic}.
 
 \section{Euler's equation}
 \label{sec:euler_equation}
@@ -363,13 +360,15 @@ The load coefficient is given by
 
 At this point the loss models discussed in \cref{sec:compressor_losses} are introduced, 
 and the values of $\acs{load_coef}_{\text{actual}}$ and $\acs{load_coef}_{\text{isen}}$ are obtained.
-The temperatures and pressure ratio can then be readily calculated from
+The temperature and pressure ratios can then be readily calculated from
 \begin{align}
     \label{eqn:psi2Tratio}
     \frac{T_{03}}{T_{02}} &= (\gamma - 1)\psi_{\text{actual}} \acs{M0rotor}^2 + 1 \\
     \label{eqn:psi2Pratio}
     \frac{P_{03}}{P_{02}} &= \left[(\gamma - 1)\psi_{\text{isen}} \acs{M0rotor}^2 + 1\right]^\frac{\gamma}{\gamma-1}
 \end{align}
+
+In this work, only the losses due to incidence and skin friction were considered, because they are the ones most important for compressor stability (see \cref{sec:compressor_loss}). The model chosen for skin friction was suggest by \textcite{Oh1997} and the incidence losses where modelled as the complete conversion of all kinetic energy normal to be blade camber line to heat \cite{Galvas1973}. This is a more phisical model than the one suggested by Oh et al., and captures better the loss variation with incidence, since Oh et al's model does not include flow angles. 
 
 
 \section{Turbine model}
@@ -400,7 +399,7 @@ Now we divide the numerator and the denominator by $P_{0e}$ and isolate the pres
 \begin{equation}
     \frac{P_{0i}}{P_{0e}} = \frac{1}{1+Y\left\{1-\left[1+\tfrac{\gamma-1}{2}M_e^2\right]^{-\frac{\gamma-1}{\gamma}}\right\}}
 \end{equation}
-This pressure ratio loss term must be multiplied to the ideal (lossless) pressure ratio given by the second term of \cref{eqn:turb_res_pr}. If more than one blade row is considered (e.g.\ one for the stator and another one for the rotor) the pressure ratio losses for each must be joined by multiplication.
+This pressure ratio loss term must be multiplied to the ideal (isentropic) pressure ratio given by the second term of \cref{eqn:turb_res_pr}. If more than one blade row is considered (e.g.\ one for the stator and another one for the rotor) the pressure ratio losses for each must be joined by multiplication.
 
 \subfile{text/body/nozzle}
 
@@ -463,7 +462,7 @@ This is probably due to the overly optmistic efficiencies in both the compressor
 
 turbine has a poor design because it tends to choke on exit instead of on inlet.
 
-nozzle should be made smaller.
+nozzle seems to be too big for the engine. In the simulation it was reduced from the measured diameter of 45mm to 35mm. This may be due to the overestimation of the components' efficiencies.
 
 \begin{figure}
     \caption{Matching sensitivity to nozzle diameter}
