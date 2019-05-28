@@ -4,7 +4,8 @@
 
 \begin{table}
 \centering
-    \caption{Turbine model problem statement}
+\caption{Turbine model problem statement}
+\label{map:turbine}
 \begin{minipage}{0.7\textwidth}
     \hrule
 
@@ -16,7 +17,7 @@
 \begin{align}
     \acs{MFP}_4 - \acs{MFP}_5\frac{A_5}{A_4}\frac{P_{05}}{P_{04}}\sqrt{\frac{T_{04}}{T_{05}}}    &= 0 \\
     \frac{T_{05}}{T_{04}} - [1 + (\gamma-1)\psi_{\text{euler}} M_b^2]                           &= 0 \\
-    \frac{P_{05}}{P_{04}} - [1 + (\gamma-1)\psi_{\text{euler}} M_b^2]^{\frac{\gamma}{\gamma-1}} &= 0 
+    \frac{P_{05}}{P_{04}} - [1 + (\gamma-1)\psi_{\text{euler}} M_b^2]^{\frac{\gamma}{\gamma-1}} &= 0 \label{eqn:turb_res_pr}
 \end{align}
 
 where

@@ -97,7 +97,7 @@ In the case of no pre-whirl, ${V_u}_2 = 0$, thus
     \sffamily\small 
     \caption{Velocities in an axial turbine stage}
     \label{fig:turbine_euler}
-%    \hfill\includesvg{fig/turbine_euler}\hfill
+    \hfill\includesvg{fig/turbine_euler}\hfill
     \source{author's figure}
 \end{figure}
 
@@ -195,10 +195,51 @@ Semi-empirical models are available to predict each individual loss based on com
 In particular, \textcite{Oh1997} did a review of various loss models for each loss mechanism and selected an optimal set.
 
 \section{Loss models for axial turbines}
-Carter's rule
 
-The loss models most commonly used for turbine are due to \textcite{Ainley1951, Denton1978, Dunham1968, Dunham1970, Dunham1973, Rody1980, Smith1965} \cite{Bringhent2015}.\cite{Persson2015}
-Ainsley
+Most of the empirical loss correlations for axial turbines in use today stem from the seminal work by \textcite{Ainley1951}. This work identified the main loss mechanisms for an axial turbine stage as 
+\begin{description}
+    \item[profile loss] due to skin friction and flow separation under high incidence angles of the blades
+    \item[annulus loss] due to boundary layer growth on the inner and outer walls of the turbine annulus
+    \item[secondary flow loss] due to the tri-dimensional nature of the flow
+    \item[tip clearence loss] due to the vortex formed at the tip of the turbine blades
+\end{description}
+
+Several improvements were made to Ainley and Mathieson's model by \textcite{Mukhtarov196, Dunham1970, Kacker1982, Moustapha1990, Benner1995} among others\cite{Persson2015}. All of these studies were based on empirical data available from previous turbine rig testing, and thus are valid for turbines with similar geometries.
+These models provide the loss values as either a pressure loss-coefficient
+\begin{equation}
+    Y = \frac{P_{04}-P_{05}}{P_{05}-P_5}
+\end{equation}
+or a kinectic energy loss coefficient
+\begin{equation}
+    \phi^2 = \left(\frac{\text{actual gas exit velocity}}
+                        {\text{ideal gas exit velocity}}\right)^2
+\end{equation}
+
+\section{Deviation models for axial turbines}
+
+The flow exiting a turbine blade row does not follow the blade camber line exactly. 
+This is analogous to the slip observed in centrifugal compressors, but needs more elaborate correlations, 
+thus deserving a section of its own. 
+The simplest correlation available is known as Carter's rule \cite{Mattinlgly1995}, and states that
+\begin{equation}
+    \label{eqn:cartersrule}
+    \delta = \frac{\beta_4-\beta_5}{4\sqrt{\sigma}}
+\end{equation}
+
+where $\delta$ is the angular deviation between the exit flow and the exit camber angle,
+$\beta_4$ and $\beta_5$ are the inlet and exit airfoil camber angles,
+and $\sigma=\frac{\text{chord}}{\text{blade separation}}$ is the solidity.
+
+Another model based on inlet and exit Mach numbers is provided by \textcite{Ainley1951}, 
+and a more elaborate model involving also blade thickness was proposed by \textcite{Islam1999}, where
+\begin{equation}
+    \delta = \frac{\frac{\rho_5 V_{x4}}{\rho_5 V_{x5}} \sigma^{-1.1} (\alpha'_4+\beta_5)^{2.25}}
+                        {\xi^{1.45} \left(t_{\max}/c\right) \left(22+0.22\beta_4^{1.64}\right)}
+\end{equation}
+where $\xi$ is the blade geometric incidence (stagger angle), 
+$t_{\max}/c$ is the blade maximum thickness-to-chord ratio 
+and all angles are given in degrees.
+
 
 \section{Engine simulation (dynamic and static)}
 
@@ -218,7 +259,7 @@ A schematic of the engine components considered for the simulation of the presen
 \begin{figure}
     \sffamily\small 
     \caption{Schematic diagram of the modelled engine}
-    %\hfill\includesvg{fig/engine_schematic}\hfill
+    \hfill\includesvg{fig/engine_schematic}\hfill
     \source{author's figure}
 \end{figure}
 
@@ -244,6 +285,8 @@ that simulates the component's behaviour.
 
 \section{Flow stability: compressor surge}
 \section{Numerical aspects}
+Closing the loop one variable at a time as suggest by \textcite{walsh2004gas} is not the ideal way to solve this systems. This method is not only hard to set up and dependent on quite a lot of intuition acquired through experience, but it is also very prone to diverge (sometimes wildly so) if the updated values for the variables are not chosen just right. A more robust approach is to use proven solvers for non-linear systems.
+
 \subsection{Nonlinear solvers}
 \subsubsection{Gradient based solvers}
 \subsubsection{Homotopic solvers}
@@ -253,6 +296,8 @@ that simulates the component's behaviour.
 \subsection{Graph theory}
 \subsubsection{Viewing a grid/mesh as a graph}
 \subsubsection{Breadth first search}
+
+\section{The VT-80 engine}
 
 \chapter{Methods}
 \label{sec:methods}
@@ -318,7 +363,7 @@ The load coefficient is given by
 
 At this point the loss models discussed in \cref{sec:compressor_losses} are introduced, 
 and the values of $\acs{load_coef}_{\text{actual}}$ and $\acs{load_coef}_{\text{isen}}$ are obtained.
-The temperatures and pressure ratio can then be readly calculate from
+The temperatures and pressure ratio can then be readily calculated from
 \begin{align}
     \label{eqn:psi2Tratio}
     \frac{T_{03}}{T_{02}} &= (\gamma - 1)\psi_{\text{actual}} \acs{M0rotor}^2 + 1 \\
@@ -329,6 +374,33 @@ The temperatures and pressure ratio can then be readly calculate from
 
 \section{Turbine model}
 \subfile{text/body/turbine_map}
+
+The turbine model is sumarized in \cref{map:turbine}. 
+Its development is mostly analogous to that of the compressor, with the exception of the loss and deviation models. 
+Since the turbine does not exhibit flow instability phenomena such as compressor surge, 
+which depends heavly on the incidence losses, 
+and this work is focussed on the dynamic moddeling of the engine, 
+the turbine was assumed isentropic. 
+Nevertheless, a loss model based on pressure loss coefficients $Y_p$, $Y_s$, $Y_k$, etc.\ 
+could easily be included in this model by modfying \cref{eqn:turb_res_pr} in the following way
+\begin{equation}
+    \frac{P_{05}}{P_{04}} -\frac{[1 + (\gamma-1)\psi_{\text{euler}} M_b^2]^{\frac{\gamma}{\gamma-1}}}{1+Y\left\{1-\left[1+\tfrac{\gamma-1}{2}M_5^2\right]^{-\frac{\gamma-1}{\gamma}}\right\}} = 0 
+\end{equation}
+
+where
+\begin{equation}
+    Y = Y_p + Y_s + Y_k
+\end{equation}
+
+This correction is derived as follows. The pressure loss coefficient is given by
+\begin{equation}
+    Y = \frac{P_{0i} - P_{0e}}{P_{0e} - P_e}
+\end{equation}
+Now we divide the numerator and the denominator by $P_{0e}$ and isolate the pressure ratio term 
+\begin{equation}
+    \frac{P_{0i}}{P_{0e}} = \frac{1}{1+Y\left\{1-\left[1+\tfrac{\gamma-1}{2}M_e^2\right]^{-\frac{\gamma-1}{\gamma}}\right\}}
+\end{equation}
+This pressure ratio loss term must be multiplied to the ideal (lossless) pressure ratio given by the second term of \cref{eqn:turb_res_pr}. If more than one blade row is considered (e.g.\ one for the stator and another one for the rotor) the pressure ratio losses for each must be joined by multiplication.
 
 \subfile{text/body/nozzle}
 
@@ -385,6 +457,13 @@ Equations:
     \source{author's figure}
     \caption*{Temperature, pressure and mach number for each engine station at a turbine inlet temperature of 1000K and flight mach number zero. The temperature and pressure scales were chosen to keep their ratios to the reference values $\mathsf P_{01}$ and $\mathsf T_{01}$ comparable. When the station number is prefixed with a ``0'', the properties are from stagnation, otherwise they are static. Interpolation was done with the PCHIP algorithm \cite{Fritsch1980, Moler2004}, to keep lines smooth while not introducing artificial maxima.}
 \end{figure}
+
+Compressor and turbine show a nice match, even though many of the losses are not included in the model.
+This is probably due to the overly optmistic efficiencies in both the compressor and the turbine compensating for each other.
+
+turbine has a poor design because it tends to choke on exit instead of on inlet.
+
+nozzle should be made smaller.
 
 \begin{figure}
     \caption{Matching sensitivity to nozzle diameter}
