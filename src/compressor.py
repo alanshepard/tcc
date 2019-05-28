@@ -93,7 +93,7 @@ class Compressor(Turbomachine):
         ax.clabel(CS, CS.levels, fmt='%.1f')
         CS.collections[0].set_label('$M_{bc}$')
         CS2 = ax.contour(MFP_grid, P0_grid, params['eff'], colors='k', linewidths=tccsty.thin,
-                          levels=[0.5,0.8,0.9,0.95])
+                          levels=np.arange(0.5,1.01,0.05))
         CS2.collections[0].set_label(r'$\eta_p$')
         ax.clabel(CS2, CS2.levels, fmt='%.2f')
         ax.plot([MFP_choke, MFP_choke, sol_P1.params['MFP1']],
