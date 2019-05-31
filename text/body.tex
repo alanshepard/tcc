@@ -327,7 +327,7 @@ In particular, the \acl{MFP} is a function of the Mach number and the specific h
     \label{eqn:mfp2mach}
     \acs{MFP}(M,\gamma) = M \left( 1 + \frac{\gamma-1}{2}M^2\right)^{-\frac{\gamma+1}{2(\gamma-1)}}
 \end{equation}
-While there is no closed form inverse for this function, it is invertible and the inverse can be easily computed nummerically, e.g.\ by a newton scheme \cite{Der1974}.
+While there is no closed form inverse for this function, it is invertible and the inverse can be easily computed numerically, e.g.\ by a newton scheme \cite{Der1974}.
 
 According to \textcite{walsh2004gas},
  the influence of the \acl{Re} in the system behaviour is only of second order.
@@ -404,10 +404,12 @@ This pressure ratio loss term must be multiplied to the ideal (isentropic) press
 \subfile{text/body/nozzle}
 
 
-\section{Engine equilibrium model}
+\section{Engine static model}
 
 
-The engine equilibrium, or steady state, 
+The engine static model, also known as steady state, 
+describes the conditions in which the engine can operate indefinitelly 
+without changes in throttle input or outside conditions (pressure and temperature).
 
 
 Equations:
@@ -423,6 +425,12 @@ Equations:
 
 \subfile{text/body/engine_map}
 
+\subsection{Performance parameters}
+\begin{itemize}
+    \item thrust
+    \item thermal efficiency
+\end{itemize}
+
 \section{Engine dynamical model}
 \begin{align}
     \dot{P}_{04} &= \frac{a_{01}^2}{\volume}(\dot{m}_c - \dot{m}_t) \\
@@ -431,10 +439,30 @@ Equations:
 \end{align}
 
 \section{Surge model}
+
 \section{Numerical aspects}
-\subsection{Nonlinear solvers and convergence}
-\subsection{Generating a parametric surface from a nonlinear system}
-\subsubsection{Initial guess propagation}
+% Literary review (TODO: move this)
+As will be shown in \cref{sec:methods}, 
+the moddeling of a gas turbine engine and of its components can 
+be conveniently described by nonlinear algebraic systems. 
+There are two main approaches to solve these systems numerically: 
+classical gradient based root finding and optimization 
+and path following algorithms (\ac{DAE} solvers).
+
+% Methods
+\subsection{Generation of component maps}
+Nonlinear solver (hybr or lm) coupled with a breadth-first search. Initial point in the $x$ and $y$-axis is chosen randomly within the choke boundaries, pressure and temperature ratios are unit, mach numbers are between 0 an 1. If convergence is achieved a breadth-first search considering that each point in the grid is a graph node connected to the points up, down, left, right and in the diagonals. The converged result for each point is used as an initial guess for neighboring points. This allows each point in the grid up to 8 different initial guesses quite close to the actual solution (if the grid is fine enougth), and has proven very robust. 
+\subsubsection{choke line}
+Compressor: find point where inlet and exit are simultaniously choked. For pressure ratios above this critical value, only the inlet is choked and the choke line is vertical. For pressure ratios bellow this value the exit is choked. The choke line was verified to be a straight line, so that just the point at another pressure ratio, e.g.\ the minimum pressure ratio of interest (normally unit) is needed to fully define it.
+
+Turbine: it is linear in a plot of \acs{MFP} vs.\ pressure ratio, but in this case the blade mach number is not uniquelly defined. In a plot of $\acs{MFP}M_b$ vs.\ expansion ratio, the choke line is highly non linear and a KS aggregation function with variable $rho$ was added to the turbine model to model the choke.  
+
+\subsection{Generation of the working line}
+Optimize the engine model for maximum efficiency. 
+Then use a \ac{DAE} solver to continue the line forwards and backwards.
+
+\subsection{Dynamical simulation}
+Inputs: step in T04 up and down; senoids?
 
 \chapter{Results and discussion}
 \epigraph{``Que tanto de coisa para estragar.''\\{\footnotesize ``That's a lot of parts to need fixing.}''}{My Grandfather commenting on my dad's new car}
