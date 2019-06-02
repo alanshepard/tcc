@@ -388,9 +388,47 @@ The surge line for a compressor system can be moved be changing components downs
 The value of the nondimensional parameter $B$ is always greater than 1. 
 
 \section{Numerical aspects}
-Closing the loop one variable at a time as suggest by \textcite{walsh2004gas} is not the ideal way to solve this systems. This method is not only hard to set up and dependent on quite a lot of intuition acquired through experience, but it is also very prone to diverge (sometimes wildly so) if the updated values for the variables are not chosen just right. A more robust approach is to use proven solvers for non-linear systems.
+\label{sec:review:numeric}
 
-%\subsection{Nonlinear solvers}
+As will be shown in \cref{sec:methods}, the modelling of a gas turbine engine leads naturally to nonlinear systems of the type 
+\begin{equation}
+    \label{eqn:nonlinear}
+    f(x) = 0, \quad f:\mathbb{R}^n \rightarrow \mathbb{R}^n
+\end{equation}
+for component maps and static engine operating points, and to \acl{DAE} systems of the type
+\begin{equation}
+    \label{eqn:dae}
+    f(t, x, \dot{x}) = 0, \quad f:\mathbb{R}^{2n+1} \rightarrow \mathbb{R}^n
+\end{equation}
+for the dynamical engine model. The surge model, on the other hand, is best expressed as a partial \acl{DAE} system of the form
+\begin{equation}
+    f(x, \nabla x) = 0, \quad f:\mathbb{R}^{n^2+n} \rightarrow \mathbb{R}^n
+\end{equation}
+where $\nabla x$ is the jacobian of $x$. 
+However, the literature on this type of system is sparse at best and no widely used software package could be found.
+This section will therefore focus itself on the problems which can be expressed in the form of \cref{eqn:nonlinear,eqn:dae}.
+
+\textcite{walsh2004gas} suggests that one way of solving theses systems is solving for one variable at a time in an approach known as successive loop closure or serial nested loop. 
+For example, in the case of an engine's static model, Walsh et al.\ proposes that, starting with a fixed shaft speed, one first guesses the operating point on the compressormap and the turbine inlet temperature $T_{04}$. Then, $T_04$ is ajusted until the mass flow predicted by the turbine map matches the guess for the turbine map. The nozzle performance is then evaluated and the position on the compressor map is changed to match the nozzle mass flow ratio. This procedure is repeated until convergence of both parameters is obtained.
+
+This method is severely flawed. As remarked by \textcite{walsh2004gas}, it becames very inefficient when the number of guesses is more than approximatelly five. Furthermore, this technique is not only hard to set up and dependent on quite a lot of intuition acquired through experience, but it is also very prone to diverge (sometimes wildly so) if the updated values for the variables are not chosen just right. A more robust approach is to use proven solvers for non-linear systems, reffered by \textcite{walsh2004 gas} as the ``matrix'' solution method. 
+This method consists on using gradient based algorithms to solve the system simultainiously for all variables.
+
+There are two main approachs to solving non-linear systems nummerically in wide use today. 
+One is to use classical root finding algorithms based on optimization theory 
+and the other is to use path following methods, such as
+\ac{DAE} system solvers and homotopy methods \cite{hompack}. 
+
+\subsection{Classical nonlinear root finding}
+
+Classical methods for finding roots of nonlinear systems are based on optimization theory. They are best represented by the software package \textsc{minpack} \cite{minpack}. 
+
+\subsection{\Acl{DAE} theory}
+
+It should be noted that every system expressed as a nonlinear system can also be represented as a \ac{DAE}. 
+This is most useful for under determined sytems where not only one solution is seeked but a parameterized continuum of solutions, such as an operating line, choke line, surge line, etc. 
+
+
 %\subsubsection{Gradient based solvers}
 %\subsubsection{Homotopic solvers}
 %\subsection{\ac{ODE} solvers}

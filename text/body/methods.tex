@@ -138,19 +138,26 @@ classical gradient based root finding and optimization
 and path following algorithms (\ac{DAE} solvers).
 
 % Methods
+As was shown in this section, the models for a gas turbine engine and its components are expressed naturally in the form of coupled (sometimes differential) non-linear systems of equations. 
+These systems are inherently coupled because their behaviour depends on the flow angles on both the inlet and exit, and these can not be calculated independently of one another.
+As discussed in \cref{sec:review:numeric}, these problems are examples of \ac{DAE} systems, and many of them do not have explicit derivatives in their formulation.
+
+In this section, the numerical approach used to calculate each of the models described in this chapter will be exposed. They consist of a mix of nonlinear solvers, namely Powell's hybrid method and Levenberg-Marcquat, as implemented by \textsc{minpack} and avaible in the Python package scipy, and of the newer \ac{DAE} solver \textsc{IDA}, available as part of \textsc{sundials} with a Python interface by Simulino.
+
 \subsection{Generation of component maps}
 Nonlinear solver (hybr or lm) coupled with a breadth-first search. Initial point in the $x$ and $y$-axis is chosen randomly within the choke boundaries, pressure and temperature ratios are unit, mach numbers are between 0 an 1. If convergence is achieved a breadth-first search considering that each point in the grid is a graph node connected to the points up, down, left, right and in the diagonals. The converged result for each point is used as an initial guess for neighboring points. This allows each point in the grid up to 8 different initial guesses quite close to the actual solution (if the grid is fine enougth), and has proven very robust. 
 
-\subsubsection*{choke line}
+\subsubsection*{Choke line}
 Compressor: find point where inlet and exit are simultaniously choked. For pressure ratios above this critical value, only the inlet is choked and the choke line is vertical. For pressure ratios bellow this value the exit is choked. The choke line was verified to be a straight line, so that just the point at another pressure ratio, e.g.\ the minimum pressure ratio of interest (normally unit) is needed to fully define it.
 
-Turbine: it is linear in a plot of \acs{MFP} vs.\ pressure ratio, but in this case the blade mach number is not uniquelly defined. In a plot of $\acs{MFP}M_b$ vs.\ expansion ratio, the choke line is highly non linear and a KS aggregation function with variable $rho$ was added to the turbine model to model the choke.  
+Turbine: it is linear in a plot of \acs{MFP} vs.\ pressure ratio, but in this case the blade mach number is not uniquelly defined. In a plot of $\acs{MFP}M_b$ vs.\ expansion ratio, the choke line is nonlinear and a KS aggregation function with variable $rho$ was added to the turbine model to model the choke.
 
 \subsection{Generation of the working line}
-Optimize the engine model for maximum efficiency. 
+Optimize the engine model for maximum efficiency.
 Then use a \ac{DAE} solver to continue the line forwards and backwards.
 
 \subsection{Dynamical simulation}
+Use a \ac{DAE} starting from an equilibrium (static) point.
 Inputs: step in T04 up and down; senoids?
 
 \section{The VT-80 engine}
