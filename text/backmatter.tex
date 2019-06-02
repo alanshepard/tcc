@@ -25,13 +25,12 @@
 % ---
 % Inicia os apêndices
 % ---
-\begin{apendicesenv}
+%\begin{apendicesenv}
 
 % Imprime uma página indicando o início dos apêndices
 %\partapendices
-    \subfile{text/appendix/instrumentation}
 
-\end{apendicesenv}
+%\end{apendicesenv}
 % ---
 
 
@@ -42,18 +41,21 @@
 % ---
 % Inicia os anexos
 % ---
-%\begin{anexosenv}
+\begin{anexosenv}
 
 % Imprime uma página indicando o início dos anexos
-%\partanexos
+\partanexos
+\subfile{text/body/materials_and_methods}
+\subfile{text/body/dynamic_engine_model}
+\subfile{text/body/controller_model}
 
-%\end{anexosenv}
+\end{anexosenv}
 
 %---------------------------------------------------------------------
 % INDICE REMISSIVO
 %---------------------------------------------------------------------
-\phantompart
-\printindex
+%\phantompart
+%\printindex
 %---------------------------------------------------------------------
 
 \end{document}
