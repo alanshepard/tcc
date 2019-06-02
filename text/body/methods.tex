@@ -14,37 +14,10 @@ as is the assumption that the performance of a component can be separated in an 
 
 \section{Compressor model}
 
-The incidence loss model used assumes that all kinectic energy from the velocity components
-normal to the inducer and diffuser blades is lost \cite{Stanitz1953}.
-All other loss models used were suggested by the comparative study of \textcite{Oh1997}, 
-and will not be discussed here.
-
 \subfile{text/body/compressor_map}
 
-From the Buckinham $\Pi$ Theorem \cite{Buckingham1914}, 
-it can be shown that the compressor behaviour is a function of only three parameters, 
-namely the \acl{MFP}, the \acl{M0rotor}, the \acl{gam} and the \acl{Re}. 
-For a centrifugal compressor, this quantities are defined respectively as follows
 
-\begin{align}
-    \acs{MFP} &\triangleq \MFP{1} = \MFPalt{1} \\
-    \acs{M0rotor} &\triangleq \frac{U_3}{\sqrt{\gamma R T_{01}}} \\
-    \gamma &\triangleq \frac{c_p}{c_v} \\
-    \acs{Re} &
-\end{align}
-
-In particular, the \acl{MFP} is a function of the Mach number and the specific heat ratio,
- i.e.\
-\begin{equation}
-    \label{eqn:mfp2mach}
-    \acs{MFP}(M,\gamma) = M \left( 1 + \frac{\gamma-1}{2}M^2\right)^{-\frac{\gamma+1}{2(\gamma-1)}}
-\end{equation}
-While there is no closed form inverse for this function, it is invertible and the inverse can be easily computed numerically, e.g.\ by a newton scheme \cite{Der1974}.
-
-According to \textcite{walsh2004gas},
- the influence of the \acl{Re} in the system behaviour is only of second order.
-
-To write Euler's equation \cref{eqn:euler} in terms of these parameters, suffices to rewrite $\phi_3$ and $\psi$ as a function of them. Thus
+To write Euler's equation \cref{eqn:euler} in terms of the nondimensional parameters introduced in \cref{sec:nondimensional}, it suffices to rewrite $\phi_3$ and $\psi$ as a function of them. Thus
 \begin{multline}
     \label{eqn:phi2_dimensionless}
     \phi_3 = \frac{W_{2r}}{U_3} 

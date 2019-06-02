@@ -300,8 +300,50 @@ and experimental measures are inherently noisy.
 It is therefore best to use this data to calibrate semi-empirical maps.
 
 \section{Nondimensional parameters}
+\label{sec:nondimensional}
 
+Using the Buckinham $\Pi$ Theorem \cite{Buckingham1914},
+the parameters which govern engine and component performance can be grouped into new, nondimensional parameters. This has the advantage that the engine behaviour becomes invariant by phisical size, and so the behaviour of a small model engine resembles that of a large commercial gas turbine. It is specially beneficial for choosing initial guesses for numerical solvers.
 
+\textcite[chapter 4]{walsh2004gas} provide some very comprehensive tables 
+for the nondimentional groups used for both individual components and complete engines.
+Componentwise, the relevant parameters are the \acl{gam}, the \acl{MFP} at inlet and exit, t
+he \acl{M0rotor}, the stagnation temperature ratio, and the stagnation pressure ratio. 
+These quantities are defined respectively as
+
+\begin{align}
+    \gamma &\triangleq \frac{c_p}{c_v} \\
+    \acs{MFP}_i &\triangleq \MFP{i} = \MFPalt{i} \label{eqn:MFPi}\\
+    \acs{MFP}_e &\triangleq \MFP{e} \\
+    \acs{M0rotor} &\triangleq \frac{U}{\sqrt{\gamma R T_{0i}}} \\
+    \text{temperature ratio}&\triangleq\tr{0e}{0i} \\
+    \text{pressure ratio}&\triangleq\pr{0e}{0i}
+\end{align}
+
+where \ldots
+The temperature ratio can be equivalently replaced by the adiabatic or politropic efficiency.
+
+In particular, the \acl{MFP} is a function of the Mach number and the specific heat ratio,
+ i.e.\
+\begin{equation}
+    \label{eqn:mfp2mach}
+    \acs{MFP}(M,\gamma) = M \left( 1 + \frac{\gamma-1}{2}M^2\right)^{-\frac{\gamma+1}{2(\gamma-1)}}
+\end{equation}
+While there is no closed form inverse for this function, it is invertible and the inverse can be easily computed numerically, e.g.\ by a newton scheme \cite{Der1974}.
+
+Although the Reynolds number also has an impact on component performance, 
+its effects are of second order\cite{walsh2004gas}. 
+For the purpose of this work, it is only a parameter of secondary importance 
+that can be eventually used in the computation of loss models.
+
+For the entire engine, the relevant nondimensional groups are the stationwise
+\acl{MFP}, nondimensional temperature and nondimensional pressure;
+the reference \acl{M0rotor} and the nondimensional fuel mass flow. 
+The stationwise \acl{MFP} is defined in the same way as in \cref{eqn:MFPi}, 
+i.e.\ for station $n$ $\acs{MFP}_n = \MFP{n}$. 
+The nondimentional pressures and temperatures are the local stagnation property normalize by the ambient value. The reference \acl{M0rotor} is taken as the compressor's 
+and the nondimentional flow parameter is defined as 
+$\frac{\dot{m}_f \sqrt{RT_{01}}}{A_1 P_{01} \sqrt{\gamma}}$.
 
 \section{Surge}
 \label{sec:review:surge}
