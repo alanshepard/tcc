@@ -1,6 +1,5 @@
 % Encoding: UTF-8
 
-
 @Misc{amd_state_machine,
   author        = {AMD},
   title         = {State Machine Design},
@@ -79,11 +78,11 @@
 }
 %
 @thesis{GasTurbvsGSP,
-      title={A comparative study of the Gas turbine Simulation Program (GSP) 11 and GasTurb 11 on their respective simulations for a single-spool turbojet},
-      author={Sung, Rayne},
-      year={2013},
-      school={University of Tennessee},
-      address = {Knoxville}
+  title={A comparative study of the Gas turbine Simulation Program (GSP) 11 and GasTurb 11 on their respective simulations for a single-spool turbojet},
+  author={Sung, Rayne},
+  year={2013},
+  school={University of Tennessee},
+  address = {Knoxville}
 }
 %
 @Manual{GasTurb,
@@ -859,7 +858,7 @@ distributions.
   year      = {1993},
 }
 
-@Article{Bammert_1976,
+@Article{Liaw2004,
   author    = {D.-C. Liaw and C.-C. Song and J.-T. Huang},
   title     = {Robust Stabilization of a Centrifugal Compressor With Spool Dynamics},
   volume    = {12},
@@ -873,7 +872,7 @@ distributions.
   year      = {2004},
 }
 
-@Article{Bammert_1976,
+@Article{Greitzer1980,
   author    = {E. M. Greitzer},
   title     = {Review{\textemdash}Axial Compressor Stall Phenomena},
   volume    = {102},
@@ -885,7 +884,7 @@ distributions.
   year      = {1980},
 }
 
-@Article{Bammert_1976,
+@Article{Bammert1976,
   author    = {K. Bammert and A. Mobarak},
   title     = {Discussion: {\textquotedblleft}Surge and Rotating Stall in Axial Flow Compressors{\textemdash}Parts I and {II}{\textquotedblright} (Greitzer, E. M., 1976, {ASME} J. Eng. Power, 98, pp. 190{\textendash}211)},
   volume    = {98},
@@ -940,6 +939,110 @@ distributions.
   title   = {Isentropic Flow},
   url     = {https://www.grc.nasa.gov/www/k-12/airplane/isentrop.html},
   urldate = {2019-05-28},
+}
+
+@techreport{Fink1988,
+  author      = {Fink, David Allan},
+  title       = {Surge dynamics and unsteady flow phenomena in centrifugal compressors},
+  url         = {http://hdl.handle.net/1721.1/104735},
+  address     = {Cambridge, MA},
+  file        = {:Fink1988 - Surge Dynamics and Unsteady Flow Phenomena in Centrifugal Compressors.pdf:PDF},
+  institution = {Gas Turbine Laboratory, Massachusetts Institute of Technology},
+  number      = {193},
+  pages       = {263},
+  year        = {1988},
+}
+
+@Article{AustinSpangIII1999,
+  author    = {Austin Spang III, H and Brown, Harold},
+  title     = {Control of jet engines},
+  volume    = {7},
+  number    = {9},
+  pages     = {1043--1059},
+  doi       = {10.1016/S0967-0661(99)00078-7},
+  file      = {:AustinSpangIII1999 - Control of Jet Engines.pdf:PDF},
+  journal   = {Control Engineering Practice},
+  publisher = {Elsevier {BV}},
+  year      = {1999},
+}
+@techreport{ARP755A,
+  type = {Standard},
+  number = {{ARP755A}},
+  date = {2011-08-10},
+  title = {Aircraft Propulsion System Performance Station Designation and Nomenclature},
+  author = {{SAE International}},
+  doi={10.4271/ARP755A},
+  pages={10},
+}
+
+@techreport{minpack,
+  title={User guide for {MINPACK}-1},
+  number={ANL-80-74},
+  author={Mor{\'e}, Jorge J and Garbow, Burton S and Hillstrom, Kenneth E},
+  year={1980},
+  institution={Argonne National Laboratory},
+  address = {Argonne, IL, USA}
+}
+
+@article{hompack,
+  author = {Watson, Layne T. and Sosonkina, Maria and Melville, Robert C. and Morgan, Alexander P. and Walker, Homer F.},
+  title = {Algorithm 777: HOMPACK90: A Suite of Fortran 90 Codes for Globally Convergent Homotopy Algorithms},
+  journal = {ACM Trans. Math. Softw.},
+  issue_date = {Dec. 1997},
+  volume = {23},
+  number = {4},
+  month = 12,
+  year = {1997},
+  issn = {0098-3500},
+  pages = {514--549},
+  numpages = {36},
+  doi = {10.1145/279232.279235},
+  acmid = {279235},
+  publisher = {ACM},
+  address = {New York, NY, USA},
+  keywords = {Chow-Yorke algorithm, curve tracking, fixed point},
+} 
+
+@article{sundials,
+  title={{SUNDIALS}: Suite of nonlinear and differential/algebraic equation solvers},
+  author={Hindmarsh, Alan C and Brown, Peter N and Grant, Keith E and Lee, Steven L and Serban, Radu and Shumaker, Dan E and Woodward, Carol S},
+  journal={ACM Transactions on Mathematical Software (TOMS)},
+  volume={31},
+  number={3},
+  pages={363--396},
+  year={2005},
+  publisher={ACM}
+}
+
+@Article{assimulo,
+  Title   = {Assimulo: A unified framework for \{ODE\} solvers},
+  Author  = {Andersson, Christian and F\"uhrer, Claus and {\AA}kesson, Johan},
+  Journal = {Mathematics and Computers in Simulation},
+  Year    = {2015},
+  Number  = {0},
+  Pages   = {26 - 43},
+  Volume  = {116},
+  Doi     = {10.1016/j.matcom.2015.04.007},
+  ISSN    = {0378-4754}
+}
+
+@Book{Brenan1987,
+  author    = {K. E. Brenan and S. L. Campbell and L. R. Petzold},
+  title     = {Numerical Solution of Initial-Value Problems in Differential-Algebraic Equations (Classics in Applied Mathematics)},
+  publisher = {Society for Industrial and Applied Mathematics},
+  isbn      = {0-89871-353-6},
+  file      = {:Brenan1987 - Numerical Solution of Initial Value Problems in Differential Algebraic Equations (Classics in Applied Mathematics).djvu:Djvu},
+  year      = {1987},
+}
+
+@InProceedings{Islam1999,
+  author    = {A. M. T. Islam and S. A. Sjolander},
+  title     = {Deviation in Axial Turbines at Subsonic Conditions},
+  booktitle = {Volume 1: Aircraft Engine; Marine; Turbomachinery; Microturbines and Small Turbomachinery},
+  publisher = {{ASME}},
+  doi       = {10.1115/99-GT-026},
+  month     = {6},
+  year      = {1999},
 }
 
 @Comment{jabref-meta: databaseType:biblatex;}

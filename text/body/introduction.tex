@@ -6,56 +6,47 @@
 \label{ch:intro}
 \epigraph{This was the very reason why you were brought to Narnia, that by knowing me here for a little, you may know me better there.}{-Aslan}
 
-Modelling a GTE for development of a control system (ECU/FADEC)
+The development of \acp{GTE} is historically related to the development of their control systems, 
+nowadays represented by a \ac{FADEC} or an \ac{ECU}. \Acp{GTE} operate their best when close to their
+thermal, mechanical or stability limits, which makes a control system of utmost importance.
+This control system is responsible for translating the pilot requests in terms of required thrust 
+%(normally converted to measurable parameters such as spool speed or \ac{EPR}) 
+into inputs to the underlying turbomachinery, 
+in the form of changes in fuel flow or variable geometry such as variable \acp{IGV}.
+The design goal for such a control system is to provide the fastest response possible to changes in pilot input
+while keeping the engine operating stably and within the designed temperature, pressure and speed limits
+\cite{AustinSpangIII1999}.
 
-Important phenomena: surge, weak/rich extinshion (will not be covered --- cite reference curves)
+To design such a control system, it is desirable to have a computer model of the engine 
+capable of reproducing all relevant phenomena of dynamical behaviour. 
+The goal of the present work is to develop such a model. 
 
-Important to model dynamical behaviour of engine: compressor maps, static component matching and finally dynamical simulation
+The development of an engine model is a three stage process. Firstly, individual component models must be developed, then they must be joined into an engine so that the steady state operating line can be calculated.
+Finally, the dynamical behaviour of the engine can be taken into account, through the introduction of a dynamical system comprising three states: spool speed, burner pressure and mass flow rate. 
+At all times, take is care to account for all characteristics which affect the final dynamical behaviour of the engine.
 
-Surge arises naturally from the model if it includes compressibility phenomena in the combustion chamber, but a surge criterion can also be used to plot the surge line on the component maps.
+This work aims to go through all these steps without resorting to experimental data.
+This can be the case during the engine design, or when the time and expense involved with testing can not be afforded.
+Even when experimental data is available, it may not be enough to fully characterize the components,
+because it is hard to operate the components in all points of the map while in a test bed, 
+and experimental measures are inherently noisy. 
+It is therefore best to use this data to calibrate semi-empirical maps.
+In this case, it is best to use the experimental data to calibrate and validate the theoretical model.
+The models employed here are based on first principles whenever possible, 
+with the inclusion of semi-empirical corrections when necessary. 
+It also aims for breadth at the expense of depth: 
+for example, compressor and turbine loss mechanisms that do not alter qualitatively the engine dynamical behaviour are not considered. 
+This, however, comes without a loss in generality. 
+These simplifications can be easily removed if more precision is required.
 
-A \gls{FADEC} is the collection of control system elements in 
- a modern aeronautical engine \cite{rolls-royce}.
-The purpose of a \gls{FADEC} is to minimize the workload of the pilot,
- while still giving him or her total control over the engine.
-In this way, the pilot is responsible for selecting a power setting 
- and the \gls{FADEC} is then in charge of getting to that condition
- as fast and safely as possible. It is therefore responsibility of the
- control system to guarantee the operation of the engine within safe limits:
- it must prevent surges when accelerating 
- and combustion extinction when decelerating.
-
-Virtually all modern gas turbines are controlled by a digital system.
-The technology used in these systems, however, is proprietary most of times.
-This thesis attempts to develop a \gls{FADEC} 
-for a small (model sized) aeronautical engine for both technological demonstration 
-and to increase the scarce literature on the subject.
-
-% What you should know before reading this text
-Since this report deals with the design of an engine control system,
- it is essential the reader to be familiar with both control theory and transient gas turbine dynamics.
-For an introduction to control theory, the reader should refer to 
- \textcite{dorf2011modern,franklinfeedback}.
-There are many texts that cover jet engine modelling, 
- albeit not many deal with starting and transient behaviour. 
-For a complete treatment, the reader should refer to \textcite{walsh2004gas}. 
-\textcite{rolls-royce} provides a very comprehensive 
- but not very mathematical description of jet engines. 
- It is a good book to develop an intutive feel for jet engine operation. 
-Finally, \textcite{Cumpsty2015} is a valuable introductory text on the subject.
+The international standard for engine station numbering \cite{ARP755A} is used throught this text. It is summarized in \cref{fig:engine} for easy reference.
 
 %Outline
 The rest of this thesis is organized as follows: 
 \begin{description}
-    \item[\Cref{ch:methods}] describes the engine and instrumentation used.
-    \item[\Cref{ch:engine_model}] explains the transient model of the engine detail.
-        Both the physics principles and its implementation are discussed. 
-        This chapter introduces the concept of a component map, 
-         essential for gas turbine simulation.
-    \item[\Cref{ch:control}] covers both the design and implementation of the control system.
-    \item[\Cref{ch:tests}] describes the experimental results of both the engine by itself 
-         and integrated with the developed control system. 
-        It contains the experimentally obtained maps for this engine's components.
+    \item[\Cref{sec:review}] is a literature review of the state of the art in engine and component simulation, including the basic elements to model the behaviour of compressors, turbines and engines, instabilities in engine systems and the numerical methods needed to bring these models to life. It is kept relatively brief and plenty of references are provided.
+    \item[\Cref{sec:methods}] develops the methods for simulating a gas turbine engine and its components. It contains tables summarizing the nonlinear system associated with each model and the specifics of the numerical methods used to simulate each aspect of the models. In the end, the engine for which these models were applied is described.
+    \item[\Cref{sec:results}] presents the results of the simulation, i.e.\ the component maps, operating line, etc.
     \item[\Cref{ch:conclusion}] presents the conclusion and final remarks of this work.
 \end{description}
 
