@@ -21,31 +21,42 @@ To design such a control system, it is desirable to have a computer model of the
 capable of reproducing all relevant phenomena of dynamical behaviour. 
 The goal of the present work is to develop such a model. 
 
-The development of an engine model is a three stage process. Firstly, individual component models must be developed, then they must be joined into an engine so that the steady state operating line can be calculated.
-Finally, the dynamical behaviour of the engine can be taken into account, through the introduction of a dynamical system comprising three states: spool speed, burner pressure and mass flow rate. 
-At all times, take is care to account for all characteristics which affect the final dynamical behaviour of the engine.
+The development of an engine model is a three stage process. 
+Firstly, individual component models must be developed, 
+then they must be matched so that the steady state operation can be calculated.
+Finally, the dynamical behaviour of the engine can be taken into account, 
+through the introduction of a dynamical system comprising three states: 
+spool speed, burner pressure and mass flow rate. 
+At all times, care is taken to account for all characteristics which affect the final dynamical behaviour of the engine.
 
 This work aims to go through all these steps without resorting to experimental data.
-This can be the case during the engine design, or when the time and expense involved with testing can not be afforded.
+This is necessary during the engine design, or when the time and expense involved with testing can not be afforded.
 Even when experimental data is available, it may not be enough to fully characterize the components,
-because it is hard to operate the components in all points of the map while in a test bed, 
-and experimental measures are inherently noisy. 
-It is therefore best to use this data to calibrate semi-empirical maps.
+since it is hard to operate the components in all points of the map while in a test bed, 
+and experimental measurements are inherently noisy. 
 In this case, it is best to use the experimental data to calibrate and validate the theoretical model.
 The models employed here are based on first principles whenever possible, 
 with the inclusion of semi-empirical corrections when necessary. 
-It also aims for breadth at the expense of depth: 
+
+This work favors breadth instead of depth: 
 for example, compressor and turbine loss mechanisms that do not alter qualitatively the engine dynamical behaviour are not considered. 
 This, however, comes without a loss in generality. 
 These simplifications can be easily removed if more precision is required.
 
-The international standard for engine station numbering \cite{ARP755A} is used throught this text. It is summarized in \cref{fig:engine} for easy reference.
+The international standard for engine station numbering \cite{ARP755A} is used throughout this text. 
+It is summarized in \cref{fig:engine} for easy reference.
 
 %Outline
 The rest of this thesis is organized as follows: 
 \begin{description}
-    \item[\Cref{sec:review}] is a literature review of the state of the art in engine and component simulation, including the basic elements to model the behaviour of compressors, turbines and engines, instabilities in engine systems and the numerical methods needed to bring these models to life. It is kept relatively brief and plenty of references are provided.
-    \item[\Cref{sec:methods}] develops the methods for simulating a gas turbine engine and its components. It contains tables summarizing the nonlinear system associated with each model and the specifics of the numerical methods used to simulate each aspect of the models. In the end, the engine for which these models were applied is described.
+    \item[\Cref{sec:review}] is a literature review of the state of the art in engine and component modelling, 
+        including the basic elements to model the behaviour of compressors, turbines and engines; 
+        instabilities in engine systems; and the numerical methods needed to bring these models to life. 
+        It is kept relatively brief and plenty of references are provided.
+    \item[\Cref{sec:methods}] develops the methods for simulating a gas turbine engine and its components. 
+        It contains tables summarizing the nonlinear system associated with each model 
+        and comments on the specifics of the numerical methods used to simulate each aspect of the models. 
+        In the end, the engine for which these modelled in \cref{sec:results} is described.
     \item[\Cref{sec:results}] presents the results of the simulation, i.e.\ the component maps, operating line, etc.
     \item[\Cref{ch:conclusion}] presents the conclusion and final remarks of this work.
 \end{description}
