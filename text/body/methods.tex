@@ -151,8 +151,8 @@ Equations:
 
 \section{Surge model}
 
-The model due to \textcite{Finsk}, described in \cref{sec:review:surge} was adopted here. 
-Since component matching is an important part of the surge mechanism, the engine matching model equations were mostly replicated here, with the exception of the nozzle equation since the exit pressure of the nozzle can be allowed to be arbitrary to consider all possible surge conditions. Surge will normally occur when the mass flow is severely reduced, which happens when the overall engine pressure ratio is big. This equation was replaced by Fink's stability criterion \cref{eqn:surge}. The resulting model is in \cref{model:surge}.
+The model due to \textcite{Fink1988}, described in \cref{sec:review:surge} was adopted here. 
+Since component matching is an important part of the surge mechanism, the engine matching model equations were mostly replicated here, with the exception of the nozzle equation since the exit pressure of the nozzle can be allowed to be arbitrary to consider all possible surge conditions. Surge will normally occur when the mass flow is severely reduced, which happens when the overall engine pressure ratio is big. This equation was replaced by Fink's stability criterion \cref{eqn:surge}. The resulting model is in \cref{model:surge} \todo{add table with model formulation}.
 
 \section{Numerical aspects}
 
@@ -180,5 +180,54 @@ Inputs: step in T04 up and down; senoids?
 
 \section{The VT-80 engine}
 The engine chosen to which apply these models was Jet-Munts VT-80.
+This engine was developed for hobby use in airplane models and comes with an \gls{ECU} installed from factory, which will not be used for this work.
+It is a single spool jet engine, with a single stage centrifugal compressor 
+ and also single stage axial turbine, as seen in \cref{fig:engine}. 
+It runs on aviation kerosene pre-mixed with oil.%
+The specifications provided by the manufacturer are in \cref{tbl:engine_specs}.
+\textcite{bolsoni} estimates the compressor pressure ratio 
+to be around 2.2 based on similar engines.
+
+\begin{figure}[p]
+    \centering
+    \caption{JetsMunt VT-80 jet engine}
+    \label{fig:engine}
+    \begin{subfigure}{\textwidth}
+        \includegraphics[width=\textwidth]{fig/JetsMuntVT-80.jpg}
+        \caption{Picture with a 30cm ruler for scale}
+        \label{fig:engine!visible}
+    \end{subfigure}
+    \begin{subfigure}{\textwidth}
+        \includegraphics[width=\textwidth]{fig/JetsMuntVT-80X-ray.jpg}
+        \caption{X-ray picture}
+        \label{fig:engine!x-ray}
+    \end{subfigure}
+    \source{\cite{bolsoni}}
+\end{figure}
+
+\begin{table}
+    \centering
+    \caption{VT80 Specifications}
+    \label{tbl:engine_specs}
+    \begin{tabular}{lr@{$\,$}l}
+        \toprule
+        Diameter (external)                & 90 & mm \\
+        Length                             & 240 & mm \\
+        Weight (bare)                      & 950 & g \\
+        Weight (with accessories)          & 1075 & g \\
+        Nominal thrust @ 15C and sea level & 80 & N \\
+        Idle thrust                        & 4 & N \\
+        Max rpm                            & 150 000 & rpm \\
+        Idle rpm                           & 45 000  & rpm \\
+        Heat soak rpm                      & 12 000  & rpm \\
+        \acs{EGT} @ max rpm                & 600$\pm$50 & \si{\celsius} \\
+        Fuel consumption @ max rpm         & 0.29 & L/min \\
+        Fuel/oil                   &\multicolumn{2}{l}{Kerosene + 4\% oil} \\
+        \bottomrule
+    \end{tabular}
+    \source{\cite{engine-manual}}
+\end{table}
+
+\todo{geometrical engine parameters used in simulation}
 
 \end{document}
