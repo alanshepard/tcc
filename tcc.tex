@@ -72,9 +72,6 @@
  % Use long (short) acronym style:
 \setacronymstyle{long-short}
 
-\input{preamble/symbol}
-\input{preamble/acronym}
-\input{preamble/newcommand}
 
 \usepackage{cleveref}
 
@@ -90,6 +87,11 @@
 	\caption*{\footnotesize \raggedright Source: #1.}
 }
 \newcommand{\authorsfigure}{author's figure}
+
+%Preamble inputs
+\input{preamble/newcommand}
+\input{preamble/symbol}
+\input{preamble/acronym}
 
 %% Uncomment this to disable source in figures
 %\renewcommand{\source}[1]{}
@@ -107,7 +109,7 @@
 
 
 % Informações de dados para CAPA e FOLHA DE ROSTO
-\titulo{Gas Turbine Engines \\ Dynamics and Simulation}
+\titulo{The Modelling of \\ Gas Turbine Engines}
 \autor{Bernardo Bahia Monteiro}
 \local{Belo Horizonte}
 \data{\the\year}

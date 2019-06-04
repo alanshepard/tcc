@@ -9,8 +9,11 @@
 The simulation of a gas turbine engine is fundamentally a multidisciplinary matter.
 It encompass not only the fields of turbomachinery and compressible flow, 
 but also those of dynamical systems and numerical analysis.
+This chapter is a literature review on these fundamental fields with the goal of 
 
-Since only the basic equations of compressible flow will be used, they will not be reproced here. The reader should refer to \textcite{Anderson, Shapiro}, or simply check the very nice review table available at NASA's website \cite{nasa_isentropic}.
+Since only the basic equations of compressible flow will be used, they will not be reproduced here. 
+The reader should refer to \textcite{Anderson, Shapiro}, 
+or simply check the very nice review table available at NASA's website \cite{nasa_isentropic}.
 
 \section{Euler's equation}
 \label{sec:euler_equation}
@@ -47,43 +50,43 @@ Assuming that the system is adiabatic and using the first law of thermodynamics,
 
 \subsection{Euler's equation for a centrifugal compressor}
 
-It is useful to write the absolute tangential velocity at the compressor exit (${V_u}_3$)
+For the analysis of a centrifugal compressor, 
+it is useful to write the absolute tangential velocity at the compressor exit (${V_u}_3$)
 as a function of the radial relative velocity (${W_r}_3$),
-since the latter is more closely related to the mass flow 
-(i.e. $\dot{m} = \rho {W_r}_3 A_3$, where $A_3$ is the ring shaped exit area of the compressor)
+since the latter is more closely related to the mass flow, 
+since $\dot{m} = \rho {W_r}_3 A_3$, where $A_3$ is the ring shaped exit area of the compressor.
 
-From the velocity triangle in figure X, assuming that the flow exits tangential to the blade surface,
+From the velocity triangle in figure \todo{add figure}, 
+and assuming that the flow exits tangential to the blade surface,
 \begin{equation}
     \label{eqn:V_u_3}
     {V_u}_3 = U_3 - {W_r}_3 \tan\beta_3
 \end{equation}
 
-Due to aerodynamic blockage at the tip and flow distortions caused by viscous efects, flow diffusion, clearences and blade aspect ratio,
-${V_u}_3$ is actually smaller than what is predicted by \cref{eqn:V_u_3}.
-This is accounted for by the \acf{impeller_distortion_factor}\index{impeller distortion factor}.
-Furthermore, the flow does not exit perfectly tangential to the blade surface, and this is accounted by the \acf{slip_factor} \cite{Wiesner1967,Aungier1995}.
+%Due to aerodynamic blockage at the tip and flow distortions caused by viscous efects, flow diffusion, clearences and blade aspect ratio,
+%${V_u}_3$ is actually smaller than what is predicted by \cref{eqn:V_u_3}.
+%This is accounted for by the \acf{impeller_distortion_factor}\index{impeller distortion factor}.
+In a real impeller, the flow does not exit perfectly tangential to the blade surface. 
+This is accounted by the introduction of a \acf{slip_factor} \cite{Wiesner1967,Aungier1995}.
 The corrected equation for the absolute tangential velocity is then
 
 \begin{equation}
     \label{eqn:V_u_3_corrected}
-    {V_u}_3 = \acs{slip_factor}(U_3 - \acs{impeller_distortion_factor}{W_r}_3 \tan\beta_3)
+    \boxed{{V_u}_3 = \acs{slip_factor}(U_3 - {W_r}_3 \tan\beta_3)}
 \end{equation}
 
 Substituting \cref{eqn:V_u_3_corrected} in \cref{eqn:euler} and dividing both sides by ${U_3^2}$, we have
-
 \begin{equation}
-    \acs{load_coef}_c = \acs{slip_factor}(1-\acs{impeller_distortion_factor}\acs{flow_coef}_3\tan\beta_3) - \frac{U_2 {V_u}_2}{U_3^2} 
+    \acs{load_coef}_c = \acs{slip_factor}(1-\acs{flow_coef}_3\tan\beta_3) - \frac{U_2 {V_u}_2}{U_3^2} 
 \end{equation}
-
 where $\phi_3 \triangleq \frac{\dot{m}}{A_3 \rho_3 U_3} = \frac{W_{3r}}{U_3}$ is the flow parameter\index{flow parameter} at the compressor exit
 and $\psi_c \triangleq \frac{\Delta h}{U_3^2}$ is the compressor power coefficient.
 
 The second term accounts for pre-whirl\index{pre-whirl} in the flow entering the compressor, e.g due to \ac{IGV}.
 In the case of no pre-whirl, ${V_u}_2 = 0$, thus 
-
 \begin{equation}
     \label{eqn:euler}
-    \boxed{\acs{load_coef}_c = \acs{slip_factor}(1-\acs{impeller_distortion_factor}\acs{flow_coef}_3\tan\beta_3)}
+    \boxed{\acs{load_coef}_c = \acs{slip_factor}(1-\acs{flow_coef}_3\tan\beta_3)}
 \end{equation}
 
 \subsection{Euler's equation for an axial turbine}
@@ -109,7 +112,7 @@ Then,
 \begin{equation}
     \Delta h = U_5^2 + U_5 V_{5x}\tan\beta_5 - U_4 V_{4x}\tan\alpha_4
 \end{equation}
-And finally, making the equation non-dimensional by diving both sides by the blade speed at the exit $U_5$, we get
+And finally, making the equation nondimensional by diving both sides by the blade speed at the exit $U_5$, we get
 \begin{equation}
     \boxed{\psi_t = 1 + \phi_5\tan\beta_5-\left(\frac{r_4}{r_5}\right)^2\phi_4\tan\alpha_4}
 \end{equation}
@@ -215,12 +218,11 @@ or a kinectic energy loss coefficient
 The flow exiting a turbine blade row does not follow the blade camber line exactly. 
 This is analogous to the slip observed in centrifugal compressors, but needs more elaborate correlations, 
 thus deserving a section of its own. 
-The simplest correlation available is known as Carter's rule \cite{Mattinlgly1995}, and states that
+The simplest correlation available is known as Carter's rule \cite{Mattingly1996}, and states that
 \begin{equation}
     \label{eqn:cartersrule}
     \delta = \frac{\beta_4-\beta_5}{4\sqrt{\sigma}}
 \end{equation}
-
 where $\delta$ is the angular deviation between the exit flow and the exit camber angle,
 $\beta_4$ and $\beta_5$ are the inlet and exit airfoil camber angles,
 and $\sigma=\frac{\text{chord}}{\text{blade separation}}$ is the solidity.
@@ -237,14 +239,22 @@ and all angles are given in degrees.
 
 \section{\Acl{GTE} dynamics}
 
+A simple engine dynamical model is due to \textcite{Fink1992}. 
+This model was validated experimentally by \textcite{Gravdahl2004}.
+It is a system of three \acp{ODE}.
+
 \begin{align}
-    \dot{P}_{04} &= \frac{a_{01}^2}{\volume}(\dot{m}_c - \dot{m}_t) \\
+    \dot{\rho}_{04} &= \frac{1}{\acs{volume}}(\dot{m}_c - \dot{m}_t) \\
     \ddot{m}_c &= \frac{A_1}{L_c}(P_{03}-P_{04}) \\
     \dot{\omega} &= \frac{1}{J} (\tau_t-\tau_c)
 \end{align}
 
+These equations represent, respectively, 
+the conservation of mass and momentum in the burner
+and the conservation of angular momentum in the spool.
+
 %Available programs
-There are also many readily available computer programs that implement this kind of simulation. 
+There are many readily available computer programs that implement this kind of simulation. 
 From these, the most famous is probably the commercial program GasTurb \cite{GasTurb}, 
 \index{software} \index{GasTurb}
 followed by the \gls{GSP} \cite{Visser2000}.
@@ -268,14 +278,15 @@ depending on how the map was obtained, this line may not be accurate because the
 \label{sec:nondimensional}
 
 Using the Buckinham $\Pi$ Theorem \cite{Buckingham1914},
-the parameters which govern engine and component performance can be grouped into new, nondimensional parameters. This has the advantage that the engine behaviour becomes invariant by phisical size, and so the behaviour of a small model engine resembles that of a large commercial gas turbine. It is specially beneficial for choosing initial guesses for numerical solvers.
+the parameters which govern engine and component performance can be grouped into new, nondimensional parameters. 
+This has the advantage that the engine behaviour becomes invariant by phisical size, and so the behaviour of a small model engine resembles that of a large commercial gas turbine. 
+It is specially beneficial for choosing initial guesses for numerical solvers.
 
 \textcite[chapter 4]{walsh2004gas} provide some very comprehensive tables 
-for the nondimentional groups used for both individual components and complete engines.
+for the nondimensional groups used for both individual components and complete engines.
 Componentwise, the relevant parameters are the \acl{gam}, the \acl{MFP} at inlet and exit, t
 he \acl{M0rotor}, the stagnation temperature ratio, and the stagnation pressure ratio. 
 These quantities are defined respectively as
-
 \begin{align}
     \gamma &\triangleq \frac{c_p}{c_v} \\
     \acs{MFP}_i &\triangleq \MFP{i} = \MFPalt{i} \label{eqn:MFPi}\\
@@ -284,9 +295,9 @@ These quantities are defined respectively as
     \text{temperature ratio}&\triangleq\tr{0e}{0i} \\
     \text{pressure ratio}&\triangleq\pr{0e}{0i}
 \end{align}
-
 where \ldots
-The temperature ratio can be equivalently replaced by the adiabatic or politropic efficiency.
+The temperature ratio can be equivalently replaced by the adiabatic or polytropic efficiency,
+see \cref{sec:compressor_losses}.
 
 In particular, the \acl{MFP} is a function of the Mach number and the specific heat ratio,
  i.e.\
@@ -305,9 +316,9 @@ For the entire engine, the relevant nondimensional groups are the stationwise
 \acl{MFP}, nondimensional temperature and nondimensional pressure;
 the reference \acl{M0rotor} and the nondimensional fuel mass flow. 
 The stationwise \acl{MFP} is defined in the same way as in \cref{eqn:MFPi}, 
-i.e.\ for station $n$ $\acs{MFP}_n = \MFP{n}$. 
-The nondimentional pressures and temperatures are the local stagnation property normalize by the ambient value. The reference \acl{M0rotor} is taken as the compressor's 
-and the nondimentional flow parameter is defined as 
+i.e.\ for station $n$, $\acs{MFP}_n = \MFP{n}$. 
+The nondimensional pressures and temperatures are the local stagnation property normalize by the ambient value. The reference \acl{M0rotor} is taken as the compressor's 
+and the nondimensional fuel flow parameter is defined as 
 $\frac{\dot{m}_f \sqrt{RT_{01}}}{A_1 P_{01} \sqrt{\gamma}}$.
 
 \section{Engine stability: surge}
@@ -325,7 +336,7 @@ Normally the system can not recover from surge on its own,
 and either a reduction in fuel flow or the opening of bleed valves is required to return the engine to its steady state operation.
 \cite{Willems1999}.
 
-The surge phenomenom arises naturally from the dynamical model of a compressor system if pressure transients are taken into account \cite{Greitzer1976}, 
+The surge phenomenon arises naturally from the dynamical model of a compressor system if pressure transients are taken into account \cite{Greitzer1976}, 
 and has good agreement with experimental data \cite{Greitzer1976_2,Gravdahl2004}.
 It is nevertheless good to have a criterion for the onset of surge, if only to draw the surge line on the compressor map.
 A simple model for surge with all the fundamental elements is due to \textcite{Fink1988}. This model includes a compressor, a plenum of known volume, some plumbing of known length and an adjustable throttle valve. 
@@ -338,8 +349,9 @@ The stability criterion derived from this model by linear control theory is
 \end{align}
 where $C' = \frac{\partial \pr{03}{02}}{\partial \dot{m}_c}$ is the derivative of the compressor characteristic, $T' = \frac{\partial \pr{05}{04}}{\partial \dot{m}_t}$ is the derivative of the turbine characteristic and 
 \begin{equation}
-    B=
+    B = \frac{U}{2a}\sqrt{\frac{\acs{volume}}{A_c L_c}}
 \end{equation}
+where $A_c$ and $L_c$ are the area and the length of the pipe downstream from the compressor.
 
 This model provides a good physical explanation of the mechanism of surge. 
 First, one should notice that, by the first stability criterion, surge can only occur when the compressor characteristic has a positive derivative, 
@@ -347,16 +359,14 @@ i.e.\ when an increase in mass flow is accompanied by an increase in the pressur
 If this increase in pressure ratio does not lead to an increased mass flow through the throttle, the increase in compressor mass flow ration will increase the plenum pressure above that which the compressor can supply, and this will result in backflow. In the negative part of the compressor characteristic, it will be able again to supply the demanded pressure, now made smaller due to backflow. Since this condition will lead to an ever decrease in the plenum pressure, the flow will eventually invert its direction again, and this results in the periodic behaviour of surge.
 
 Analysing the extreme values of the parameter $B$ is helpful in developing an intuitive grasp for the phenomenon.
-For large values of $B$, that is, large plenum volumes, the surge limit approaches the point where the compressor characteristic has zero derivative. Since the plenum is very big, any change in the mass flow of the throttle will make a very small difference in the plenum pressure, and so any simultaneous increase in compressor mass flow and pressure ratio will lead to instability. This is the conservative limit for the surge line.
-Inversely, for small values of $B$, i.e.\ approaching unit, any increase in pressure will lead to an increase in mass flow through the throttle, which will instantaneously reduce the pressure, thus having an stabilizing effect. 
+For large values of $B$, that is, large burner volumes, the surge limit approaches the point where the compressor characteristic has zero derivative. Since the plenum is very big, any change in the mass flow of the throttle will make a very small difference in the plenum pressure, and so any simultaneous increase in compressor mass flow and pressure ratio will lead to instability. This is the conservative limit for the surge line.
+Inversely, for small values of $B$, that is, small burner volumes, any increase in pressure will lead to a fast increase in mass flow through the throttle, which will instantaneously reduce the pressure, thus having an stabilizing effect. 
 In this case, the two criteria for surge collapse into one.
 
 Another result from this model is that while surge is often related to compressor stall, this is not necessarily the case.
-The surge line for a compressor system can be moved be changing components downstream from it, and operation of compressors beyond the surge line using control systems based on bleed valves is widely reported in the literature \cite{bla}, and that would not be possible if surge was simply an aerodynamical effect.
+The surge line for a compressor system can be moved be changing components downstream from it, and operation of compressors beyond the surge line, i.e.\ with flow angles that would otherwise cause surge, using control systems based on bleed valves is widely reported in the literature \cite[e.g.][]{Liaw2004}, and that would not be possible if surge was simply an aerodynamical effect.
 
-The value of the nondimensional parameter $B$ is always greater than 1. 
-
-\section{Numerical aspects}
+\section{Nonlinear systems}
 \label{sec:review:numeric}
 
 As will be shown in \cref{sec:methods}, the modelling of a gas turbine engine leads naturally to nonlinear systems of the type 
@@ -369,42 +379,33 @@ for component maps and static engine operating points, and to \acl{DAE} systems 
     \label{eqn:dae}
     f(t, x, \dot{x}) = 0, \quad f:\mathbb{R}^{2n+1} \rightarrow \mathbb{R}^n
 \end{equation}
-for the dynamical engine model. The surge model, on the other hand, is best expressed as a partial \acl{DAE} system of the form
+for the dynamical engine model. 
+This particular formulation is know in the literature as a \ac{DAE} system \cite{Brenan1995}.
+The surge model, on the other hand, is best expressed as a partial \acl{DAE} system of the form
 \begin{equation}
     f(x, \nabla x) = 0, \quad f:\mathbb{R}^{n^2+n} \rightarrow \mathbb{R}^n
 \end{equation}
-where $\nabla x$ is the jacobian of $x$. 
+where $\nabla x$ is the Jacobian of $x$. 
 However, the literature on this type of system is sparse at best and no widely used software package could be found.
 This section will therefore focus itself on the problems which can be expressed in the form of \cref{eqn:nonlinear,eqn:dae}.
 
 \textcite{walsh2004gas} suggests that one way of solving theses systems is solving for one variable at a time in an approach known as successive loop closure or serial nested loop. 
-For example, in the case of an engine's static model, \textcite{walsh2004gas} proposes that, starting with a fixed shaft speed, one first guesses the operating point on the compressormap and the turbine inlet temperature $T_{04}$. Then, $T_04$ is ajusted until the mass flow predicted by the turbine map matches the guess for the turbine map. The nozzle performance is then evaluated and the position on the compressor map is changed to match the nozzle mass flow ratio. This procedure is repeated until convergence of both parameters is obtained.
+For example, in the case of an engine's static model, \textcite{walsh2004gas} proposes that, starting with a fixed shaft speed, one first guesses the operating point on the compressor map and the turbine inlet temperature $T_{04}$. Then, $T_04$ is adjusted until the mass flow predicted by the turbine map matches the guess for the turbine map. The nozzle performance is then evaluated and the position on the compressor map is changed to match the nozzle mass flow ratio. This procedure is repeated until convergence of both parameters is obtained.
 
-This method is severely flawed. As remarked by \textcite{walsh2004gas}, it becames very inefficient when the number of guesses is more than approximatelly five. Furthermore, this technique is not only hard to set up and dependent on quite a lot of intuition acquired through experience, but it is also very prone to diverge (sometimes wildly so) if the updated values for the variables are not chosen just right. A more robust approach is to use proven solvers for non-linear systems, reffered by \textcite{walsh2004gas} as the ``matrix'' solution method. 
-This method consists on using gradient based algorithms to solve the system simultainiously for all variables.
+This method is severely flawed. As remarked by \textcite{walsh2004gas}, it becomes very inefficient when the number of guesses is more than approximately five. Furthermore, this technique is not only hard to set up and dependent on quite a lot of intuition acquired through experience, but it is also very prone to diverge (sometimes wildly so) if the updated values for the variables are not chosen just right. A more robust approach is to use proven solvers for non-linear systems, referred by \textcite{walsh2004gas} as the ``matrix'' solution method. 
+This method consists on using gradient based algorithms to solve the system simultaneously for all variables.
 
-There are two main approachs to solving non-linear systems nummerically in wide use today. 
+There are two main approaches to solving non-linear systems numerically in wide use today. 
 One is to use classical root finding algorithms based on optimization theory 
 and the other is to use path following methods, such as
-\ac{DAE} system solvers and homotopy methods \cite{hompack}. 
+\ac{DAE} system solvers and homotopy methods \cite{Allgower1997,Rabier2002,hompack,sundials}. 
 
-\subsection{Classical nonlinear root finding}
-
-Classical methods for finding roots of nonlinear systems are based on optimization theory. They are best represented by the software package \textsc{minpack} \cite{minpack}. 
-
-\subsection{\Acl{DAE} theory}
+Classical methods for finding roots of nonlinear systems are based on optimization theory. 
+They are best represented by the software package \textsc{minpack} \cite{minpack}, which includes implementations of Powell's hybrid method and Levenberg-Marquardt's method.
 
 It should be noted that every system expressed as a nonlinear system can also be represented as a \ac{DAE}. 
-This is most useful for under determined sytems where not only one solution is seeked but a parameterized continuum of solutions, such as an operating line, choke line, surge line, etc. 
-
-
-%\subsubsection{Gradient based solvers}
-%\subsubsection{Homotopic solvers}
-%\subsection{\ac{ODE} solvers}
-%\subsubsection{Explicit solvers}
-%\subsubsection{Implicit solvers}
-%\subsection{Graph theory}
-%\subsubsection{Viewing a grid/mesh as a graph}
-%\subsubsection{Breadth first search}
+This is most useful for under determined systems where not only one solution is sought 
+but a uni-dimensionally parameterized continuum of solutions, such as an operating line, 
+choke line, surge line, etc.
 
 \end{document}
