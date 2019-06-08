@@ -8,12 +8,12 @@
 
 This section deals with the models used for the engine compressor, turbine and nozzle, 
 as well as the methods used for calculating the engine steady operation (engine matching), 
-surge, dynamical behaviour and performance parameters. 
-Throught this section, the ideal gas assumption is widely used, 
+surge, dynamical behavior and performance parameters. 
+Throughout this section, the ideal gas assumption is widely used, 
 as is the assumption that the performance of a component can be separated in an ideal performance and a loss model. 
 In the end, the engine from which the parameters for the model were extracted is described.
 
-The component models are normally reffered to as component maps or characteristic lines. 
+The component models are normally referred to as component maps or characteristic lines. 
 A component map or characteristic is, in a general sense, the functional relationship between a component's
 mass flow rate, rotation speed, pressure ratio and efficiency. 
 These five unknowns are linked by two constraints, namely Euler's equation and a loss model. 
@@ -68,20 +68,20 @@ The temperature and pressure ratios can then be readily calculated from
     \frac{P_{03}}{P_{02}} &= \left[(\gamma - 1)\psi_{\text{isen}} \acs{M0rotor}^2 + 1\right]^\frac{\gamma}{\gamma-1}
 \end{align}
 
-In this work, only the losses due to incidence and skin friction were considered, because they are the ones most important for compressor stability (see \cref{sec:compressor_loss}). The model chosen for skin friction was suggest by \textcite{Oh1997} and the incidence losses where modelled as the complete conversion of all kinetic energy normal to be blade camber line to heat \cite{Galvas1973}. This is a more phisical model than the one suggested by Oh et al., and captures better the loss variation with incidence, since Oh et al's model does not include flow angles. 
+In this work, only the losses due to incidence and skin friction were considered, because they are the ones most important for compressor stability (see \cref{sec:compressor_loss}). The model chosen for skin friction was suggest by \textcite{Oh1997} and the incidence losses where modeled as the complete conversion of all kinetic energy normal to be blade camber line to heat \cite{Galvas1973}. This is a more physical model than the one suggested by Oh et al., and captures better the loss variation with incidence, since Oh et al's model does not include flow angles. 
 
 
 \section{Turbine model}
 \subfile{text/body/turbine_map}
 
-The turbine model is sumarized in \cref{map:turbine}. 
+The turbine model is summarized in \cref{map:turbine}. 
 Its development is mostly analogous to that of the compressor, with the exception of the loss and deviation models. 
 Since the turbine does not exhibit flow instability phenomena such as compressor surge, 
-which depends heavly on the incidence losses, 
-and this work is focussed on the dynamic moddeling of the engine, 
+which depends heavily on the incidence losses, 
+and this work is focused on the dynamic modeling of the engine, 
 the turbine was assumed isentropic. 
 Nevertheless, a loss model based on pressure loss coefficients $Y_p$, $Y_s$, $Y_k$, etc.\ 
-could easily be included in this model by modfying \cref{eqn:turb_res_pr} in the following way
+could easily be included in this model by modifying \cref{eqn:turb_res_pr} in the following way
 \begin{equation}
     \frac{P_{05}}{P_{04}} -\frac{[1 + (\gamma-1)\psi_{\text{euler}} M_b^2]^{\frac{\gamma}{\gamma-1}}}{1+Y\left\{1-\left[1+\tfrac{\gamma-1}{2}M_5^2\right]^{-\frac{\gamma-1}{\gamma}}\right\}} = 0 
 \end{equation}
@@ -107,12 +107,12 @@ This pressure ratio loss term must be multiplied to the ideal (isentropic) press
 \section{Engine static model}
 
 The engine static model, also known as steady state, 
-describes the conditions in which the engine can operate indefinitelly 
+describes the conditions in which the engine can operate indefinitely 
 without changes in throttle input or outside conditions (pressure and temperature).
 
 The engine model used is of the lumped volume type. This means that each component 
- (compressor, combustor,turbine and nozzle)
- is modelled as a single point in space and conservation laws are applied to them.
+ (compressor, burner,turbine and nozzle)
+ is modeled as a single point in space and conservation laws are applied to them.
  This type of model is also known as zero dimensional (0-D) or as parametric cycle analysis
  \index{parametric cycle analysis},
  and is widely used in both industry and academy as a tool for preliminary design and 
@@ -122,7 +122,7 @@ A schematic of the engine components considered for the simulation of the presen
 
 \begin{figure}
     \sffamily\small 
-    \caption{Schematic diagram of the modelled engine}
+    \caption{Schematic diagram of the modeled engine}
     \label{fig:engine}
     \hfill\includesvg{fig/engine_schematic}\hfill
     \source{author's figure}
@@ -131,9 +131,9 @@ A schematic of the engine components considered for the simulation of the presen
 Equations:
 \begin{enumerate}
     \item Constant spool speed
-    \item Conservation of energy transmited through spool
+    \item Conservation of energy transmitted through spool
     \item Conservation of mass in the burner
-    \item Energy adition due to fuel
+    \item Energy addition due to fuel
     \item nozzle
     \item turbine (x3)
     \item compressor (x3)
@@ -157,18 +157,18 @@ Since component matching is an important part of the surge mechanism, the engine
 \section{Numerical aspects}
 
 As was shown in this section, the models for a gas turbine engine and its components are expressed naturally in the form of coupled (sometimes differential) non-linear systems of equations. 
-These systems are inherently coupled because their behaviour depends on the flow angles on both the inlet and exit, and these can not be calculated independently of one another.
+These systems are inherently coupled because their behavior depends on the flow angles on both the inlet and exit, and these can not be calculated independently of one another.
 As discussed in \cref{sec:review:numeric}, these problems are examples of \ac{DAE} systems, and many of them do not have explicit derivatives in their formulation.
 
-In this section, the numerical approach used to calculate each of the models described in this chapter will be exposed. They consist of a mix of nonlinear solvers, namely Powell's hybrid method and Levenberg-Marcquat, as implemented by \textsc{minpack} and avaible in the Python package scipy, and of the newer \ac{DAE} solver \textsc{IDA}, available as part of \textsc{sundials} \cite{sundials} with a Python interface by Assimulo \cite{assimulo}.
+In this section, the numerical approach used to calculate each of the models described in this chapter will be exposed. They consist of a mix of nonlinear solvers, namely Powell's hybrid method and Levenberg-Marquardt, as implemented by \textsc{minpack} and available in the Python package scipy, and of the newer \ac{DAE} solver \textsc{IDA}, available as part of \textsc{sundials} \cite{sundials} with a Python interface by Assimulo \cite{assimulo}.
 
 \subsection{Generation of component maps}
-Nonlinear solver (hybr or lm) coupled with a breadth-first search. Initial point in the $x$ and $y$-axis is chosen randomly within the choke boundaries, pressure and temperature ratios are unit, mach numbers are between 0 an 1. If convergence is achieved a breadth-first search considering that each point in the grid is a graph node connected to the points up, down, left, right and in the diagonals. The converged result for each point is used as an initial guess for neighboring points. This allows each point in the grid up to 8 different initial guesses quite close to the actual solution (if the grid is fine enougth), and has proven very robust. 
+Nonlinear solver (hybr or lm) coupled with a breadth-first search. Initial point in the $x$ and $y$-axis is chosen randomly within the choke boundaries, pressure and temperature ratios are unit, mach numbers are between 0 an 1. If convergence is achieved a breadth-first search considering that each point in the grid is a graph node connected to the points up, down, left, right and in the diagonals. The converged result for each point is used as an initial guess for neighboring points. This allows each point in the grid up to 8 different initial guesses quite close to the actual solution (if the grid is fine enough), and has proven very robust. 
 
 \subsubsection*{Choke line}
-Compressor: find point where inlet and exit are simultaniously choked. For pressure ratios above this critical value, only the inlet is choked and the choke line is vertical. For pressure ratios bellow this value the exit is choked. The choke line was verified to be a straight line, so that just the point at another pressure ratio, e.g.\ the minimum pressure ratio of interest (normally unit) is needed to fully define it.
+Compressor: find point where inlet and exit are simultaneously choked. For pressure ratios above this critical value, only the inlet is choked and the choke line is vertical. For pressure ratios bellow this value the exit is choked. The choke line was verified to be a straight line, so that just the point at another pressure ratio, e.g.\ the minimum pressure ratio of interest (normally unit) is needed to fully define it.
 
-Turbine: it is linear in a plot of \acs{MFP} vs.\ pressure ratio, but in this case the blade mach number is not uniquelly defined. In a plot of $\acs{MFP}M_b$ vs.\ expansion ratio, the choke line is nonlinear and a KS aggregation function with variable $rho$ was added to the turbine model to model the choke.
+Turbine: it is linear in a plot of \acs{MFP} vs.\ pressure ratio, but in this case the blade mach number is not uniquely defined. In a plot of $\acs{MFP}M_b$ vs.\ expansion ratio, the choke line is nonlinear and a KS aggregation function with variable $rho$ was added to the turbine model to model the choke.
 
 \subsection{Generation of the working line}
 Optimize the engine model for maximum efficiency.
@@ -183,7 +183,7 @@ The engine chosen to which apply these models was Jet-Munts VT-80.
 This engine was developed for hobby use in airplane models and comes with an \gls{ECU} installed from factory, which will not be used for this work.
 It is a single spool jet engine, with a single stage centrifugal compressor 
  and also single stage axial turbine, as seen in \cref{fig:engine}. 
-It runs on aviation kerosene pre-mixed with oil.%
+It runs on aviation kerosene premixed with oil.%
 The specifications provided by the manufacturer are in \cref{tbl:engine_specs}.
 \textcite{bolsoni} estimates the compressor pressure ratio 
 to be around 2.2 based on similar engines.

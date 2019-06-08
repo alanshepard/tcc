@@ -18,16 +18,16 @@ while keeping the engine operating stably and within the designed temperature, p
 \cite{AustinSpangIII1999}.
 
 To design such a control system, it is desirable to have a computer model of the engine 
-capable of reproducing all relevant phenomena of dynamical behaviour. 
+capable of reproducing all relevant phenomena of dynamical behavior. 
 The goal of the present work is to develop such a model. 
 
 The development of an engine model is a three stage process. 
 Firstly, individual component models must be developed, 
 then they must be matched so that the steady state operation can be calculated.
-Finally, the dynamical behaviour of the engine can be taken into account, 
+Finally, the dynamical behavior of the engine can be taken into account, 
 through the introduction of a dynamical system comprising three states: 
 spool speed, burner pressure and mass flow rate. 
-At all times, care is taken to account for all characteristics which affect the final dynamical behaviour of the engine.
+At all times, care is taken to account for all characteristics which affect the final dynamical behavior of the engine.
 
 This work aims to go through all these steps without resorting to experimental data.
 This is necessary during the engine design, or when the time and expense involved with testing can not be afforded.
@@ -39,7 +39,7 @@ The models employed here are based on first principles whenever possible,
 with the inclusion of semi-empirical corrections when necessary. 
 
 This work favors breadth instead of depth: 
-for example, compressor and turbine loss mechanisms that do not alter qualitatively the engine dynamical behaviour are not considered. 
+for example, compressor and turbine loss mechanisms that do not alter qualitatively the engine dynamical behavior are not considered. 
 This, however, comes without a loss in generality. 
 These simplifications can be easily removed if more precision is required.
 
@@ -49,14 +49,14 @@ It is summarized in \cref{fig:engine} for easy reference.
 %Outline
 The rest of this thesis is organized as follows: 
 \begin{description}
-    \item[\Cref{sec:review}] is a literature review of the state of the art in engine and component modelling, 
-        including the basic elements to model the behaviour of compressors, turbines and engines; 
+    \item[\Cref{sec:review}] is a literature review of the state of the art in engine and component modeling, 
+        including the basic elements to model the behavior of compressors, turbines and engines; 
         instabilities in engine systems; and the numerical methods needed to bring these models to life. 
         It is kept relatively brief and plenty of references are provided.
     \item[\Cref{sec:methods}] develops the methods for simulating a gas turbine engine and its components. 
         It contains tables summarizing the nonlinear system associated with each model 
         and comments on the specifics of the numerical methods used to simulate each aspect of the models. 
-        In the end, the engine for which these modelled in \cref{sec:results} is described.
+        In the end, the engine for which these modeled in \cref{sec:results} is described.
     \item[\Cref{sec:results}] presents the results of the simulation, i.e.\ the component maps, operating line, etc.
     \item[\Cref{ch:conclusion}] presents the conclusion and final remarks of this work.
 \end{description}

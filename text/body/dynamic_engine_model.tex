@@ -13,8 +13,8 @@ To develop a controller for any kind of system,
  For the present work, we must model a gas turbine engine.
 
 The engine model used is of the lumped volume type. This means that each component 
- (compressor, combustor,turbine and nozzle)
- is modelled as a single point in space and conservation laws are applied to them.
+ (compressor, burner,turbine and nozzle)
+ is modeled as a single point in space and conservation laws are applied to them.
  This type of model is also known as zero dimensional (0-D) or as parametric cycle analysis
  \index{parametric cycle analysis},
  and is widely used in both industry and academy as a tool for preliminary design and 
@@ -30,7 +30,7 @@ In particular, GasTurb has already been used to simulate model gas turbines
 An open-source alternative is the \gls{T-MATS}, from NASA \cite{T-MATS}.
 \gls{T-MATS} provides a library of turbo machinery blocks for use in Simulink. 
 Each of these blocks is actually a wrapper for a function written in C 
- that simulates the component's behaviour.
+ that simulates the component's behavior.
 
 A schematic of the engine components considered for the simulation of the present gas turbine engine is shown in \todo{add figure}.
 
@@ -46,7 +46,7 @@ If we fix the working fluid and the engine dimensions, the terms related to gas 
 \index{parameters!quasi-dimensionless}
 The quasi-dimensionless parameters account implicitly for variations in ambient pressure and temperature only.
 They are dimensional terms, but do not have a clear physical interpretation. 
-To make engineering judgement easier, it is useful to scale these parameters by 
+To make engineering judgment easier, it is useful to scale these parameters by 
  a standard pressure and temperature, which are usually taken as the 
  \gls{ISA} conditions at \gls{SL}. 
 In this manner, they are a function of the terms theta (\acs{theta}) and delta (\acs{delta}):
@@ -76,7 +76,7 @@ Seen in the framework of control theory,
  Every other corrected engine parameter, such as shaft acceleration and thrust,
  can be derived from this two by an off-design calculation
  which allows for excess power in the turbine.
-This calculation is the thermodynamic model of the engine and is highly non-linear and depends on the knowledge of the behaviour of each of the engine component.
+This calculation is the thermodynamic model of the engine and is highly non-linear and depends on the knowledge of the behavior of each of the engine component.
 
 The calculation process works as follows.
 Inlet mach number, corrected shaft rotational speed and corrected fuel flow are known.

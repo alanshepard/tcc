@@ -82,8 +82,8 @@ Substituting \cref{eqn:V_u_3_corrected} in \cref{eqn:euler} and dividing both si
 where $\phi_3 \triangleq \frac{\dot{m}}{A_3 \rho_3 U_3} = \frac{W_{3r}}{U_3}$ is the flow parameter\index{flow parameter} at the compressor exit
 and $\psi_c \triangleq \frac{\Delta h}{U_3^2}$ is the compressor power coefficient.
 
-The second term accounts for pre-whirl\index{pre-whirl} in the flow entering the compressor, e.g due to \ac{IGV}.
-In the case of no pre-whirl, ${V_u}_2 = 0$, thus 
+The second term accounts for prewhirl\index{prewhirl} in the flow entering the compressor, e.g due to \ac{IGV}.
+In the case of no prewhirl, ${V_u}_2 = 0$, thus 
 \begin{equation}
     \label{eqn:euler}
     \boxed{\acs{load_coef}_c = \acs{slip_factor}(1-\acs{flow_coef}_3\tan\beta_3)}
@@ -123,7 +123,7 @@ $\psi_t=\frac{\Delta h}{U_5^2}$ is the power coefficient for the turbine.
 \label{sec:compressor_losses}
 Euler's equation is only valid for isentropic flow. 
 For a real flow, corrections must be introduced to account for the generation of entropy in many parts of the compression process. 
-These so called ``losses'' are modelled in literature as enthalpy corrections 
+These so called ``losses'' are modeled in literature as enthalpy corrections 
 for the Euler equation considering both the \emph{actual} process and the \emph{isentropic} process 
 that would generate the same increase in pressure as the real process.
 Each of these losses can be categorized as either \emph{internal} or \emph{parasitic}.
@@ -151,7 +151,7 @@ The temperature and pressure ratios are given by
     \frac{P_{03}}{P_{02}} &= \left( 1 + \frac{\Delta h_{\text{isen}}}{c_p T_{02}}\right)^{\frac{\gamma}{\gamma-1}}
 \end{align}
 
-The isentropic and polytropic efficiencies can then be readly calculated as
+The isentropic and polytropic efficiencies can then be readily calculated as
 \begin{align}
     \eta_t &= \frac{\Delta h_{\text{isen}}}{\Delta h_{\text{actual}}}\\
     \eta_p &= \frac{\gamma-1}{\gamma} \left(\frac{\log\frac{P_{02}}{P_{01}}}
@@ -159,7 +159,7 @@ The isentropic and polytropic efficiencies can then be readly calculated as
                                      \right)
 \end{align}
 
-\textcite{Aungier1995} criticises this calculation because the losses should be regarded as changes in entropy, and not in enthalphy. Despite this shortcomming, the enthalphy approach is widely used.
+\textcite{Aungier1995} criticizes this calculation because the losses should be regarded as changes in entropy, and not in enthalpy. Despite this shortcoming, the enthalpy approach is widely used.
 
 The losses generally accounted for are listed in \cref{tbl:compressor_loss_mechanisms}. According to \textcite{Gravdahl2004,Gravdahl1999,Ferguson1963,Watson1982}, the most important losses for stability considerations are the incidence losses and the skin friction losses. The former is destabilizing because it introduces the positive slope of the left hand side of the compressor map. The fluid friction losses are stabilizing because they increase with mass flow, therefore contributing to the decrease in the derivative of the iso-speed lines.
 \begin{table}
@@ -198,8 +198,8 @@ Most of the empirical loss correlations for axial turbines in use today stem fro
 \begin{description}
     \item[profile loss] due to skin friction and flow separation under high incidence angles of the blades
     \item[annulus loss] due to boundary layer growth on the inner and outer walls of the turbine annulus
-    \item[secondary flow loss] due to the tri-dimensional nature of the flow
-    \item[tip clearence loss] due to the vortex formed at the tip of the turbine blades
+    \item[secondary flow loss] due to the tridimensional nature of the flow
+    \item[tip clearance loss] due to the vortex formed at the tip of the turbine blades
 \end{description}
 
 Several improvements were made to Ainley and Mathieson's model by \textcite{Mukhtarov196, Dunham1970, Kacker1982, Moustapha1990, Benner1995} among others\cite{Persson2015}. All of these studies were based on empirical data available from previous turbine rig testing, and thus are valid for turbines with similar geometries.
@@ -207,7 +207,7 @@ These models provide the loss values as either a pressure loss-coefficient
 \begin{equation}
     Y = \frac{P_{04}-P_{05}}{P_{05}-P_5}
 \end{equation}
-or a kinectic energy loss coefficient
+or a kinetic energy loss coefficient
 \begin{equation}
     \phi^2 = \left(\frac{\text{actual gas exit velocity}}
                         {\text{ideal gas exit velocity}}\right)^2
@@ -264,22 +264,22 @@ In particular, GasTurb has already been used to simulate model gas turbines
 An open-source alternative is the \gls{T-MATS}, from NASA \cite{T-MATS}.
 \gls{T-MATS} provides a library of turbo machinery blocks for use in Simulink. 
 Each of these blocks is actually a wrapper for a function written in C 
-that simulates the component's behaviour.
+that simulates the component's behavior.
 
 The downside of all these programs is that they rely on component map data provided by the user 
 and do not consider the burner pressure and mass flow as state parameters---only the spool speed.
 The generation of the maps is a substantial effort that must be carried independently, 
 either by scaling maps from similar designs, obtaining the maps experimentally 
 or using semi-empirical methods as described in this work. 
-On the other hand, disregarding the dynamical behaviour of the combustion chamber makes the model unable to predict surge on its own. The surge can still be included through a surge line in the compressor map but,
+On the other hand, disregarding the dynamical behavior of the combustion chamber makes the model unable to predict surge on its own. The surge can still be included through a surge line in the compressor map but,
 depending on how the map was obtained, this line may not be accurate because the surge depends on the components downstream from the compressor, as discussed in \cref{sec:review:surge}.
 
 \section{Nondimensional parameters}
 \label{sec:nondimensional}
 
-Using the Buckinham $\Pi$ Theorem \cite{Buckingham1914},
+Using the Buckingham $\Pi$ Theorem \cite{Buckingham1914},
 the parameters which govern engine and component performance can be grouped into new, nondimensional parameters. 
-This has the advantage that the engine behaviour becomes invariant by phisical size, and so the behaviour of a small model engine resembles that of a large commercial gas turbine. 
+This has the advantage that the engine behavior becomes invariant by physical size, and so the behavior of a small model engine resembles that of a large commercial gas turbine. 
 It is specially beneficial for choosing initial guesses for numerical solvers.
 
 \textcite[chapter 4]{walsh2004gas} provide some very comprehensive tables 
@@ -356,9 +356,9 @@ where $A_c$ and $L_c$ are the area and the length of the pipe downstream from th
 This model provides a good physical explanation of the mechanism of surge. 
 First, one should notice that, by the first stability criterion, surge can only occur when the compressor characteristic has a positive derivative, 
 i.e.\ when an increase in mass flow is accompanied by an increase in the pressure ratio supplied by the compressor. 
-If this increase in pressure ratio does not lead to an increased mass flow through the throttle, the increase in compressor mass flow ration will increase the plenum pressure above that which the compressor can supply, and this will result in backflow. In the negative part of the compressor characteristic, it will be able again to supply the demanded pressure, now made smaller due to backflow. Since this condition will lead to an ever decrease in the plenum pressure, the flow will eventually invert its direction again, and this results in the periodic behaviour of surge.
+If this increase in pressure ratio does not lead to an increased mass flow through the throttle, the increase in compressor mass flow ration will increase the plenum pressure above that which the compressor can supply, and this will result in backflow. In the negative part of the compressor characteristic, it will be able again to supply the demanded pressure, now made smaller due to backflow. Since this condition will lead to an ever decrease in the plenum pressure, the flow will eventually invert its direction again, and this results in the periodic behavior of surge.
 
-Analysing the extreme values of the parameter $B$ is helpful in developing an intuitive grasp for the phenomenon.
+Analyzing the extreme values of the parameter $B$ is helpful in developing an intuitive grasp for the phenomenon.
 For large values of $B$, that is, large burner volumes, the surge limit approaches the point where the compressor characteristic has zero derivative. Since the plenum is very big, any change in the mass flow of the throttle will make a very small difference in the plenum pressure, and so any simultaneous increase in compressor mass flow and pressure ratio will lead to instability. This is the conservative limit for the surge line.
 Inversely, for small values of $B$, that is, small burner volumes, any increase in pressure will lead to a fast increase in mass flow through the throttle, which will instantaneously reduce the pressure, thus having an stabilizing effect. 
 In this case, the two criteria for surge collapse into one.
@@ -369,7 +369,7 @@ The surge line for a compressor system can be moved be changing components downs
 \section{Nonlinear systems}
 \label{sec:review:numeric}
 
-As will be shown in \cref{sec:methods}, the modelling of a gas turbine engine leads naturally to nonlinear systems of the type 
+As will be shown in \cref{sec:methods}, the modeling of a gas turbine engine leads naturally to nonlinear systems of the type 
 \begin{equation}
     \label{eqn:nonlinear}
     f(x) = 0, \quad f:\mathbb{R}^n \rightarrow \mathbb{R}^n
@@ -405,7 +405,7 @@ They are best represented by the software package \textsc{minpack} \cite{minpack
 
 It should be noted that every system expressed as a nonlinear system can also be represented as a \ac{DAE}. 
 This is most useful for under determined systems where not only one solution is sought 
-but a uni-dimensionally parameterized continuum of solutions, such as an operating line, 
+but a unidimensionally parameterized continuum of solutions, such as an operating line, 
 choke line, surge line, etc.
 
 \end{document}

@@ -25,7 +25,7 @@ The controller shall
 
 \subsection{Remarks and rationale for requirements}
 \begin{itemize}
-    \item the \gls{FADEC} does not attempt to relight the engine automattically 
+    \item the \gls{FADEC} does not attempt to relight the engine automatically 
           because it can not determine if the engine is in a safe state
     \item temperature at the turbine entry is limited by the material \todo{calculations for choosing a value}
 \end{itemize}
@@ -44,7 +44,7 @@ The controller is implemented as a state machine \cite{amd_state_machine}
 The allowed states are
 \begin{description}
     \item[Shutdown] engine is off. 
-    \item[Dry cranck] starter motor is on and engine rotates,
+    \item[Dry crank] starter motor is on and engine rotates,
           but no fuel is supplied.
     \item[Lights off] the ignition per say. 
     \item[Acceleration and heat soak] after a successful ignition,
