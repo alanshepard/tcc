@@ -1,0 +1,68 @@
+\usepackage{lmodern}			% Usa a fonte Latin Modern			
+\usepackage[T1]{fontenc}		% Selecao de codigos de fonte.
+\usepackage[utf8]{inputenc}		% Codificacao do documento (conversão automática dos acentos)
+\usepackage{lastpage}			% Usado pela Ficha catalográfica
+\usepackage{indentfirst}		% Indenta o primeiro parágrafo de cada seção.
+\usepackage{color}				% Controle das cores
+\usepackage{graphicx}			% Inclusão de gráficos
+\usepackage{microtype} 			% para melhorias de justificação
+%\usepackage{helvet}
+%\usepackage{sfmath}
+\usepackage{tcolorbox}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows,automata,calc}
+\usepackage{pgfplots}
+\pgfplotsset{compat=newest}
+\usepgfplotslibrary{groupplots}
+\usepgfplotslibrary{dateplot}
+\usepackage{subfiles}
+\usepackage{subcaption}
+\usepackage{siunitx}
+\usepackage[olditem,oldenum]{paralist}
+\usepackage{pdfpages}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage[ruled]{algorithm2e}
+\usepackage{multicol}
+\usepackage{rotating}
+\usepackage{pdflscape}
+\usepackage{everypage}
+\usepackage[font={small,sf, singlespacing}, margin=2cm]{caption}
+\usepackage{svg}
+\usepackage[style=abnt,language=english,pretty]{biblatex}
+\usepackage{morewrites}
+\usepackage[acronym,acronymlists={symbol},shortcuts]{glossaries}
+\usepackage{cleveref}
+
+% Citações padrão ABNT.
+% Uncomment to use bibtex 
+%\usepackage[alf]{abntex2cite}	
+
+% Uncomment to use biblatex
+\addbibresource{references/references.bib}        % Seus arquivos de
+\addbibresource{references/numeric/numeric.bib}        % Seus arquivos de
+\addbibresource{references/turbine/turbine.bib}        % Seus arquivos de
+%\addbibresource{outroarquivo.bib}   % bibliografia vão aqui
+
+%Acronyms and list of symbols
+\newglossary[slg]{symbol}{sot}{sym}{List of Symbols}
+\makeglossaries
+\renewcommand{\acronymname}{List of abbreviations and acronyms}
+
+ % Use long (short) acronym style:
+\setacronymstyle{long-short}
+
+%Preamble inputs
+\input{preamble/newcommand}
+\input{preamble/symbol}
+\input{preamble/acronym}
+
+%% Uncomment this to disable source in figures
+%\renewcommand{\source}[1]{}
+
+%% Configurações de aparência do PDF final
+
+% alterando o aspecto da cor azul
+\definecolor{blue}{RGB}{41,5,195}
+

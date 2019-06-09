@@ -1,0 +1,65 @@
+\documentclass{beamer}
+
+\input{preamble/usepackages}
+
+\usetheme[sectionpage=none, progressbar=head]{metropolis}
+\setbeamercolor{background canvas}{bg=white}
+
+\title{Simulation of Gas Turbine Engines}
+\author{Bernardo Bahia Monteiro}
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\clearpage
+
+\section{Engine overview}
+{\setbeamercolor{background canvas}{bg=black}
+\begin{frame}
+\frametitle{Engine overview}
+\includegraphics[width=\textwidth]{fig/JetsMuntVT-80.jpg}
+\end{frame}
+
+\begin{frame}
+\frametitle{Engine overview: X-ray}
+\includegraphics[width=\textwidth]{fig/JetsMuntVT-80X-ray_enhanced_invert.jpg}
+\end{frame}
+}
+\begin{frame}
+\frametitle{Engine overview: schematic}
+\includesvg[width=\textwidth]{fig/engine_schematic}
+\end{frame}
+
+\section{Compressor}
+
+\begin{frame}
+\frametitle{Compressor velocity triangles}
+\includesvg[width=\textwidth,height=0.7\textheight]{fig/impeller_schematic}
+\begin{description}
+    \item[$U$] \acl{U}
+    \item[$V$] \acl{V}
+    \item[$W$] \acl{W}
+\end{description}
+\end{frame}
+
+\section{Turbine}
+
+\begin{frame}
+\frametitle{Turbine velocity triangles}
+\includesvg[width=\textwidth, height=0.7\textheight]{fig/turbine_euler}
+\end{frame}
+
+
+\section{Engine Simulation}
+\begin{frame}
+\frametitle{Operation line}
+\makebox[\linewidth]{\includegraphics[width=\paperwidth]{fig/wline.pdf}}
+\end{frame}
+
+\begin{frame}
+\includegraphics[width=\textwidth]{fig/stations1000K}
+\end{frame}
+
+
+\end{document}
