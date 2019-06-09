@@ -50,21 +50,22 @@
 \usepackage{everypage}
 \usepackage[font={small,sf, singlespacing}, margin=2cm]{caption}
 \usepackage{svg}
+\usepackage[style=abnt,language=english,pretty]{biblatex}
+\usepackage{morewrites}
+\usepackage[acronym,acronymlists={symbol},shortcuts]{glossaries}
+\usepackage{cleveref}
 
 % Citações padrão ABNT.
 % Uncomment to use bibtex 
 %\usepackage[alf]{abntex2cite}	
 
 % Uncomment to use biblatex
-\usepackage[style=abnt,language=english,pretty]{biblatex}
 \addbibresource{references/references.bib}        % Seus arquivos de
 \addbibresource{references/numeric/numeric.bib}        % Seus arquivos de
 \addbibresource{references/turbine/turbine.bib}        % Seus arquivos de
 %\addbibresource{outroarquivo.bib}   % bibliografia vão aqui
 
 %Acronyms and list of symbols
-\usepackage{morewrites}
-\usepackage[acronym,acronymlists={symbol},shortcuts]{glossaries}
 \newglossary[slg]{symbol}{sot}{sym}{List of Symbols}
 \makeglossaries
 \renewcommand{\acronymname}{List of abbreviations and acronyms}
@@ -72,21 +73,7 @@
  % Use long (short) acronym style:
 \setacronymstyle{long-short}
 
-
-\usepackage{cleveref}
-
-%Cross product
-\newcommand{\cross}{\times}
-
-
-% todo boxes
-\newtcbox{\todo}[1][yellow]{on line,arc=7pt,colback=#1!10!white,colframe=#1!50!black,before upper={\rule[-3pt]{0pt}{10pt}},boxrule=1pt, boxsep=0pt,left=6pt,right=6pt,top=2pt,bottom=2pt}
-
-% for figure's sources
-\newcommand{\source}[1]{
-	\caption*{\footnotesize \raggedright Source: #1.}
-}
-\newcommand{\authorsfigure}{author's figure}
+\setfloatadjustment{figure}{\small\sffamily\centering}
 
 %Preamble inputs
 \input{preamble/newcommand}
@@ -106,7 +93,6 @@
 
 % alterando o aspecto da cor azul
 \definecolor{blue}{RGB}{41,5,195}
-
 
 % Informações de dados para CAPA e FOLHA DE ROSTO
 \titulo{Simulation of Gas Turbine Engines}
