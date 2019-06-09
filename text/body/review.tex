@@ -56,7 +56,15 @@ as a function of the radial relative velocity (${W_r}_3$),
 since the latter is more closely related to the mass flow, 
 since $\dot{m} = \rho {W_r}_3 A_3$, where $A_3$ is the ring shaped exit area of the compressor.
 
-From the velocity triangle in figure \todo{add figure}, 
+\begin{figure}
+    \centering\sffamily\small
+    \caption{Velocity triangles for a centrifugal impeller and inducer}
+    \label{fig:compressor_schematic}
+    \includesvg{fig/impeller_schematic}
+    \source{\authorsfigure}
+\end{figure}
+
+From the velocity triangle in \cref{fig:compressor_schematic}, 
 and assuming that the flow exits tangential to the blade surface,
 \begin{equation}
     \label{eqn:V_u_3}
@@ -92,10 +100,9 @@ In the case of no prewhirl, ${V_u}_2 = 0$, thus
 \subsection{Euler's equation for an axial turbine}
 
 \begin{figure}
-    \sffamily\small 
     \caption{Velocities in an axial turbine stage}
     \label{fig:turbine_euler}
-    \hfill\includesvg{fig/turbine_euler}\hfill
+    \includesvg{fig/turbine_euler}
     \source{author's figure}
 \end{figure}
 
