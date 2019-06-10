@@ -1,31 +1,103 @@
-\newacronym[type=symbol]{N}{\ensuremath{N}}{shaft rotational speed}
-\newacronym[type=symbol]{T0}{\ensuremath{T_0}}{ambient temperature}
-\newacronym[type=symbol]{P0}{\ensuremath{P_0}}{ambient pressure}
-\newacronym[type=symbol]{delta}{\ensuremath{\delta}}{$\text{inlet pressure}/\text{\acs{ISA} pressure at sea level}$}
-\newacronym[type=symbol]{theta}{\ensuremath{\theta}}{$\text{inlet temperature}/\text{\acs{ISA}temperature at sea level}$}
+% Sections
+\newacronym[type=symbol]{subscripts}{Subscripts}{\nopostdesc}
+\newacronym[type=symbol]{superscripts}{Superscripts}{\nopostdesc}
 
-% Euler equation
+% Euler's equation
 \newacronym[type=symbol]{torque}{\ensuremath{\tau}}{torque}
-\newacronym[type=symbol]{power}{\ensuremath{\text{power}}}{power}
-\newacronym[type=symbol]{U}{\ensuremath{U}}{rotor speed}
-\newacronym[type=symbol]{r}{\ensuremath{r}}{rotor radius}
+\newacronym[type=symbol]{radius}{\ensuremath{r}}{rotor radius}
 \newacronym[type=symbol]{V}{\ensuremath{V}}{velocity in the inertial frame of reference}
-\newacronym[type=symbol]{W}{\ensuremath{W}}{velocity in the rotating frame of reference}
-\newacronym[type=symbol]{h}{\ensuremath{h}}{specific enthalpy}
+\newacronym[type=symbol]{mdot}{\ensuremath{\dot{m}}}{mass flow rate}
+\newacronym[type=symbol, parent=subscripts]{i}{\ensuremath{i}}{inlet}
+\newacronym[type=symbol, parent=subscripts]{e}{\ensuremath{e}}{exit}
+
 \newacronym[type=symbol]{omega}{\ensuremath{\omega}}{angular speed}
-\newacronym[type=symbol]{beta}{\ensuremath{\beta}}{specific enthalpy}
+
+\newacronym[type=symbol]{Delta}{\ensuremath{\Delta}}{difference}
+\newacronym[type=symbol]{h}{\ensuremath{h}}{specific enthalpy}
+
+\newacronym[type=symbol]{U}{\ensuremath{U}}{rotor speed}
+\newacronym[type=symbol, parent=subscripts]{u}{\ensuremath{u}}{direction of rotor velocity (i.e. tangential)}
+\newacronym[type=symbol, parent=subscripts]{r}{\ensuremath{r}}{radial direction}
+\newacronym[type=symbol, parent=subscripts]{x}{\ensuremath{x}}{meridional direction}
+
+% Compressor
+\newacronym[type=symbol]{W}{\ensuremath{W}}{velocity in the rotating frame of reference}
+\newacronym[type=symbol]{beta}{\ensuremath{\beta}}{angle in the rotating frame of reference}
+\newacronym[type=symbol]{alpha}{\ensuremath{\alpha}}{angle in the inertial frame of reference}
 \newacronym[type=symbol]{load_coef}{\ensuremath{\psi}}{load coefficient}
 \newacronym[type=symbol]{flow_coef}{\ensuremath{\phi}}{flow coefficient}
+
 %\newacronym[type=symbol]{impeller_distortion_factor}{\ensuremath{\lambda}}{impeller distortion factor}
 \newacronym[type=symbol]{slip_factor}{\ensuremath{\sigma}}{slip factor}
-\newacronym[type=symbol]{MFP}{\text{MFP}}{mass flow parameter}% $\frac{\dot{m}\sqrt{RT_{01}}}{A_1 P_{01} \sqrt{\gamma}}$}
-\newacronym[type=symbol]{M0rotor}{\ensuremath{M_b}} {blade mach number}
-\newacronym[type=symbol]{Re}{\text{Re}} {Reynolds number}
+
+% Compressor losses
+\newacronym[type=symbol]{eff_t}{\ensuremath{\eta_t}}{isentropic efficiency}
+\newacronym[type=symbol]{eff_p}{\ensuremath{\eta_p}}{polytropic efficiency}
 \newacronym[type=symbol]{gam}{\ensuremath{\gamma}} {specific heat ratio}
-\newacronym[type=symbol]{FHV}{\ensuremath{\text{FHV}}} {fuel lower calorific value}
+\newacronym[type=symbol]{T}{\ensuremath{T}}{temperature}
+\newacronym[type=symbol]{P}{\ensuremath{P}}{pressure}
+\newacronym[type=symbol, parent=subscripts]{euler}{\text{euler}}{calculated by Euler's equation}
+\newacronym[type=symbol, parent=subscripts]{actual}{\text{actual}}{measured in practice}
+\newacronym[type=symbol, parent=subscripts]{isen}{\text{isen}}{isentropic}
+
+% Turbine losses
+\newacronym[type=symbol]{P_loss}{\ensuremath{Y}}{pressure loss coefficient} %$\frac{P_{04}-P_{05}}{P_{05}- P_5}$}
+
+
+
+% Deviation models for axial turbines
+\newacronym[type=symbol]{s}{\ensuremath{s}}{solidity}
+\newacronym[type=symbol]{deviation}{\ensuremath{\delta}}{angular deviation}
+\newacronym[type=symbol]{th}{\ensuremath{t}}{thickness}
+\newacronym[type=symbol]{c}{\ensuremath{c}}{chord}
+\newacronym[type=symbol]{stagger}{\ensuremath{\xi}}{blade geometric incidence}
+
+% Gas turbine engine dynamics
+\newacronym[type=symbol]{I}{\ensuremath{I}} {moment of inertial of the spool}
+\newacronym[type=symbol, parent=superscripts]{dot}{\ensuremath{\cdot}}{derivative in time}
+\newacronym[type=symbol]{rho}{\ensuremath{\rho}}{density}
+\newacronym[type=symbol, parent=subscripts]{turb}{\ensuremath{t}}{turbine}
+\newacronym[type=symbol, parent=subscripts]{comp}{\ensuremath{c}}{compressor}
+\newacronym[type=symbol, parent=subscripts]{burner}{\ensuremath{p}}{burner (from plenum or pipe)}
+
+% Nondimensional parameters
+\newacronym[type=symbol]{cp}{\ensuremath{c_p}}{specific heat at constant pressure}
+\newacronym[type=symbol]{cv}{\ensuremath{c_v}}{specific heat at constant volume}
+\newacronym[type=symbol]{R}{\ensuremath{R}}{gas constant}
+\newacronym[type=symbol]{MFP}{\text{MFP}}{mass flow parameter}% $\frac{\dot{m}\sqrt{RT_{01}}}{A_1 P_{01} \sqrt{\gamma}}$}
+\newacronym[type=symbol]{M0rotor}{\ensuremath{M_b}} {blade stagnation Mach number}
+%\newacronym[type=symbol]{Re}{\text{Re}} {Reynolds number}
+\newacronym[type=symbol]{M}{\ensuremath{M}} {Mach number}
+\newacronym[type=symbol]{A}{\ensuremath{A}} {area}
+\newacronym[type=symbol]{L}{\ensuremath{L}} {length}
+
+% Engine stability: surge
+\newacronym[type=symbol]{C'}{\ensuremath{C'}}{compressor characteristic derivative}
+\newacronym[type=symbol]{T'}{\ensuremath{T'}}{turbine characteristic derivative}
+\newacronym[type=symbol]{B}{\ensuremath{B}}{surge parameter}
 \newacronym[type=symbol]{volume}{{\protect\ooalign{\hfil$V$\hfil\cr\kern0.08em--\hfil\cr}}}{burner volume}
-\newacronym[type=symbol]{J}{\ensuremath{J}} {moment of inertial of the spool}
 \newacronym[type=symbol]{a}{\ensuremath{a}} {sonic speed}
+
+%Nonlinear systems
+\newacronym[type=symbol]{jac}{\ensuremath{\nabla}} {jacobian}
+\newacronym[type=symbol]{Real}{\ensuremath{\mathbb{R}}} {set of real numbers}
+
+%Nozzle model
+\newacronym[type=symbol, parent=superscripts]{star}{\ensuremath{*}}{sonic}
+
+% Engine static model
+\newacronym[type=symbol]{FHV}{\text{FHV}} {fuel lower calorific value}
+
+\newacronym[type=symbol, parent=subscripts]{0}{\ensuremath{0}}{stagnation}
+\newacronym[type=symbol, parent=subscripts]{1}{\ensuremath{1}}{engine inlet station}
+\newacronym[type=symbol, parent=subscripts]{2}{\ensuremath{2}}{compressor inlet station}
+\newacronym[type=symbol, parent=subscripts]{3}{\ensuremath{3}}{compressor exit station}
+\newacronym[type=symbol, parent=subscripts]{4}{\ensuremath{4}}{turbine inlet station}
+\newacronym[type=symbol, parent=subscripts]{5}{\ensuremath{5}}{turbine exit station}
+\newacronym[type=symbol, parent=subscripts]{8}{\ensuremath{8}}{nozzle throat (exit) station}
+\newacronym[type=symbol, parent=subscripts]{amb}{\ensuremath{a}}{ambient}
+\newacronym[type=symbol, parent=subscripts]{fuel}{\ensuremath{f}}{fuel}
+\newacronym[type=symbol]{eta_combustion}{\ensuremath{\eta_f}}{combustion efficiency}
 
 \glsaddall
 

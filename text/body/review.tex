@@ -22,30 +22,30 @@ Euler's equation is a consequence of the application of the laws of conservation
 From the conservation of angular momentum, 
 
 \begin{equation}
-    \vec{\acs{torque}} = \dot{m} (\vec{r}_{\text{out}}\cross\vec{V}_{\text{out}} - \vec{r}_{\text{in}}\cross\vec{V}_{\text{in}}) 
+    \vec{\acs{torque}} = \dot{m} (\vec{r}_{\acs{e}}\cross\vec{V}_{\acs{e}} - \vec{r}_{\acs{i}}\cross\vec{V}_{\acs{i}}) 
 \end{equation}
 
 Multiplying both sides by the rotational speed ($\omega$)
 
 \begin{equation}
-    \acs{power} = \vec{\omega}\cdot\vec{\acs{torque}} 
-                = \dot{m} \vec{\omega} \cdot (\vec{r}_{\text{out}}\cross\vec{V}_{\text{out}} - \vec{r_{\text{in}}}\cross\vec{V}_{\text{in}}) 
+    \text{power} = \vec{\omega}\cdot\vec{\acs{torque}} 
+                = \dot{m} \vec{\omega} \cdot (\vec{r}_{\acs{e}}\cross\vec{V}_{\acs{e}} - \vec{r_{\acs{i}}}\cross\vec{V}_{\acs{i}}) 
 \end{equation}
 
 Assuming that the system is adiabatic and using the first law of thermodynamics, the specific enthalpy change is given by
 
 \begin{equation}
-    \Delta h = \frac{\acs{power}}{\dot{m}} 
-             = \vec{\omega} \cdot (\vec{r}_{\text{out}}\cross\vec{V}_{\text{out}} - \vec{r}_{\text{in}}\cross\vec{V}_{\text{in}}) 
+    \Delta h = \frac{\text{power}}{\dot{m}} 
+             = \vec{\omega} \cdot (\vec{r}_{\acs{e}}\cross\vec{V}_{\acs{e}} - \vec{r}_{\acs{i}}\cross\vec{V}_{\acs{i}}) 
 \end{equation}
 
 \begin{equation}
-    \Delta h = \omega (r_{\text{out}} {V_u}_{\text{out}} - r_{\text{in}} {V_u}_{\text{in}}) 
+    \Delta h = \omega (r_{\acs{e}} {V_u}_{\acs{e}} - r_{\acs{i}} {V_u}_{\acs{i}}) 
 \end{equation}
 
 \begin{equation}
     \label{eqn:euler}
-    \Delta h = U_{\text{out}} {V_u}_{\text{out}} - U_{\text{in}} {V_u}_{\text{in}} 
+    \Delta h = U_{\acs{e}} {V_u}_{\acs{e}} - U_{\acs{i}} {V_u}_{\acs{i}} 
 \end{equation}
 
 \subsection{Euler's equation for a centrifugal compressor}
@@ -121,10 +121,10 @@ Then,
 \end{equation}
 And finally, making the equation nondimensional by diving both sides by the blade speed at the exit $U_5$, we get
 \begin{equation}
-    \boxed{\psi_t = 1 + \phi_5\tan\beta_5-\left(\frac{r_4}{r_5}\right)^2\phi_4\tan\alpha_4}
+    \boxed{\psi = 1 + \phi_5\tan\beta_5-\left(\frac{r_4}{r_5}\right)^2\phi_4\tan\alpha_4}
 \end{equation}
 where $\phi_4 = \frac{V_{4x}}{U_5}$ and $\phi_5 = \frac{V_{5x}}{U_5}$ are the flow parameters and
-$\psi_t=\frac{\Delta h}{U_5^2}$ is the power coefficient for the turbine.
+$\psi=\frac{\Delta h}{U_5^2}$ is the power coefficient for the turbine.
 
 \section{Loss models for centrifugal compressors}
 \label{sec:compressor_losses}
@@ -228,16 +228,16 @@ thus deserving a section of its own.
 The simplest correlation available is known as Carter's rule \cite{Mattingly1996}, and states that
 \begin{equation}
     \label{eqn:cartersrule}
-    \delta = \frac{\beta_4-\beta_5}{4\sqrt{\sigma}}
+    \delta = \frac{\beta_4-\beta_5}{4\sqrt{s}}
 \end{equation}
 where $\delta$ is the angular deviation between the exit flow and the exit camber angle,
 $\beta_4$ and $\beta_5$ are the inlet and exit airfoil camber angles,
-and $\sigma=\frac{\text{chord}}{\text{blade separation}}$ is the solidity.
+and $s=\frac{\text{chord}}{\text{blade separation}}$ is the solidity.
 
 Another model based on inlet and exit Mach numbers is provided by \textcite{Ainley1951}, 
 and a more elaborate model involving also blade thickness was proposed by \textcite{Islam1999}, where
 \begin{equation}
-    \delta = \frac{\frac{\rho_5 V_{x4}}{\rho_5 V_{x5}} \sigma^{-1.1} (\alpha'_4+\beta_5)^{2.25}}
+    \delta = \frac{\frac{\rho_5 V_{x4}}{\rho_5 V_{x5}} s^{-1.1} (\alpha'_4+\beta_5)^{2.25}}
                         {\xi^{1.45} \left(t_{\max}/c\right) \left(22+0.22\beta_4^{1.64}\right)}
 \end{equation}
 where $\xi$ is the blade geometric incidence (stagger angle), 
@@ -253,7 +253,7 @@ It is a system of three \acp{ODE}.
 \begin{align}
     \dot{\rho}_{04} &= \frac{1}{\acs{volume}}(\dot{m}_c - \dot{m}_t) \\
     \ddot{m}_c &= \frac{A_1}{L_c}(P_{03}-P_{04}) \\
-    \dot{\omega} &= \frac{1}{J} (\tau_t-\tau_c)
+    \dot{\omega} &= \frac{1}{I} (\tau_t-\tau_c)
 \end{align}
 
 These equations represent, respectively, 
@@ -302,7 +302,7 @@ These quantities are defined respectively as
     \text{temperature ratio}&\triangleq\tr{0e}{0i} \\
     \text{pressure ratio}&\triangleq\pr{0e}{0i}
 \end{align}
-where \ldots
+
 The temperature ratio can be equivalently replaced by the adiabatic or polytropic efficiency,
 see \cref{sec:compressor_losses}.
 
@@ -356,9 +356,9 @@ The stability criterion derived from this model by linear control theory is
 \end{align}
 where $C' = \frac{\partial \pr{03}{02}}{\partial \dot{m}_c}$ is the derivative of the compressor characteristic, $T' = \frac{\partial \pr{05}{04}}{\partial \dot{m}_t}$ is the derivative of the turbine characteristic and 
 \begin{equation}
-    B = \frac{U}{2a}\sqrt{\frac{\acs{volume}}{A_c L_c}}
+    B = \frac{1}{2a}\sqrt{\frac{\acs{volume}}{A L}}
 \end{equation}
-where $A_c$ and $L_c$ are the area and the length of the pipe downstream from the compressor.
+where $A$ and $L$ are the area and length of the pipe downstream from the compressor.
 
 This model provides a good physical explanation of the mechanism of surge. 
 First, one should notice that, by the first stability criterion, surge can only occur when the compressor characteristic has a positive derivative, 
