@@ -62,7 +62,7 @@ class Compressor(Turbomachine):
         
         return res_MFP, res_T0_ratio, res_P0_ratio
 
-    def plot_map(self, ax, P0_min=1, P0_max=4, samples=25, plot=False, grid=False):
+    def plot_map(self, ax, P0_min=1, P0_max=4, samples=25, plot=False, grid=False, choke=True):
     
         MFP_choke = mach2mfp(1,self.gam)
         sol_cr = self.general_explicit_map({'MFP1': MFP_choke, 'MFP2': MFP_choke})
@@ -87,6 +87,13 @@ class Compressor(Turbomachine):
     
         if grid:
             ax.plot(MFP_grid, P0_grid, 'k,')
+
+        #Add choke 20% before maximum rpm
+        if choke:
+            index_cr = np.argmin(params['Mb'], axis=0)
+            for i, i_cr  in enumerate(np.ceil(0.8*index_cr).astype(int)):
+                params['Mb'][:i_cr, i] = np.nan
+                params['eff'][:i_cr, i] = np.nan
 
         CS = ax.contour(MFP_grid, P0_grid, params['Mb'], levels=np.arange(0,2,0.1), 
                             colors='k', linewidths=tccsty.thick)
