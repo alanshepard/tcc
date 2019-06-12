@@ -202,7 +202,18 @@ class Engine(Turbomachine):
             wline.append(params)
 
         return wline
-            
+
+    def thrust(self, **params):
+        gam_t = self.turbine.gam
+        R_t = self.R_t
+        MFP8 = min(params['MFP5']*self.turbine.geom['A2']/self.A8, mach2mfp(1, gam_t))
+        mdot =  params['MFP5'] * self.turbine.geom['A2']*params['P05']*gam_t**0.5/(params['T05']*R_t)**0.5
+        M8 = mfp2mach(MFP8, gam_t)
+        P8 = params['P05'] * (1+(gam_t-1)/2*M8**2)**(-gam_t/(gam_t-1))
+        mdot5 = params['MFP5'] * self.turbine.geom['A2']*params['P05']*gam_t**0.5/(params['T05']*R_t)**0.5
+        T8 = params['T05'] * (1+(gam_t-1)/2*M8**2)**(-1)
+
+        return mdot*M8*(gam_t*R_t*T8)**0.5 + (P8-self.P01/(1+(gam_t-1)*params['M_flight']**2)**0.5)*self.A8           
 
 
     def ode_fun(self,t,y):

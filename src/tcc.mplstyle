@@ -1,5 +1,7 @@
 text.usetex: True
 grid.linewidth: 0.2
+grid.linestyle: -
+grid.color: grey
 axes.linewidth: 0.6
 lines.linewidth: 0.8
 text.latex.preamble: \usepackage{sfmath} \usepackage{amsmath}
