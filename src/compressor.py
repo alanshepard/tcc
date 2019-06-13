@@ -98,13 +98,13 @@ class Compressor(Turbomachine):
         CS = ax.contour(MFP_grid, P0_grid, params['Mb'], levels=np.arange(0,2,0.1), 
                             colors='k', linewidths=tccsty.thick)
         ax.clabel(CS, CS.levels, fmt='%.1f')
-        CS.collections[0].set_label('$M_{bc}$')
+        #CS.collections[0].set_label('$M_{bc}$')
         CS2 = ax.contour(MFP_grid, P0_grid, params['eff'], colors='k', linewidths=tccsty.thin,
-                          levels=np.arange(0.5,1.01,0.05))
-        CS2.collections[0].set_label(r'$\eta_p$')
-        ax.clabel(CS2, CS2.levels, fmt='%.2f')
+                          levels=np.arange(0.0,1.01,0.05))
+        #CS2.collections[0].set_label(r'$\eta_p$')
+        ax.clabel(CS2, CS2.levels[-5:], fmt='%.2f')
         ax.plot([MFP_choke, MFP_choke, sol_P1.params['MFP1']],
-                 [P0_max, sol_cr.params['P0_ratio'], P0_min], 'k--', label='choke limit')
+                 [P0_max, sol_cr.params['P0_ratio'], P0_min], 'k--')#, label='choke limit')
         ax.set_xlim((0,0.6))
         ax.set_ylim((1,4))
         ax.set_xlabel("MFP")

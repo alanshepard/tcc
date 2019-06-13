@@ -8,55 +8,67 @@
 
 The development of \acp{GTE} is historically related to the development of their control systems, 
 nowadays represented by a \ac{FADEC} or an \ac{ECU}. \Acp{GTE} operate their best when close to their
-thermal, mechanical or stability limits, which makes a control system of utmost importance.
+thermal, mechanical or stability limits, which makes a control system essential.
 This control system is responsible for translating the pilot requests in terms of required thrust 
 %(normally converted to measurable parameters such as spool speed or \ac{EPR}) 
-into inputs to the underlying turbomachinery, 
-in the form of changes in fuel flow or variable geometry such as variable \acp{IGV}.
-The design goal for such a control system is to provide the fastest response possible to changes in pilot input
+into inputs to the underlying turbomachinery 
+in the form of changes in fuel flow or variable geometry.
+The design goal for an engine control system is to provide the fastest response possible 
+to changes in pilot input
 while keeping the engine operating stably and within the designed temperature, pressure and speed limits
 \cite{AustinSpangIII1999}.
 
 To design such a control system, it is desirable to have a computer model of the engine 
 capable of reproducing all relevant phenomena of dynamical behavior. 
-The goal of the present work is to develop such a model. 
+There are two basic types of \ac{GTE} models. 
+The most elementary one is the thermodynamic cycle model, which does not consider the mechanical aspects of the turbomachinery, taking them as idealized thermodynamical processes. It relies heavily on the assumption that the turbine inlet is choked, which is not always true, especially for operating conditions far from the design point and for poorly designed engines.
+The next level is the component model, which relies on theoretical or empirical models for the compressors and turbines in an engine (the so called maps) and applies conservation laws among them to calculate the engine performance.
+The goal of the present work is to develop a component based engine model 
+and the model of the components themselves. 
 
-The development of an engine model is a three stage process. 
+The development of a component level engine model is a three stage process. 
 Firstly, individual component models must be developed, 
 then they must be matched so that the steady state operation can be calculated.
 Finally, the dynamical behavior of the engine can be taken into account, 
 through the introduction of a dynamical system comprising three states: 
-spool speed, burner pressure and mass flow rate. 
-At all times, care is taken to account for all characteristics which affect the final dynamical behavior of the engine.
+spool speed, burner density and mass flow rate. 
 
-This work aims to go through all these steps without resorting to experimental data.
-This is necessary during the engine design, or when the time and expense involved with testing can not be afforded.
+This work aims to go through all these steps without requiring experimental data.
+This is necessary during the engine design, or when the time and costs involved with testing can not be afforded.
 Even when experimental data is available, it may not be enough to fully characterize the components,
-since it is hard to operate the components in all points of the map while in a test bed, 
+since it may be hard to operate the components in all points of their maps while in a test bed,
 and experimental measurements are inherently noisy. 
 In this case, it is best to use the experimental data to calibrate and validate the theoretical model.
 The models employed here are based on first principles whenever possible, 
 with the inclusion of semi-empirical corrections when necessary. 
 
 This work favors breadth instead of depth: 
-for example, compressor and turbine loss mechanisms that do not alter qualitatively the engine dynamical behavior are not considered. 
+for example, the models are presented for a single spool turbojet with a single stage centrifugal compressor and also single stage axial turbine; and compressor and turbine loss mechanisms that do not alter qualitatively the engine dynamical behavior are not considered. 
 This, however, comes without a loss in generality. 
 These simplifications can be easily removed if more precision is required.
 
 The international standard for engine station numbering \cite{ARP755A} is used throughout this text. 
-It is summarized in \cref{fig:engine} for easy reference.
+It is summarized in \cref{fig:engine_schematic} for easy reference.
+
+\begin{figure}[b]
+    \caption{Schematic diagram of the modeled engine}
+    \label{fig:engine_schematic}
+    \includesvg{fig/engine_schematic}
+    \source{\authorsfigure}
+\end{figure}
+
 
 %Outline
 The rest of this thesis is organized as follows: 
 \begin{description}
-    \item[\Cref{sec:review}] is a literature review of the state of the art in engine and component modeling, 
-        including the basic elements to model the behavior of compressors, turbines and engines; 
-        instabilities in engine systems; and the numerical methods needed to bring these models to life. 
+    \item[\Cref{sec:review}] is a literature review of the state of the art in engine and component modeling. 
+        It describes the basic elements of compressors, turbines and engines; 
+        instabilities in engine systems; and the numerical methods employed to bring these models to life. 
         It is kept relatively brief and plenty of references are provided.
     \item[\Cref{sec:methods}] develops the methods for simulating a gas turbine engine and its components. 
         It contains tables summarizing the nonlinear system associated with each model 
         and comments on the specifics of the numerical methods used to simulate each aspect of the models. 
-        In the end, the engine for which these modeled in \cref{sec:results} is described.
+        In the end, the engine used for calculations in \cref{sec:results} is described.
     \item[\Cref{sec:results}] presents the results of the simulation, i.e.\ the component maps, operating line, etc.
     \item[\Cref{ch:conclusion}] presents the conclusion and final remarks of this work.
 \end{description}

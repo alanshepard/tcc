@@ -4,7 +4,7 @@
 
 \section{Nozzle model}
 The nozzle model must consider the both unchoked and choked flow regimes. 
-In unchoked flow, the nozzle static exit pressure, $P_8$ must be equal to the ambient pressure, $P_a$. 
+In unchoked flow, the nozzle static exit pressure ($P_8$) must be equal to the ambient pressure ($P_a$). 
 When the nozzle is choked, the exit velocity must be sonic 
 and the exit pressure must be greater than the ambient pressure.
 In order to be useful for the non-linear engine model, these conditions must be expressed as a single, preferably differentiable, equation. 
@@ -31,17 +31,18 @@ since the nozzle is convergent only. Therefore, the nozzle behavior for either c
 \end{equation}
 
 
-This function is continuous but has discontinuities in the derivative at the connecting points. 
+This function is continuous but its derivative has discontinuities at the connecting points. 
 Although the case $\pr{08}{8}<1$ has no physical meaning 
 (the stagnation pressure can never be less than the static pressure in isentropic flow), 
 it may arise during the iterative solution of the nonlinear system, 
 hence it is useful to have it mathematically well defined. 
-In this case it was simply defined as a constant chosen to ensure continuity. It will be shown that this choice also provides for a continuous derivative in the end.
+In this case it was simply defined as a constant chosen to ensure continuity. It will be shown that this choice also provides for a continuous derivative in the final function.
 
 The singularity in the derivative at sonic speed can be removed by using the \ac{MFP} instead of the mach number, since 
 $\left.\frac{\partial\acs{MFP}}{\partial M} \right|_{M=1} = 0$ 
 and 
-$\left.\frac{\partial M_8}{\partial P_{05}/P_a}\right|_{M_8=1}$ is finite.
+$\left.\frac{\partial M_8}{\partial P_{05}/P_a}\right|_{M_8=1}$ is finite, 
+therefore $\left.\frac{\partial\acs{MFP}_8}{\partial P_{05}/P_a}\right|_{M_8=1}=0$.
  Assuming the nozzle isentropic, the stagnation conditions at the throat match the ones at the turbine exit, so
 \begin{equation}
     \acs{MFP}_8 = \acs{MFP}_5 \tfrac{A_5}{A_8}
@@ -51,12 +52,13 @@ Using \cref{eqn:M8},
     \textstyle
     \acs{MFP}_5 \tfrac{A_5}{A_8} - \acs{MFP}(M_8(\pr{05}{a}), \gamma) = 0
 \end{equation}
-where \acs{MFP} is taken as a function of $M$ and $\gamma$ as defined in \cref{eqn:}.
+where \acs{MFP} is taken as a function of $M$ and $\gamma$ as defined in \cref{eqn:mfp2mach}.
 
 The final step is to remove the singularity in the derivative of the second term at $\pr{08}{8} = 1$. 
 It is easy to verify that multiplying the equation by $(\pr{08}{8}-1)$ removes the singularity and the resulting derivative at that point is zero. 
 Therefore, the nozzle constraint is
 \begin{equation}
+    \label{eqn:nozzle}
     \boxed{
     \textstyle
         \left(\pr{05}{a}-1\right)\acs{MFP}_5\frac{A_5}{A_8} - \left(\pr{05}{a}-1\right)\acs{MFP}\left(M_8\left(\pr{05}{a}\right), \gamma\right) = 0

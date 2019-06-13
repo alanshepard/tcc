@@ -15,13 +15,21 @@
         And whither then? I cannot say.
         }{-Bilbo Baggins}
 
-        It is possible to model a gas turbine engine's static and dynamic behavior in a realistic way from simple unidimensional flow considerations
+        This work has shown that it is possible to model a gas turbine engine's static and dynamic behavior in a realistic way from simple unidimensional flow considerations 
+        and semi-empirical corrections. This model is superior to the thermodynamic cycle model because it represents phenomena such as surge, choke, spool and gas dynamics 
+        which are not captured by the former. It is also an efficient way to review a design before incurring in manufacturing costs.
+        It does, however, requires more refined geometry data than the cycle model, but the data required is generally available very early in the design process, since it is mostly composed of the basic engine areas and angles.
+        
+        The model suggest in this work is most easily expressed as a implicit nonlinear system of equations. 
+        It must be solved numerically. Fortunately, there are many high quality computer codes which can deal with most of the problems encountered.
+        There is not, however, a good partial differential algebraic equation solver readily available, and this proved a challenge for modelling surge.
+        In general, the nonlinear systems proposed can exhibit convergence issues in the lack of appropriate initial guesses when using newton-type solvers.
+        A good alternative is to use a path following solver.
 
-        This results in nonlinear models which must be solved numerically. These nonlinear systems can exhibit convergence issues in the lack of appropriate initial guesses when using newton-type solvers. Homotopic/path following solvers may be an alternative.
-
-
-
-        \section{Future Work}
-        Implement the remaining loss models. Validate the model against experimental data. Run more dynamical simulations. Improve surge line. Design and test the engine controller.
+        For future work, we recommend the implementation of the remaining loss models for the compressor and of all loss models for the engine.
+        This will allow much more precise estimation of the engine performance, and so the comparative analysis of model predictions and experimental data should be performed again. 
+        We believe that the results will be much better.
+        Furthermore, the dynamical engine model should be implemented and tested against experimental data. The surge model using the derivative of the compressor and turbine characteristics should also be implemented, perhaps using some discretization of the map to calculate the partial derivatives or by converting the problem into a regular \ac{DAE} through the use of the chain rule.
+        After all this is done, the model will be ready for use in improving the VT-80 engine design, designing other engines and also designing and testing their control systems.
 
 \end{document}
