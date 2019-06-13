@@ -4,35 +4,35 @@
 
 \section{Nozzle model}
 The nozzle model must consider the both unchoked and choked flow regimes. 
-In unchoked flow, the nozzle static exit pressure ($P_8$) must be equal to the ambient pressure ($P_a$). 
+In unchoked flow, the nozzle static exit pressure ($P_9$) must be equal to the ambient pressure ($P_a$). 
 When the nozzle is choked, the exit velocity must be sonic 
 and the exit pressure must be greater than the ambient pressure.
 In order to be useful for the non-linear engine model, these conditions must be expressed as a single, preferably differentiable, equation. 
 
 Starting by the unchoked case, the exit mach number is given by
 \begin{equation}
-    M_8 = \sqrt{\frac{2}{\gamma-1}\left[\left(\frac{P_{05}}{P_8}\right)^{\frac{\gamma-1}{\gamma}}-1\right]}
+    M_9 = \sqrt{\frac{2}{\gamma-1}\left[\left(\frac{P_{05}}{P_9}\right)^{\frac{\gamma-1}{\gamma}}-1\right]}
 \end{equation}
-where $P_8=P_a$, and the choke pressure ratio is given by
+where $P_9=P_a$, and the choke pressure ratio is given by
 \begin{equation}
-    \left(\frac{P_{05}}{P_8}\right)^* = \left(\frac{\gamma+1}{2}\right)^\frac{\gamma}{\gamma-1}
+    \left(\frac{P_{05}}{P_9}\right)^* = \left(\frac{\gamma+1}{2}\right)^\frac{\gamma}{\gamma-1}
 \end{equation}
 
 For pressure ratios greater than the choke pressure ratio, the mach number does not increase above unity, 
 since the nozzle is convergent only. Therefore, the nozzle behavior for either choked or unchoked flow is
 \begin{equation}
-    \label{eqn:M8}
-    M_8\left(\tfrac{P_{05}}{P_a}\right) = \begin{cases}
-        0 &\text{if $\pr{08}{8} < 1$} \\
-        \sqrt{\frac{2}{\gamma-1}\left[\left(\frac{P_{08}}{P_a}\right)^{\frac{\gamma-1}{\gamma}}-1\right]} 
-        &\text{if $1 \leq \pr{08}{8} <\left(\frac{\gamma+1}{2}\right)^\frac{\gamma}{\gamma-1}$} \\
-        1 & \text{if $\pr{08}{8} \geq \left(\frac{\gamma+1}{2}\right)^\frac{\gamma}{\gamma-1}$ }
+    \label{eqn:M9}
+    M_9\left(\tfrac{P_{05}}{P_a}\right) = \begin{cases}
+        0 &\text{if $\pr{09}{9} < 1$} \\
+        \sqrt{\frac{2}{\gamma-1}\left[\left(\frac{P_{09}}{P_a}\right)^{\frac{\gamma-1}{\gamma}}-1\right]} 
+        &\text{if $1 \leq \pr{09}{9} <\left(\frac{\gamma+1}{2}\right)^\frac{\gamma}{\gamma-1}$} \\
+        1 & \text{if $\pr{09}{9} \geq \left(\frac{\gamma+1}{2}\right)^\frac{\gamma}{\gamma-1}$ }
     \end{cases}
 \end{equation}
 
 
 This function is continuous but its derivative has discontinuities at the connecting points. 
-Although the case $\pr{08}{8}<1$ has no physical meaning 
+Although the case $\pr{09}{9}<1$ has no physical meaning 
 (the stagnation pressure can never be less than the static pressure in isentropic flow), 
 it may arise during the iterative solution of the nonlinear system, 
 hence it is useful to have it mathematically well defined. 
@@ -41,27 +41,27 @@ In this case it was simply defined as a constant chosen to ensure continuity. It
 The singularity in the derivative at sonic speed can be removed by using the \ac{MFP} instead of the mach number, since 
 $\left.\frac{\partial\acs{MFP}}{\partial M} \right|_{M=1} = 0$ 
 and 
-$\left.\frac{\partial M_8}{\partial P_{05}/P_a}\right|_{M_8=1}$ is finite, 
-therefore $\left.\frac{\partial\acs{MFP}_8}{\partial P_{05}/P_a}\right|_{M_8=1}=0$.
+$\left.\frac{\partial M_9}{\partial P_{05}/P_a}\right|_{M_9=1}$ is finite, 
+therefore $\left.\frac{\partial\acs{MFP}_9}{\partial P_{05}/P_a}\right|_{M_9=1}=0$.
  Assuming the nozzle isentropic, the stagnation conditions at the throat match the ones at the turbine exit, so
 \begin{equation}
-    \acs{MFP}_8 = \acs{MFP}_5 \tfrac{A_5}{A_8}
+    \acs{MFP}_9 = \acs{MFP}_5 \tfrac{A_5}{A_9}
 \end{equation}
-Using \cref{eqn:M8},
+Using \cref{eqn:M9},
 \begin{equation}
     \textstyle
-    \acs{MFP}_5 \tfrac{A_5}{A_8} - \acs{MFP}(M_8(\pr{05}{a}), \gamma) = 0
+    \acs{MFP}_5 \tfrac{A_5}{A_9} - \acs{MFP}(M_9(\pr{05}{a}), \gamma) = 0
 \end{equation}
 where \acs{MFP} is taken as a function of $M$ and $\gamma$ as defined in \cref{eqn:mfp2mach}.
 
-The final step is to remove the singularity in the derivative of the second term at $\pr{08}{8} = 1$. 
-It is easy to verify that multiplying the equation by $(\pr{08}{8}-1)$ removes the singularity and the resulting derivative at that point is zero. 
+The final step is to remove the singularity in the derivative of the second term at $\pr{09}{9} = 1$. 
+It is easy to verify that multiplying the equation by $(\pr{09}{9}-1)$ removes the singularity and the resulting derivative at that point is zero. 
 Therefore, the nozzle constraint is
 \begin{equation}
     \label{eqn:nozzle}
     \boxed{
     \textstyle
-        \left(\pr{05}{a}-1\right)\acs{MFP}_5\frac{A_5}{A_8} - \left(\pr{05}{a}-1\right)\acs{MFP}\left(M_8\left(\pr{05}{a}\right), \gamma\right) = 0
+        \left(\pr{05}{a}-1\right)\acs{MFP}_5\frac{A_5}{A_9} - \left(\pr{05}{a}-1\right)\acs{MFP}\left(M_9\left(\pr{05}{a}\right), \gamma\right) = 0
     }
 \end{equation}
 This equation holds for all $\pr{05}{a} \geq 1$, is mathematically well defined for all real values of $\acs{MFP}_5$ and $\pr{05}{a}$, is one time differentiable and has a continuous derivative everywhere.
