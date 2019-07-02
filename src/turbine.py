@@ -62,7 +62,7 @@ class TurbineExtendedMap(Turbine):
 
         return (*res_turbine, MbMFP-Mb*MFP1)
 
-    def plot_map(self, ax, extent=None, samples=25, grid=False):
+    def plot_map(self, ax, extent=None, samples=25, grid=False, choke_line=True):
 
         if extent is None:
             xmin, xmax = ax.get_xlim()
@@ -71,18 +71,19 @@ class TurbineExtendedMap(Turbine):
             xmin, xmax, ymin, ymax = extent
 
         #Choke line
-        MFP_choke = mach2mfp(1, self.gam)
-        sol = self.general_explicit_map({'MFP1': 0.9*MFP_choke, 'MFP2': 0.9*MFP_choke})
-        MbMFP = np.linspace(sol.params['MbMFP'], xmax, samples*5)
-        pr_choke = np.empty_like(MbMFP)
-        for i, MbMFP_ in enumerate(MbMFP):
-            if sol.success:
-                old_sol = sol
-            sol = self.general_explicit_map({'MbMFP': MbMFP_, 'MFP2': MFP_choke}, 
-                                            initial_guesses=old_sol.params)
-            pr_choke[i] = sol.params['P0_ratio'] if sol.success else np.nan
+        if choke_line:
+            MFP_choke = mach2mfp(1, self.gam)
+            sol = self.general_explicit_map({'MFP1': 0.9*MFP_choke, 'MFP2': 0.9*MFP_choke})
+            MbMFP = np.linspace(sol.params['MbMFP'], xmax, samples*5)
+            pr_choke = np.empty_like(MbMFP)
+            for i, MbMFP_ in enumerate(MbMFP):
+                if sol.success:
+                    old_sol = sol
+                sol = self.general_explicit_map({'MbMFP': MbMFP_, 'MFP2': MFP_choke}, 
+                                                initial_guesses=old_sol.params)
+                pr_choke[i] = sol.params['P0_ratio'] if sol.success else np.nan
 
-        ax.plot(MbMFP, 1/pr_choke, 'k--', linewidth=0.8)
+            ax.plot(MbMFP, 1/pr_choke, 'k--', linewidth=0.8)
 
 
         #Map

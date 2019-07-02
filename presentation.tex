@@ -1,64 +1,329 @@
-\documentclass{beamer}
+\documentclass[aspectratio=1610]{beamer}
 
 \input{preamble/usepackages}
+\usepackage[brazil]{babel}
+\usepackage{multimedia}
 
-\usetheme[sectionpage=none, progressbar=head]{metropolis}
+\usetheme[%sectionpage=none,
+          %numbering=fraction,
+          progressbar=head]{metropolis}
 \setbeamercolor{background canvas}{bg=white}
 
-\title{Simulation of Gas Turbine Engines}
+\title{Simulação de motores a jato}
 \author{Bernardo Bahia Monteiro}
+\institute{Universidade Federal de Minas Gerais}
+\date{26 de junho de 2019}
 
 \begin{document}
 \maketitle
+
+\begin{frame}
+\frametitle{Agenda}
 \tableofcontents
+\end{frame}
 
 \clearpage
 
-\section{Engine overview}
-{\setbeamercolor{background canvas}{bg=black}
-\begin{frame}
-\frametitle{Engine overview}
-\includegraphics[width=\textwidth]{fig/JetsMuntVT-80.jpg}
+\section{Introdução} %Motivação
+\begin{frame}[t]
+\frametitle{O motor a jato}
+\centering
+
+%\the\textwidth
+
+\only<1>{\includesvg{fig/engine_schematic_presentation1}}
+\only<2>{\includesvg{fig/engine_schematic_presentation2}}
+
 \end{frame}
+\note{
+Este é um desenho esquemático do motor com o qual vamos trabalhar. Trata-se de um motor turbojato com compressor centrífugo e turbina axial.
+
+A numeração das estações dentro do motor segue o padrão da indústria:
+a estação 2 é a entrada do compressor; 3 saída do compressor, 4 entrada da turbina; 5 saída da turbina; e 9 saída do bocal.
+}
 
 \begin{frame}
-\frametitle{Engine overview: X-ray}
-\includegraphics[width=\textwidth]{fig/JetsMuntVT-80X-ray_enhanced_invert.jpg}
+\frametitle{Por que simular um motor a jato?}
+Verificar o projeto fora do ponto de projeto
+
+\vspace{1em}
+
+Desenvolver o sistema de controle. Queremos operar perto da
+    \begin{itemize}
+        \item velocidade máxima do eixo
+        \item temperatura máxima da turbina
+        \item limite de estabilidade do compressor
+        \item limite de estabilidade da queima
+        \item região de máxima eficiência
+    \end{itemize}
+\end{frame}
+
+%\subsection{Estabilidade de um motor a jato}
+\begin{frame}
+    \frametitle{Extinção de chama (blowout)}
+        \begin{center}
+        \includegraphics[height=3in]{fig/combustion_stability}
+        \end{center}
+        \vspace{-1em}
+        {\scriptsize\cite{walsh2004gas}}
+\end{frame}
+
+{
+\setbeamercolor{background canvas}{bg=black}
+\begin{frame}
+    \frametitle{Purga do compressor}
+    \centering
+    \pgfdeclareimage[width=4in]{surgethumb}{fig/surge_thumb}
+    \movie[width=4in, height=3in]{\pgfuseimage{surgethumb}}{../fig/surge.mp4}
 \end{frame}
 }
-\begin{frame}
-\frametitle{Engine overview: schematic}
-\includesvg[width=\textwidth]{fig/engine_schematic}
-\end{frame}
-
-\section{Compressor}
 
 \begin{frame}
-\frametitle{Compressor velocity triangles}
-\includesvg[width=\textwidth,height=0.7\textheight]{fig/impeller_schematic}
-\begin{description}
-    \item[$U$] \acl{U}
-    \item[$V$] \acl{V}
-    \item[$W$] \acl{W}
-\end{description}
-\end{frame}
+    \frametitle{Como simular um motor a jato?}
+     Comportamento de cada componente
+            \begin{itemize}
+                \item relação entre $\dot{m}$, $\omega$, e as razões de $P$ e  $T$
+            \end{itemize}
+            \vspace{1em}
+     Casamento dos componentes
+            \begin{itemize}
+                \item equações de conservação
+            \end{itemize}
 
-\section{Turbine}
-
-\begin{frame}
-\frametitle{Turbine velocity triangles}
-\includesvg[width=\textwidth, height=0.7\textheight]{fig/turbine_euler}
 \end{frame}
 
 
-\section{Engine Simulation}
 \begin{frame}
-\frametitle{Operation line}
-\makebox[\linewidth]{\includegraphics[width=\paperwidth]{fig/wline.pdf}}
+    \frametitle{Números adimensionais}
+    
+    \begin{columns}
+        \column{0.5\textwidth}
+        \begin{align*}
+            M_b &= \frac{\omega r}{a_{0i}} \\[2em]
+            \acs{MFP}_n &= \MFP{n} = \MFPalt{n} 
+        \end{align*}
+        
+        \column{0.5\textwidth}
+        \only<2>{\centering\includegraphics{fig/mfp_fig}}
+    \end{columns}
+\end{frame}
+
+\section{Modelo dos componentes} %compressor e turbina
+\begin{frame}
+    \frametitle{Mapa do compressor}
+    \centering
+    \includegraphics{fig/compressor_map}
+\end{frame}
+
+\note{Mas como esse mapa é gerado?}
+\begin{frame}
+\frametitle{Modelo do compressor}
+
+\begin{block}{Variáveis}
+    \[
+        \acs{MFP}_2, \quad \acs{MFP}_3, \quad M_{bc}, \quad \tr{03}{02}, \quad \pr{03}{02}
+    \]
+\end{block}
+
+\vfill
+    
+\begin{block}{Equações}
+\begin{itemize}
+    \item Conservação do momento angular (equação de Euler)
+    \item Conservação de massa
+    \item Modelo de perdas
+\end{itemize}
+\end{block}
+    \vfill
+    \textbf{Graus de liberdade:} 2 
+\end{frame}
+
+
+\note{O fluxo de massa na entrada e na saída determina a velocidade do fluído. 
+Em conjunto com  a rotação, os angulos do escoamento são determinados. 
+a equação de conservação do momento angular, chamada equação de Euler, 
+liga esses ângulos ao aumento de entalpia ideal que ocorre no compressor.
+finalmente o modelo de perdas transforma o aumento de entalpia ideal em um aumento de entalpia real, que é usado para calcular o aumento de temperatura e um aumento de entalpia do processo isentrópico equivalente, que é usado para calcular o aumento de pressão no compressor.
+}
+
+\begin{frame}
+    \frametitle{Modelo de perdas do compressor}
+    \begin{columns}
+        \column{0.5\textwidth}
+        \begin{itemize}
+            \item Perda por incidência
+            \item Perda por carga na pá
+            \item Perda por fricção
+        \end{itemize}
+        \column{0.5\textwidth}
+
+        \only<2>{\includesvg{fig/incidence_loss1}}
+        \only<3>{\includesvg{fig/incidence_loss2}}
+        \only<4>{\includesvg{fig/incidence_loss3}}
+    \end{columns}
+
 \end{frame}
 
 \begin{frame}
-\includegraphics[width=\textwidth]{fig/stations1000K}
+    \frametitle{Mapa da turbina}
+    \includegraphics{fig/turbine_map_typical}
+\end{frame}
+
+\note{Mas como esse mapa é gerado?}
+\begin{frame}
+\frametitle{Modelo da turbina}
+
+\begin{block}{Variáveis}
+    \[
+        \acs{MFP}_4, \quad \acs{MFP}_5, \quad M_{bt}, \quad \tr{05}{04}, \quad \pr{05}{04}
+    \]
+\end{block}
+
+\vfill
+    
+\begin{block}{Equações}
+\begin{itemize}
+    \item Conservação do momento angular (equação de Euler)
+    \item Conservação de massa
+    \item Modelo de perdas
+\end{itemize}
+\end{block}
+    \vfill
+    \textbf{Graus de liberdade:} 2 
+\end{frame}
+
+\section{Modelo do motor} % dinâmico e estático
+\begin{frame}
+    \frametitle{Modelo estático do motor}
+
+    \begin{block}{Variáveis}
+        \begin{tabular}{ll}
+            Compressor & $ \acs{MFP}_2, \quad \acs{MFP}_3, \quad M_{bc}, \quad \tr{03}{02}, \quad \pr{03}{02}$ \\
+            Turbina    & $ \acs{MFP}_4, \quad \acs{MFP}_5, \quad M_{bt}, \quad \tr{05}{04}, \quad \pr{05}{04}$ \\
+            Adicionais & $\dot{m}_f, \quad T_{04}$ \\
+        \end{tabular}
+    \end{block}
+    \vfill
+    \begin{block}{Equações}
+    \begin{itemize}
+        \item Modelo do compressor (3 eq.) e da turbina (3 eq.)
+        \item Conservação de energia no eixo
+        \item Conservação de massa na câmara de combustão
+        \item Adição de energia pela queima
+        \item Expansão isentrópica no bocal 
+    \end{itemize}
+    \end{block}
+
+    \textbf{Graus de liberdade:} 1 
+\end{frame}
+
+\begin{frame}
+    \frametitle{Modelo dinâmico do motor}
+
+    \begin{block}{Variáveis}
+        \begin{tabular}{ll}
+            Compressor & $ \acs{MFP}_2, \quad \acs{MFP}_3, \quad M_{bc}, \quad \tr{03}{02}, \quad \pr{03}{02}$ \\
+            Turbina    & $ \acs{MFP}_4, \quad \acs{MFP}_5, \quad M_{bt}, \quad \tr{05}{04}, \quad \pr{05}{04}$ \\
+            Adicionais & $ t, \quad \dot{m}_f, \quad T_{04}, \quad P_{04}, \quad\rho_{04}$ \\
+        \end{tabular}
+    \end{block}
+    \vfill
+    \begin{block}{Equações}
+    \begin{compactitem}
+        \item Modelo do compressor (3 eq.) e da turbina (3 eq.)
+        \item Rotação do compressor igual a da turbina
+        \item Conservação de energia no eixo permitindo aceleração
+        \item Conservação de massa no queimador (densidade variável)
+        \item Conservação de quantidade de movimento no queimador
+        \item Adição de energia pela queima
+        \item Expansão isentrópica no bocal
+        \item Equação do gás ideal no queimador
+    \end{compactitem}
+    \end{block}
+
+    \textbf{Graus de liberdade:} 2 
+    \hspace{6em}
+    \textbf{Estados:} $\omega$, $\dot{m}$, $\rho_{04}$
+\end{frame}
+
+\section{Aspectos numéricos}
+\begin{frame}
+    \frametitle{Tipos de sistemas não lineares implícitos}
+    \begin{columns}
+        \column{0.3\textwidth}
+        \only<1->{\[ f(x) = 0 \]}
+        \column{0.3\textwidth}
+        \only<2->{\[ f(t, x, \dot{x}) = 0 \]}
+        \column{0.3\textwidth}
+        \only<4->{\[ f(t, x, \dot{x}, \nabla x) = 0 \]}
+
+    \end{columns}
+        \vspace{1em}
+        \makebox[0pt][t]{%
+  \raisebox{-\totalheight}[0pt][0pt]{
+        \hspace{0.33\textwidth}
+        \only<3>{\includegraphics[width=0.3\textwidth]{fig/path_following.png}
+        \scriptsize\cite{Allgower1997}
+        }
+        }}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Sistemas não lineares implícitos}
+    \centering
+    \begin{tabular}{lccccc}
+        \toprule
+        modelo & variáveis & \multicolumn{3}{c}{equações} & DOF \\ 
+               &              & alg. & ODE & PDE          &     \\\midrule
+        compressor       & 5  & 3    & -   & -    & 2 \\
+        turbina          & 5  & 3    & -   & -    & 2 \\
+        motor (estático) & 12 & 11   & -   & -    & 1 \\
+        motor (dinâmico) & 15 & 10   & 3   & -    & 2 \\
+        purga (estática) & 12 & 10   & -   & 1    & 1 \\
+        \bottomrule
+    \end{tabular}
+\end{frame}        
+
+
+\section{Resultados}
+
+\begin{frame}
+\frametitle{Linha de operação}
+\makebox[\linewidth]{\includegraphics[width=\paperwidth, height=0.95\textheight, keepaspectratio]{fig/wline.pdf}}
+\end{frame}
+
+\begin{frame}
+\frametitle{Ponto de operação $@ T_4=1000\si{K}$}
+\centering
+\includegraphics[width=\paperwidth, height=0.95\textheight, keepaspectratio]{fig/stations1000K}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Comparação com dados experimentais}
+    \centering
+    \includegraphics[width=\paperwidth, height=0.95\textheight, keepaspectratio]{fig/experimental_presentation}
+\end{frame}
+
+\section{Conclusão}
+\begin{frame}
+    \frametitle{Conclusão}
+    \begin{itemize}
+        \item É possível simular realisticamente um motor a jato
+        \item Os modelos são expressos naturalmente como sistemas não lineares implícitos
+        \item Esses sistemas devem ser resolvidos por métodos numéricos robustos
+    \end{itemize}
+    \vfill
+    \begin{block}{Trabalhos futuros}
+        \begin{itemize}
+            \item Melhorar modelo de perdas
+            \item Implementar modelo de purga
+            \item Validadar com dados experimentais
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \huge Obrigado!
 \end{frame}
 
 

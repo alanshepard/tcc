@@ -18,7 +18,6 @@ axes.labelpad: 8
 axes.titlepad: 10  
 xtick.major.width: 0.6    # major tick width in points
 xtick.minor.width: 0.4    # minor tick width in points
-xtick.top: False
 xtick.direction: in
 
 ytick.right: False

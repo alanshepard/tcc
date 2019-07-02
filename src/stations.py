@@ -87,7 +87,7 @@ ax_ratio.plot(x_interp, tr_interp, 'k-')
 ax_ratio.set_yticks([]) #Remove y axis from axis_ratio
 
 ax_ratio.set_xticks(x)
-ax_ratio.set_xticklabels(('02','03','04','05','8'))
+ax_ratio.set_xticklabels(('02','03','04','05','9'))
 ax_ratio.set_xlabel('Station')
 
 ax_ratio.set_ylim(None, 5)
