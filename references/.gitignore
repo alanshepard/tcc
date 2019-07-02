@@ -1,7 +1,8 @@
 *.pdf
-*djvu
+*.djvu
 *.pptx
 *.docx
+*.gif
 
 #JabRef files
 *.sav
