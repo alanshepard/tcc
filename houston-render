@@ -1,5 +1,0 @@
-#!/bin/bash
-
-rsync -avz ~/Dropbox/tcc/report/ houston.mooo.com:tcc_rsync/report/ \
-    && ssh houston.mooo.com "cd tcc_rsync/report && latexmk $1" \
-    && rsync -avz houston.mooo.com:tcc_rsync/report/ ./ --include='*.pdf' --exclude='*'
