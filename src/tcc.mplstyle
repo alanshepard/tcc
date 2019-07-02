@@ -1,4 +1,5 @@
 text.usetex: True
+text.latex.unicode: True
 grid.linewidth: 0.2
 grid.linestyle: -
 grid.color: grey
