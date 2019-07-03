@@ -31,13 +31,13 @@ Multiplying both sides by the rotational speed ($\omega$),
                 = \dot{m} \vec{\omega} \cdot (\vec{r}_{\acs{e}}\cross\vec{V}_{\acs{e}} - \vec{r_{\acs{i}}}\cross\vec{V}_{\acs{i}}) 
 \end{equation}
 
-Assuming that the system is adiabatic and using the first law of thermodynamics, the specific enthalpy change is given by
+Assuming that the system is adiabatic and using the first law of thermodynamics, the specific stagnation enthalpy change is given by
 
 \begin{align}
-    \Delta h &= \frac{\text{power}}{\dot{m}} 
+    \Delta h_0 &= \frac{\text{power}}{\dot{m}} 
              = \vec{\omega} \cdot (\vec{r}_{\acs{e}}\cross\vec{V}_{\acs{e}} - \vec{r}_{\acs{i}}\cross\vec{V}_{\acs{i}}) \\
-    \Delta h &= \omega (r_{\acs{e}} {V_u}_{\acs{e}} - r_{\acs{i}} {V_u}_{\acs{i}}) \\
-    \Delta h &= U_{\acs{e}} {V_u}_{\acs{e}} - U_{\acs{i}} {V_u}_{\acs{i}} 
+    \Delta h_0 &= \omega (r_{\acs{e}} {V_u}_{\acs{e}} - r_{\acs{i}} {V_u}_{\acs{i}}) \\
+    \Delta h_0 &= U_{\acs{e}} {V_u}_{\acs{e}} - U_{\acs{i}} {V_u}_{\acs{i}} 
     \label{eqn:euler}
 \end{align}
 where the subscript $u$ denotes the tangential component of the velocity and $U$ is the rotor speed at its mean square radius.
@@ -82,7 +82,7 @@ Substituting \cref{eqn:V_u_3_corrected} in \cref{eqn:euler} and dividing both si
     \acs{load_coef}_c = \acs{slip_factor}(1-\acs{flow_coef}_3\tan\beta_3) - \frac{U_2 {V_u}_2}{U_3^2} 
 \end{equation}
 where $\phi_3 \triangleq \frac{\dot{m}}{A_3 \rho_3 U_3} = \frac{W_{3r}}{U_3}$ is the flow parameter\index{flow parameter} at the compressor exit
-and $\psi_c \triangleq \frac{\Delta h}{U_3^2}$ is the compressor power coefficient.
+and $\psi_c \triangleq \frac{\Delta h_0}{U_3^2}$ is the compressor power coefficient.
 
 The second term accounts for prewhirl\index{prewhirl} in the flow entering the compressor, e.g due to \ac{IGV}.
 In the case of no prewhirl, ${V_u}_2 = 0$, thus 
@@ -102,7 +102,7 @@ In the case of no prewhirl, ${V_u}_2 = 0$, thus
 
 Applying \cref{eqn:euler} to an axial turbine stage (\cref{fig:turbine_euler}), we have
 \begin{equation}
-    \Delta_h = U_5V_5-U_4V_5
+    \Delta h_0 = U_5V_5-U_4V_5
 \end{equation}
 The tangential fluid velocities can be expressed in terms of their axial components, i.e.\
 \begin{align}
@@ -111,14 +111,14 @@ The tangential fluid velocities can be expressed in terms of their axial compone
 \end{align}
 Then,
 \begin{equation}
-    \Delta h = U_5^2 + U_5 V_{5x}\tan\beta_5 - U_4 V_{4x}\tan\alpha_4
+    \Delta h_0 = U_5^2 + U_5 V_{5x}\tan\beta_5 - U_4 V_{4x}\tan\alpha_4
 \end{equation}
 And finally, making the equation nondimensional by diving both sides by the blade speed at the exit $U_5$, we get
 \begin{equation}
     \boxed{\psi = 1 + \phi_5\tan\beta_5-\left(\frac{r_4}{r_5}\right)^2\phi_4\tan\alpha_4}
 \end{equation}
 where $\phi_4 = \frac{V_{4x}}{U_5}$ and $\phi_5 = \frac{V_{5x}}{U_5}$ are the flow parameters and
-$\psi=\frac{\Delta h}{U_5^2}$ is the power coefficient for the turbine.
+$\psi=\frac{\Delta h_0}{U_5^2}$ is the power coefficient for the turbine.
 
 \section{Loss models for centrifugal compressors}
 \label{sec:compressor_losses}
@@ -134,26 +134,26 @@ and result in a increase in the temperature ratio through the compressor \cite{G
 Using these definitions, the actual and isentropic enthalpy changes through the compressor are calculate as follows
 
 \begin{align}
-    \Delta h_{\text{actual}} &= \Delta h_{\text{euler}} + \sum_{\substack{
+    \Delta h_{0\text{actual}} &= \Delta h_{0\text{euler}} + \sum_{\substack{
                                                             \text{parasitic} \\ 
                                                             \text{losses}
                                                         }}
-                                                          \Delta h \\
-    \Delta h_{\text{isen}}  &= \Delta h_{\text{euler}} - \sum_{\substack{
+                                                          \Delta h_0 \\
+    \Delta h_{0\text{isen}}  &= \Delta h_{0\text{euler}} - \sum_{\substack{
                                                             \text{internal} \\ 
                                                             \text{losses}
                                                         }}
-                                                          \Delta h
+                                                          \Delta h_0
 \end{align}
 
 The temperature and pressure ratios are given by
 \begin{align}
-    \frac{T_{03}}{T_{02}} &= 1 + \frac{\Delta h_{\text{actual}}}{c_p T_{02}} \\
-    \frac{P_{03}}{P_{02}} &= \left( 1 + \frac{\Delta h_{\text{isen}}}{c_p T_{02}}\right)^{\frac{\gamma}{\gamma-1}}
+    \frac{T_{03}}{T_{02}} &= 1 + \frac{\Delta h_{0\text{actual}}}{c_p T_{02}} \\
+    \frac{P_{03}}{P_{02}} &= \left( 1 + \frac{\Delta h_{0\text{isen}}}{c_p T_{02}}\right)^{\frac{\gamma}{\gamma-1}}
 \end{align}
 and the isentropic and polytropic efficiencies can then be readily calculated as
 \begin{align}
-    \eta_t &= \frac{\Delta h_{\text{isen}}}{\Delta h_{\text{actual}}}\\
+    \eta_t &= \frac{\Delta h_{\text{isen}}}{\Delta h_{0\text{actual}}}\\
     \eta_p &= \frac{\gamma-1}{\gamma} \left(\frac{\log\frac{P_{02}}{P_{01}}}
                                                  {\log\frac{T_{02}}{T_{01}}}
                                      \right)
