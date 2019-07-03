@@ -1,7 +1,3 @@
-\documentclass[tcc]{subfiles}
-
-\begin{document}
-
 \chapter{Methods}
 \label{sec:methods}
 \epigraph{It's not denial. \\ I'm just very selective about the reality I accept.}{-Calvin}
@@ -26,7 +22,7 @@ For incompressible flow this leads to the collapse of the constant rotational sp
 
 \section{Compressor model}
 
-\subfile{text/body/compressor_map}
+\input{text/body/compressor_map}
 
 To write Euler's equation \cref{eqn:euler} in terms of the nondimensional parameters introduced in \cref{sec:nondimensional}, it suffices to rewrite $\phi_3$ and $\psi$ as a function of them. Thus
 \begin{multline}
@@ -77,7 +73,7 @@ This is a more physical model than the one suggested by Oh et al., and captures 
 The compressor model is summarized in \cref{map:compressor}.
 
 \section{Turbine model}
-\subfile{text/body/turbine_map}
+\input{text/body/turbine_map}
 
 The turbine model is summarized in \cref{map:turbine}. 
 Its development is mostly analogous to that of the compressor, with the exception of the loss and deviation models. 
@@ -104,7 +100,7 @@ Now we divide the numerator and the denominator by $P_{0e}$ and isolate the pres
 \end{equation}
 This pressure ratio loss term must be multiplied to the ideal (isentropic) pressure ratio given by the second term of \cref{eqn:turb_res_pr}. If more than one blade row is considered (e.g.\ one for the stator and another one for the rotor) the pressure ratio losses ($Y$) for each must be joined by multiplication.
 
-\subfile{text/body/nozzle}
+\input{text/body/nozzle}
 
 
 \section{Engine static model}
@@ -135,7 +131,7 @@ The model was derived considering following constraints:
 \end{enumerate}
 
 This model is shown in \cref{map:engine}. It has 12 variables and 11 equations, so it has a one dimensional solution set i.e. the work line.
-\subfile{text/body/engine_map}
+\input{text/body/engine_map}
 
 \section{Engine dynamical model}
 The dynamical engine model adopted was the one described in \cref{sec:review:dynamics}. It is similar to the one described in \cref{sec:model:static} with the following changes:
@@ -149,7 +145,7 @@ The dynamical engine model adopted was the one described in \cref{sec:review:dyn
 
 This results in the nonlinear system shown in \cref{model:dynamic}. It has 14 variables and 13 equations, thus it is a single input system, like the static model. For a control problem, the input variable would be the fuel mass flow.
 
-\subfile{text/body/dynamical_map}
+\input{text/body/dynamical_map}
 
 \section{Surge model}
 
@@ -232,4 +228,3 @@ to be around 2.2 based on similar engines. Engines and components drawings with 
     \source{\cite{engine-manual}}
 \end{table}
 
-\end{document}
