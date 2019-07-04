@@ -5,7 +5,7 @@ When the nozzle is choked, the exit velocity must be sonic
 and the exit pressure must be greater than the ambient pressure.
 In order to be useful for the non-linear engine model, these conditions must be expressed as a single, preferably differentiable, equation. 
 
-Starting by the unchoked case, the exit mach number is given by
+Starting by the unchoked case, the exit Mach number is given by
 \begin{equation}
     M_9 = \sqrt{\frac{2}{\gamma-1}\left[\left(\frac{P_{05}}{P_9}\right)^{\frac{\gamma-1}{\gamma}}-1\right]}
 \end{equation}
@@ -14,7 +14,7 @@ where $P_9=P_a$, and the choke pressure ratio is given by
     \left(\frac{P_{05}}{P_9}\right)^* = \left(\frac{\gamma+1}{2}\right)^\frac{\gamma}{\gamma-1}
 \end{equation}
 
-For pressure ratios greater than the choke pressure ratio, the mach number does not increase above unity, 
+For pressure ratios greater than the choke pressure ratio, the Mach number does not increase above unity, 
 since the nozzle is convergent only. Therefore, the nozzle behavior for either choked or unchoked flow is
 \begin{equation}
     \label{eqn:M9}
@@ -34,7 +34,7 @@ it may arise during the iterative solution of the nonlinear system,
 hence it is useful to have it mathematically well defined. 
 In this case it was simply defined as a constant chosen to ensure continuity. It will be shown that this choice also provides for a continuous derivative in the final function.
 
-The singularity in the derivative at sonic speed can be removed by using the \ac{MFP} instead of the mach number, since 
+The singularity in the derivative at sonic speed can be removed by using the \ac{MFP} instead of the Mach number, since 
 $\left.\frac{\partial\acs{MFP}}{\partial M} \right|_{M=1} = 0$ 
 and 
 $\left.\frac{\partial M_9}{\partial P_{05}/P_a}\right|_{M_9=1}$ is finite, 

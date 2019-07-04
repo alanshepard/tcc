@@ -163,7 +163,7 @@ In this section, the numerical approach used to calculate each of the models des
 \subsection{Generation of component maps}
 A classic nonlinear solver was used, coupled with a breadth-first search approach for propagating previous solutions as initial guesses. 
 Firstly, the initial point in the $x$ and $y$-axis is chosen randomly within the choke boundaries, 
-pressure and temperature ratios are unit, mach numbers are between 0 an 1. 
+pressure and temperature ratios are unit, Mach numbers are between 0 an 1. 
 If convergence is achieved a breadth-first search considering that each point in the grid is a graph node connected to the points up, down, left, right and in the diagonals is done.
 Considering this search tree, the solution for each parent is used as a initial guess for its children. Provided that the grid is thin enough, this provides very good initial guesses for the nonlinear solver, ensuring fast and robust convergence. Furthermore, since each node has 8 neighbours, they can have up to 8 different initial guesses, which makes this approach even more robust.
 
