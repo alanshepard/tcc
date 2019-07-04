@@ -6,7 +6,7 @@ The simulation of a gas turbine engine is fundamentally a multidisciplinary matt
 It encompass not only the fields of turbomachinery and compressible flow, 
 but also those of dynamical systems and numerical analysis.
 This chapter is a literature review on these fundamental fields with the goal of 
-providing subsidy for the models derivations in \cref{sec:methods}.
+providing subsidy for the models derivations in \Cref{sec:methods}.
 
 Since only the basic equations of compressible flow will be used, they will not be reproduced here. 
 The reader should refer to \textcite{Anderson, Shapiro}, 
@@ -58,7 +58,7 @@ In fact, $\dot{m} = \rho {W_r}_3 A_3$, where $A_3$ is the ring shaped exit area 
     \caption*{The velocities ($W$) relative to the impeller exit (left) and inducer inlet (right) are shown. $U$ is the impeller tip velocity. The positive sign is defined in the direction of $U$ for the inlet and opposite to it at the exit, for historical reasons.}
 \end{figure}
 
-From the velocity triangles in \cref{fig:compressor_schematic}, 
+From the velocity triangles in \Cref{fig:compressor_schematic}, 
 and assuming that the flow exits tangential to the blade surface,
 \begin{equation}
     \label{eqn:V_u_3}
@@ -66,7 +66,7 @@ and assuming that the flow exits tangential to the blade surface,
 \end{equation}
 
 %Due to aerodynamic blockage at the tip and flow distortions caused by viscous efects, flow diffusion, clearences and blade aspect ratio,
-%${V_u}_3$ is actually smaller than what is predicted by \cref{eqn:V_u_3}.
+%${V_u}_3$ is actually smaller than what is predicted by \Cref{eqn:V_u_3}.
 %This is accounted for by the \acf{impeller_distortion_factor}\index{impeller distortion factor}.
 In a real impeller, the flow does not leave the blade perfectly tangential to its surface. 
 This is accounted by the introduction of a \acf{slip_factor} \cite{Wiesner1967,Aungier1995}.
@@ -77,7 +77,7 @@ The corrected equation for the absolute tangential velocity is then
     \boxed{{V_u}_3 = \acs{slip_factor}(U_3 - {W_r}_3 \tan\beta_3)}
 \end{equation}
 
-Substituting \cref{eqn:V_u_3_corrected} in \cref{eqn:euler} and dividing both sides by ${U_3^2}$, we have
+Substituting \Cref{eqn:V_u_3_corrected} in \Cref{eqn:euler} and dividing both sides by ${U_3^2}$, we have
 \begin{equation}
     \acs{load_coef}_c = \acs{slip_factor}(1-\acs{flow_coef}_3\tan\beta_3) - \frac{U_2 {V_u}_2}{U_3^2} 
 \end{equation}
@@ -100,7 +100,7 @@ In the case of no prewhirl, ${V_u}_2 = 0$, thus
     \source{author's figure}
 \end{figure}
 
-Applying \cref{eqn:euler} to an axial turbine stage (\cref{fig:turbine_euler}), we have
+Applying \Cref{eqn:euler} to an axial turbine stage (\Cref{fig:turbine_euler}), we have
 \begin{equation}
     \Delta h_0 = U_5V_{u5}-U_4V_{u4}
 \end{equation}
@@ -161,7 +161,7 @@ and the isentropic and polytropic efficiencies can then be readily calculated as
 
 \textcite{Aungier1995} criticizes this calculation because the losses should be regarded as changes in entropy, and not in enthalpy. Despite this shortcoming, the enthalpy approach is widely used.
 
-The losses generally accounted for are listed in \cref{tbl:compressor_loss_mechanisms}. According to \textcite{Gravdahl2004,Gravdahl1999,Watson1982}, the most important losses for stability considerations are the incidence losses and the skin friction losses. The former is destabilizing because it introduces the positive slope of the left hand side of the compressor map. The fluid friction losses are stabilizing because they increase with mass flow, therefore contributing to the decrease in the derivative of the iso-speed lines.
+The losses generally accounted for are listed in \Cref{tbl:compressor_loss_mechanisms}. According to \textcite{Gravdahl2004,Gravdahl1999,Watson1982}, the most important losses for stability considerations are the incidence losses and the skin friction losses. The former is destabilizing because it introduces the positive slope of the left hand side of the compressor map. The fluid friction losses are stabilizing because they increase with mass flow, therefore contributing to the decrease in the derivative of the iso-speed lines.
 \begin{table}
 \caption{Loss mechanisms for a centrifugal compressor}
 \label{tbl:compressor_loss_mechanisms}
@@ -269,7 +269,7 @@ The generation of the maps is a substantial effort that must be carried independ
 either by scaling maps from similar designs, obtaining the maps experimentally 
 or using semi-empirical methods as described in this work. 
 On the other hand, disregarding the dynamical behavior of the combustion chamber makes the model unable to predict surge. The surge can still be included through a surge line in the compressor map but,
-depending on how the map was obtained, this line may not be accurate because the surge depends on the components downstream from the compressor, as discussed in \cref{sec:review:surge}.
+depending on how the map was obtained, this line may not be accurate because the surge depends on the components downstream from the compressor, as discussed in \Cref{sec:review:surge}.
 
 \section{Engine stability: surge}
 \label{sec:review:surge}
@@ -287,7 +287,7 @@ Normally the system can not recover from surge on its own,
 and either a reduction in fuel flow or the opening of bleed valves is required to return the engine to its steady state operation.
 \cite{Willems1999}.
 
-The surge phenomenon arises naturally from the dynamical model of a compressor system if density transients are taken into account, such as the one from \cref{sec:review:dynamics} \cite{Greitzer1976}, 
+The surge phenomenon arises naturally from the dynamical model of a compressor system if density transients are taken into account, such as the one from \Cref{sec:review:dynamics} \cite{Greitzer1976}, 
 and has good agreement with experimental data \cite{Greitzer1976_2,Gravdahl2004}.
 It is nevertheless good to have a criterion for the onset of surge, if only to draw the surge line on the compressor map.
 A simple model for surge with all the fundamental elements is due to \textcite{Fink1988}. This model includes a compressor, a plenum of known volume, some plumbing of known length and an adjustable throttle valve. 
@@ -310,10 +310,10 @@ First, one should notice that, since $T'$ is always positive, surge can only occ
 i.e.\ when an increase in mass flow is accompanied by an increase in the pressure ratio supplied by the compressor. 
 \Cref{eqn:surge1} shows that if this increase in pressure ratio does not lead to an equal or greater increase in mass flow through the throttle, the increase in compressor mass flow ratio will increase the plenum pressure above that which the compressor can supply, and this will result in backflow. In the negative part of the compressor characteristic, it will be able again to supply the demanded pressure, now made smaller due to backflow. Since this condition will lead to an ever decrease in the plenum pressure, the flow will eventually invert its direction again, and this results in the periodic behavior of surge.
 
-Conversely, \cref{eqn:surge2} represents the destabilizing effect of $B$ in the system.
+Conversely, \Cref{eqn:surge2} represents the destabilizing effect of $B$ in the system.
 For large values of $B$, that is, large burner volumes, the surge limit approaches the point where the compressor characteristic has zero derivative. Since the plenum is very big, any change in the mass flow of the throttle will make a very small difference in the plenum pressure, and so any simultaneous increase in compressor mass flow and pressure ratio will lead to instability. This is the conservative limit for the surge line.
 Inversely, for small values of $B$, that is, small burner volumes, any increase in pressure will lead to a fast increase in mass flow through the throttle, which will instantaneously reduce the pressure, thus having an stabilizing effect. 
-In this case, the onset of surge will be determined by \cref{eqn:surge1}.
+In this case, the onset of surge will be determined by \Cref{eqn:surge1}.
 
 Another result from this model is that while surge is often related to compressor stall, this is not necessarily the case.
 The surge line for a compressor system can be moved be changing components downstream from it, and operation of compressors beyond the surge line, i.e.\ with flow angles that would otherwise cause surge, using control systems based on bleed valves is widely reported in the literature \cite[e.g.][]{Liaw2004}, which not be possible if surge was simply an aerodynamical effect.
@@ -341,7 +341,7 @@ These quantities are defined respectively as
 \end{align}
 
 The temperature ratio can be equivalently replaced by the adiabatic or polytropic efficiency,
-see \cref{sec:compressor_losses}.
+see \Cref{sec:compressor_losses}.
 
 In particular, the \acl{MFP} is a function of the Mach number and the specific heat ratio,
  i.e.\
@@ -358,7 +358,7 @@ For the purpose of this work, it will only be eventually used in the computation
 For the entire engine, the relevant nondimensional groups are the stationwise
 \acl{MFP}, nondimensional temperature and nondimensional pressure;
 the reference \acl{M0rotor} and the nondimensional fuel mass flow. 
-The stationwise \acl{MFP} is defined in the same way as in \cref{eqn:MFPi}, 
+The stationwise \acl{MFP} is defined in the same way as in \Cref{eqn:MFPi}, 
 i.e.\ for station $n$, $\acs{MFP}_n = \MFP{n}$. 
 The nondimensional pressures and temperatures are the local stagnation property normalize by the ambient value. The reference \acl{M0rotor} is taken as the compressor's 
 and the nondimensional fuel flow parameter is defined as 
@@ -367,7 +367,7 @@ $\frac{\dot{m}_f \sqrt{RT_{01}}}{A_1 P_{01} \sqrt{\gamma}}$.
 \section{Nonlinear systems}
 \label{sec:review:numeric}
 
-As will be shown in \cref{sec:methods}, the modeling of a gas turbine engine leads naturally to nonlinear systems of the type 
+As will be shown in \Cref{sec:methods}, the modeling of a gas turbine engine leads naturally to nonlinear systems of the type 
 \begin{equation}
     \label{eqn:nonlinear}
     f(x) = 0, \quad f:\mathbb{R}^n \rightarrow \mathbb{R}^n
@@ -385,7 +385,7 @@ The surge model, on the other hand, is best expressed as a partial \acl{DAE} sys
 \end{equation}
 where $\nabla x$ is the Jacobian of $x$. 
 However, the literature on this type of system is sparse at best and no widely used software package could be found.
-This section will therefore focus itself on the problems which can be expressed in the form of \cref{eqn:nonlinear,eqn:dae}.
+This section will therefore focus itself on the problems which can be expressed in the form of \Cref{eqn:nonlinear,eqn:dae}.
 
 \textcite{walsh2004gas} suggests that one way of solving theses systems is solving for one variable at a time in an approach known as successive loop closure or serial nested loop. 
 For example, in the case of an engine's static model, \textcite{walsh2004gas} proposes that, starting with a fixed shaft speed, one first guesses the operating point on the compressor map and the turbine inlet temperature $T_{04}$. Then, $T_04$ is adjusted until the mass flow predicted by the turbine map matches the guess for the turbine map. The nozzle performance is then evaluated and the position on the compressor map is changed to match the nozzle mass flow ratio. This procedure is repeated until convergence of both parameters is obtained.

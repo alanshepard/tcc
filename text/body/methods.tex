@@ -24,7 +24,7 @@ For incompressible flow this leads to the collapse of the constant rotational sp
 
 \input{text/body/compressor_map}
 
-To write Euler's equation \cref{eqn:euler} in terms of the nondimensional parameters introduced in \cref{sec:nondimensional}, it suffices to rewrite $\phi_3$ and $\psi$ as a function of them. Thus
+To write Euler's equation \Cref{eqn:euler} in terms of the nondimensional parameters introduced in \Cref{sec:nondimensional}, it suffices to rewrite $\phi_3$ and $\psi$ as a function of them. Thus
 \begin{multline}
     \label{eqn:phi2_dimensionless}
     \phi_3 = \frac{W_{2r}}{U_3} 
@@ -32,12 +32,12 @@ To write Euler's equation \cref{eqn:euler} in terms of the nondimensional parame
            = \frac{\MFPalt{2}}{\acs{M0rotor}} \frac{a_{03}}{a_{02}} \stagdensratio{3} \\ 
            = \frac{\acs{MFP}_3}{\acs{M0rotor}} \sqrt{\frac{T_{03}}{T_{01}}} \stagdensratio{3}
 \end{multline}
-The value of $M_3$ can be obtained from $\acs{MFP}_3$ using \cref{eqn:mfp2mach}, while the latter is given by
+The value of $M_3$ can be obtained from $\acs{MFP}_3$ using \Cref{eqn:mfp2mach}, while the latter is given by
 \begin{equation}
     \label{eqn:mfp2mfp2}
     \acs{MFP}_3 \triangleq \MFP{2} = \acs{MFP} \frac{A_2}{A_3} \frac{P_{02}}{P_{03}} \sqrt{\frac{T_{03}}{T_{02}}}
 \end{equation}
-Notice that \cref{eqn:mfp2mfp2} makes no assumption of the process 1--2 being isentropic. Furthermore $\acs{MFP}_3$ can be used along with $\acs{MFP}_2$ to check for choking.
+Notice that \Cref{eqn:mfp2mfp2} makes no assumption of the process 1--2 being isentropic. Furthermore $\acs{MFP}_3$ can be used along with $\acs{MFP}_2$ to check for choking.
 
 Finally, the load coefficient is given by
 \begin{equation}
@@ -50,7 +50,7 @@ Finally, the load coefficient is given by
                         \left(\frac{1}{\gamma-1}\right)
 \end{equation}
 
-At this point the loss models discussed in \cref{sec:compressor_losses} are introduced, 
+At this point the loss models discussed in \Cref{sec:compressor_losses} are introduced, 
 and the values of $\acs{load_coef}_{\text{actual}}$ and $\acs{load_coef}_{\text{isen}}$ are obtained.
 The temperature and pressure ratios can then be readily calculated from
 \begin{align}
@@ -70,18 +70,18 @@ where $\beta_2$ and $\alpha_3$ are the actual blade (metal) angles and $\beta_{2
 
 This is a more physical model than the one suggested by Oh et al., and captures better the loss variation with incidence, since Oh et al's model does not include flow angles. 
 
-The compressor model is summarized in \cref{map:compressor}.
+The compressor model is summarized in \Cref{map:compressor}.
 
 \section{Turbine model}
 \input{text/body/turbine_map}
 
-The turbine model is summarized in \cref{map:turbine}. 
+The turbine model is summarized in \Cref{map:turbine}. 
 Its development is mostly analogous to that of the compressor, with the exception of the loss and deviation models. 
 Since the turbine does not exhibit flow instability phenomena such as compressor surge, 
 which depends heavily on the incidence losses, 
 the turbine was assumed isentropic. 
 Nevertheless, a loss model based on pressure loss coefficients $Y_p$, $Y_s$, $Y_k$, etc.\ 
-could easily be included in this model by modifying \cref{eqn:turb_res_pr} in the following way
+could easily be included in this model by modifying \Cref{eqn:turb_res_pr} in the following way
 \begin{equation}
     \frac{P_{05}}{P_{04}} -\frac{[1 + (\gamma-1)\psi_{\text{euler}} M_b^2]^{\frac{\gamma}{\gamma-1}}}{1+Y\left\{1-\left[1+\tfrac{\gamma-1}{2}M_5^2\right]^{-\frac{\gamma-1}{\gamma}}\right\}} = 0 
 \end{equation}
@@ -98,7 +98,7 @@ Now we divide the numerator and the denominator by $P_{0e}$ and isolate the pres
 \begin{equation}
     \frac{P_{0i}}{P_{0e}} = \frac{1}{1+Y\left\{1-\left[1+\tfrac{\gamma-1}{2}M_e^2\right]^{-\frac{\gamma-1}{\gamma}}\right\}}
 \end{equation}
-This pressure ratio loss term must be multiplied to the ideal (isentropic) pressure ratio given by the second term of \cref{eqn:turb_res_pr}. If more than one blade row is considered (e.g.\ one for the stator and another one for the rotor) the pressure ratio losses ($Y$) for each must be joined by multiplication.
+This pressure ratio loss term must be multiplied to the ideal (isentropic) pressure ratio given by the second term of \Cref{eqn:turb_res_pr}. If more than one blade row is considered (e.g.\ one for the stator and another one for the rotor) the pressure ratio losses ($Y$) for each must be joined by multiplication.
 
 \input{text/body/nozzle}
 
@@ -118,45 +118,45 @@ The engine model used is of the lumped volume type. This means that each compone
  and is widely used in both industry and academy as a tool for preliminary design and 
  performance analysis. 
 
-A schematic of the engine components considered for the simulation of the present gas turbine engine is shown in \cref{fig:engine_schematic}.
+A schematic of the engine components considered for the simulation of the present gas turbine engine is shown in \Cref{fig:engine_schematic}.
 
 The model was derived considering following constraints:
 
 \begin{enumerate}
-    \item conservation of energy through the spool, \cref{eqn:engine:energy};
-    \item conservation of mass in the burner, \cref{eqn:engine:mass};
-    \item conservation of energy in the combustion process, \cref{eqn:engine:burn};
-    \item the nozzle equation, \cref{eqn:nozzle};
-    \item and the compressor and turbine models, \cref{map:compressor,map:turbine}.
+    \item conservation of energy through the spool, \Cref{eqn:engine:energy};
+    \item conservation of mass in the burner, \Cref{eqn:engine:mass};
+    \item conservation of energy in the combustion process, \Cref{eqn:engine:burn};
+    \item the nozzle equation, \Cref{eqn:nozzle};
+    \item and the compressor and turbine models, \Cref{map:compressor,map:turbine}.
 \end{enumerate}
 
-This model is shown in \cref{map:engine}. It has 12 variables and 11 equations, so it has a one dimensional solution set i.e. the work line.
+This model is shown in \Cref{map:engine}. It has 12 variables and 11 equations, so it has a one dimensional solution set i.e. the work line.
 \input{text/body/engine_map}
 
 \section{Engine dynamical model}
-The dynamical engine model adopted was the one described in \cref{sec:review:dynamics}. It is similar to the one described in \cref{sec:model:static} with the following changes:
+The dynamical engine model adopted was the one described in \Cref{sec:review:dynamics}. It is similar to the one described in \Cref{sec:model:static} with the following changes:
 
 \begin{enumerate}
-    \item The conservation of energy in the spool, \cref{eqn:engine:energy}, is replaced by \cref{eqn:dynamic:energy} to allow spool acceleration;
-    \item The conservation of mass in the burner, \cref{eqn:engine:mass}, is replaced by \cref{eqn:dynamic:mass}  to allow transient changes in density within the burner;
-    \item The implicit assumption that the pressure in the burner is constant from inlet to exit ($P_{03}=P_{04}$) is dropped and replaced by the conservation of momentum in the combustion chamber, \cref{eqn:dynamic:momentum};
+    \item The conservation of energy in the spool, \Cref{eqn:engine:energy}, is replaced by \Cref{eqn:dynamic:energy} to allow spool acceleration;
+    \item The conservation of mass in the burner, \Cref{eqn:engine:mass}, is replaced by \Cref{eqn:dynamic:mass}  to allow transient changes in density within the burner;
+    \item The implicit assumption that the pressure in the burner is constant from inlet to exit ($P_{03}=P_{04}$) is dropped and replaced by the conservation of momentum in the combustion chamber, \Cref{eqn:dynamic:momentum};
     \item and the ideal gas equation is added to link the pressure, density and temperature in the combustion chamber.
 \end{enumerate}
 
-This results in the nonlinear system shown in \cref{model:dynamic}. It has 14 variables and 13 equations, thus it is a single input system, like the static model. For a control problem, the input variable would be the fuel mass flow.
+This results in the nonlinear system shown in \Cref{model:dynamic}. It has 14 variables and 13 equations, thus it is a single input system, like the static model. For a control problem, the input variable would be the fuel mass flow.
 
 \input{text/body/dynamical_map}
 
 \section{Surge model}
 
-Due to the nonavailability of an off the shelf partial \ac{DAE} solver, the model described in \cref{sec:review:surge} was not implemented. Instead, the surge line was estimated to be at a \acs{MFP} equivalent to 80\% of the required \acs{MFP} to achieve minimum angular speed for a given pressure ratio, i.e. 20\% before the peak of the compressor characteristic. 
-To implement \cref{sec:review:surge}'s model in a partial \ac{DAE} or with discretized partial derivatives, the static model (\cref{sec:model:static}) could be used with the nozzle equation, \cref{eqn:nozzle}, removed since for surge it is important to consider the engine at any overall pressure ratio ($\pr{05}{02}$). The addition of the stability criteria would maintain the number of equations, thus the solution set would still be a line.
+Due to the nonavailability of an off the shelf partial \ac{DAE} solver, the model described in \Cref{sec:review:surge} was not implemented. Instead, the surge line was estimated to be at a \acs{MFP} equivalent to 80\% of the required \acs{MFP} to achieve minimum angular speed for a given pressure ratio, i.e. 20\% before the peak of the compressor characteristic. 
+To implement \Cref{sec:review:surge}'s model in a partial \ac{DAE} or with discretized partial derivatives, the static model (\Cref{sec:model:static}) could be used with the nozzle equation, \Cref{eqn:nozzle}, removed since for surge it is important to consider the engine at any overall pressure ratio ($\pr{05}{02}$). The addition of the stability criteria would maintain the number of equations, thus the solution set would still be a line.
 
 \section{Numerical aspects}
 
 As was shown in this section, the models for a gas turbine engine and its components are expressed naturally in the form of coupled (sometimes differential) non-linear systems of equations. 
 These systems are inherently coupled because their behavior depends on the flow angles on both the inlet and exit, and these can not be calculated independently of one another.
-As discussed in \cref{sec:review:numeric}, these problems are examples of \ac{DAE} systems, and many of them do not have explicit derivatives in their formulation.
+As discussed in \Cref{sec:review:numeric}, these problems are examples of \ac{DAE} systems, and many of them do not have explicit derivatives in their formulation.
 
 In this section, the numerical approach used to calculate each of the models described in this chapter will be exposed. They consist of a mix of nonlinear solvers, namely Powell's hybrid method and Levenberg-Marquardt, as implemented by \textsc{minpack} and available in the Python package scipy, and of the newer \ac{DAE} solver \textsc{IDA}, available as part of \textsc{sundials} \cite{sundials} with a Python interface by Assimulo \cite{assimulo}.
 
@@ -182,9 +182,9 @@ After that, use a \ac{DAE} solver to continue the line forwards and backwards.
 The engine chosen to which apply these models was Jet-Munts VT-80.
 This engine was developed for hobby use in airplane models. It is a 
 It is a single spool jet engine, with a single stage centrifugal compressor 
- and also single stage axial turbine, as seen in \cref{fig:engine}. It stems from the original micro turbine desin by \textcite{Schreckling1994} and improved by \textcite{Kamps1999}, among others. 
+ and also single stage axial turbine, as seen in \Cref{fig:engine}. It stems from the original micro turbine desin by \textcite{Schreckling1994} and improved by \textcite{Kamps1999}, among others. 
 It runs on aviation kerosene premixed with oil.
-The specifications provided by the manufacturer are in \cref{tbl:engine_specs}.
+The specifications provided by the manufacturer are in \Cref{tbl:engine_specs}.
 \textcite{bolsoni} estimates the compressor pressure ratio 
 to be around 2.2 based on similar engines. Engines and components drawings with all dimensions relevant for the simulations are annexed to this work. This drawings were based on Kamps' design, measurements of the actual engine, and CAD models found online.
 
