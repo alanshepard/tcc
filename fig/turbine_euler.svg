@@ -295,11 +295,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1"
-     inkscape:cx="545.86706"
-     inkscape:cy="647.75031"
+     inkscape:zoom="5.6568542"
+     inkscape:cx="289.53094"
+     inkscape:cy="561.13021"
      inkscape:document-units="px"
-     inkscape:current-layer="layer2"
+     inkscape:current-layer="layer7"
      showgrid="false"
      inkscape:object-paths="true"
      inkscape:snap-intersection-paths="true"
@@ -313,10 +313,10 @@
      inkscape:snap-to-guides="true"
      showguides="true"
      inkscape:guide-bbox="true"
-     inkscape:window-width="3094"
-     inkscape:window-height="1761"
-     inkscape:window-x="106"
-     inkscape:window-y="39"
+     inkscape:window-width="1861"
+     inkscape:window-height="1056"
+     inkscape:window-x="59"
+     inkscape:window-y="24"
      inkscape:window-maximized="1"
      inkscape:snap-nodes="true"
      inkscape:snap-bbox="false"
@@ -353,7 +353,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -452,7 +452,7 @@
            height="147.78532"
            x="38.183765"
            y="349.32126" /></flowRegion><flowPara
-         id="flowPara6060"></flowPara></flowRoot>  </g>
+         id="flowPara6060" /></flowRoot>  </g>
   <g
      inkscape:groupmode="layer"
      id="layer6"
@@ -481,7 +481,7 @@
          id="tspan6048"
          x="144.14517"
          y="468.69843"
-         style="font-size:10px;text-align:end;text-anchor:end">$V_{4u}$</tspan></text>
+         style="font-size:10px;text-align:end;text-anchor:end">$V_{u4}$</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:12.5px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -493,7 +493,7 @@
          id="tspan6052"
          x="153.16183"
          y="431.54388"
-         style="font-size:10px">$V_{4x}$</tspan></text>
+         style="font-size:10px">$V_{x4}$</tspan></text>
     <flowRoot
        xml:space="preserve"
        id="flowRoot6127"
@@ -504,7 +504,7 @@
            height="104.75"
            x="112.625"
            y="417.86218" /></flowRegion><flowPara
-         id="flowPara6133"></flowPara></flowRoot>    <text
+         id="flowPara6133" /></flowRoot>    <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:12.5px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="80.610168"
@@ -541,7 +541,7 @@
          sodipodi:role="line"
          id="tspan6121"
          x="261.62671"
-         y="447.36218">$W_{5u}$</tspan></text>
+         y="447.36218">$W_{u5}$</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:12.5px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -553,7 +553,7 @@
          id="tspan6125"
          x="266.625"
          y="475.48718"
-         style="font-size:10px">$W_{5x}$</tspan></text>
+         style="font-size:10px">$W_{x5}$</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:12.5px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"

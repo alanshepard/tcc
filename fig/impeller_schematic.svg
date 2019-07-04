@@ -388,9 +388,9 @@
      inkscape:guide-bbox="true"
      inkscape:snap-text-baseline="true"
      inkscape:snap-global="false"
-     inkscape:zoom="5.1200002"
-     inkscape:cx="174.78296"
-     inkscape:cy="894.75136"
+     inkscape:zoom="1.8101934"
+     inkscape:cx="567.04193"
+     inkscape:cy="281.6008"
      inkscape:window-x="59"
      inkscape:window-y="24"
      inkscape:window-maximized="1"
@@ -699,7 +699,7 @@
          id="tspan3224"
          x="187.53082"
          y="-650.58862"
-         style="font-size:10px;stroke-width:0.75px">$W_{3r}$</tspan></text>
+         style="font-size:10px;stroke-width:0.75px">$W_{r3}$</tspan></text>
 <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10px;line-height:125%;font-family:'CMU Classical Serif';-inkscape-font-specification:'CMU Classical Serif';text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.75px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -714,7 +714,7 @@
          id="tspan3228"
          x="158.18591"
          y="-621.02539"
-         style="font-size:10px;text-align:end;text-anchor:end;stroke-width:0.75px">$W_{3u}$</tspan></text>
+         style="font-size:10px;text-align:end;text-anchor:end;stroke-width:0.75px">$W_{u3}$</tspan></text>
 <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;line-height:125%;font-family:'CMU Classical Serif';-inkscape-font-specification:'CMU Classical Serif';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.75px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -736,24 +736,26 @@
        x="387.73929"
        y="-463.78427"
        id="text3230-9"
-       transform="scale(1,-1)"><tspan
+       transform="scale(1,-1)"
+       sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan3228-2"
          x="387.73929"
          y="-463.78427"
-         style="font-size:10px;text-align:end;text-anchor:end;stroke-width:0.75px">$-W_{2u}$</tspan></text>
+         style="font-size:10px;text-align:end;text-anchor:end;stroke-width:0.75px">$-W_{u2}$</tspan></text>
 <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;line-height:125%;font-family:'CMU Classical Serif';-inkscape-font-specification:'CMU Classical Serif';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.75px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="403.08109"
        y="-427.45615"
        id="text3226-2"
-       transform="scale(1,-1)"><tspan
+       transform="scale(1,-1)"
+       sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan3224-8"
          x="403.08109"
          y="-427.45615"
-         style="font-size:10px;stroke-width:0.75px">$W_{2x}$</tspan></text>
+         style="font-size:10px;stroke-width:0.75px">$W_{x2}$</tspan></text>
 <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;line-height:125%;font-family:'CMU Classical Serif';-inkscape-font-specification:'CMU Classical Serif';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.75px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
