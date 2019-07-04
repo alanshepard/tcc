@@ -154,7 +154,24 @@ To implement \Cref{sec:review:surge}'s model in a partial \ac{DAE} or with discr
 
 \section{Numerical aspects}
 
-As was shown in this section, the models for a gas turbine engine and its components are expressed naturally in the form of coupled (sometimes differential) non-linear systems of equations. 
+\begin{table}
+    \centering
+        \caption{Equation balance for the non-linear models}
+        \label{eqn:balance}
+    \begin{tabular}{lccccc}
+        \toprule
+        model & variables & \multicolumn{3}{c}{equations} & \acs{DOF} \\ 
+               &              & algebraic & \acs{ODE} & \acs{PDE}          &     \\\midrule
+        compressor       & 5  & 3    & -   & -    & 2 \\
+        turbine          & 5  & 3    & -   & -    & 2 \\
+        engine (static) & 12 & 11   & -   & -    & 1 \\
+        engine (dinamic) & 15 & 10   & 3   & -    & 2 \\
+        surge (static) & 12 & 10   & -   & 1    & 1 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+As was shown in this section and summarized in \Cref{tbl:eqn_balance}, the models for a gas turbine engine and its components are expressed naturally in the form of coupled (sometimes differential) non-linear systems of equations. 
 These systems are inherently coupled because their behavior depends on the flow angles on both the inlet and exit, and these can not be calculated independently of one another.
 As discussed in \Cref{sec:review:numeric}, these problems are examples of \ac{DAE} systems, and many of them do not have explicit derivatives in their formulation.
 
